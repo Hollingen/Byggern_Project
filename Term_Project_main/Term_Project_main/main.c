@@ -8,7 +8,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 
-#include "UART/UARTdrv.h"
+#include "UART/UARTdrv.c"
 
 int main(void)
 {
