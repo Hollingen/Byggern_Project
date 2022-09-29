@@ -1,5 +1,5 @@
-#ifndef __UARTDRV__
-#define __UARTDRV__
+#ifndef UARTDRV_H_
+#define UARTDRV_H_
 
 #include <avr/io.h>
 #include <stdio.h>
