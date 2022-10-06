@@ -80,7 +80,10 @@ void Int_INIT(void){
 	sei();
 }
 
+adc_dir adc_get_dir(int value1, int offset){
 
+	if(value1 > 1);
+}
 
 ISR(INT0_vect){
     BUSY_flag = 1;
