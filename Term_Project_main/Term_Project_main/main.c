@@ -17,9 +17,13 @@ int main(void)
 	USART_Init(MYUBRR);
 	XMEM_init();
 	ADC_Init();
+	Int_INIT();
     /* Replace with your application code */
     while (1) 
     {
+		ADC_calibrate();
+		_delay_ms(1000);
+        
     }
 }
 

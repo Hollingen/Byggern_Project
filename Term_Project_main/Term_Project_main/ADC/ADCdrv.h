@@ -8,14 +8,15 @@
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
+
 // ADDRESS FOR ADC MEMORY SPACE
 #define ADC_ADDRESS 0x1400
 #define ADC_ADDRESS_SPACE 0x0400
 
 // CHANNELS
-#define y_axis_ch  0
-#define left_slider_ch 1
-#define x_axis_ch 2
+#define x_axis_ch 0
+#define y_axis_ch  1
+#define left_slider_ch 2
 #define right_slider_ch 3 
 
 void ADC_Init(void);
