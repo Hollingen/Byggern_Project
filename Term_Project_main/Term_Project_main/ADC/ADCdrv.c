@@ -10,6 +10,13 @@ uint8_t down_data = 0;
 
 uint8_t BUSY_flag = 0;
 
+typedef enum{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
+} adc_dir;
+
 void ADC_Init(void){
 
     TCCR1A = (1<<COM1A1)|(1<<WGM11);  // Clear OCnA/OCnB on Compare Match, set OCnA/OCnB at TOP.
@@ -72,6 +79,8 @@ void Int_INIT(void){
 	
 	sei();
 }
+
+
 
 ISR(INT0_vect){
     BUSY_flag = 1;
