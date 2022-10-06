@@ -17,14 +17,21 @@ int main(void)
 {
 	USART_Init(MYUBRR);
 	XMEM_init();
-	ADC_Init();
 	Int_INIT();
+	ADC_Init();
+	oled_init();
     /* Replace with your application code */
+	
+	//TESTE OLED;
+	oled_reset();
+	oled_home();
+	oled_print_char('t');
     while (1) 
     {
-		ADC_calibrate();
+		oled_fill_line(1);
 		_delay_ms(1000);
-        
+		oled_clear_line(1);
+        _delay_ms(1000);
     }
 }
 

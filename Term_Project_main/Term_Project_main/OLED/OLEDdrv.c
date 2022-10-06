@@ -1,22 +1,18 @@
-#include <avr/pgmspace.h>
+#include "OLEDdrv.h"
 #include "fonts.h"
-
-#define OLED_COMMAND_ADDRESS  0x1000
-#define OLED_DATA_ADDRESS 0x1200
-
 
 volatile int fontSize = 8;
 volatile int column = 0;
 volatile int line = 0;
 
-void write_command(uint8_t data){
+void oled_write_command(uint8_t data){
 	volatile char *ext_mem = (char *) OLED_COMMAND_ADDRESS;
-	ext_mem[addr]= data;
+	ext_mem[0]= data;
 }
 
-void write_data(uint8_t data){
+void oled_write_data(uint8_t data){
 	volatile char *ext_mem = (char *) OLED_DATA_ADDRESS;
-	ext_mem[addr]= data;
+	ext_mem[0]= data;
 }
 
 void oled_init(){
@@ -51,7 +47,7 @@ void oled_init(){
 }
 
 void oled_reset(){
-    for (int i = 0; i < 0; i++) { //For every column write the data to 0 so that the line is cleared
+    for (int i = 0; i < 8; i++) { //For every column write the data to 0 so that the line is cleared
 		oled_clear_line(i);
 	}
     oled_home();
@@ -66,30 +62,30 @@ void oled_goto_line(int line){
     //Add check for if line is between 0-7
     //page adressing mode
     int command = 0xB0 + line;
-    write_command(command);
+    oled_write_command(command);
 }
 
 void oled_goto_column(int column){
     //Add check if line is between 0-127
     //This is page adressing mode
-    write_command(0x00 + (column % 16)); // Lower nibble
-	write_command(0x10 + (column / 16)); // Higher nibble
+    oled_write_command(0x00 + (column % 16)); // Lower nibble
+	oled_write_command(0x10 + (column / 16)); // Higher nibble
 
 }
-void oled_fill_line(){
+void oled_fill_line(int line){
     oled_goto_pos(line, 0); // Go to the right line and start at the first column
     for (int i = 0; i < 128; i++) { //For every column write the data to 0 so that the line is cleared
-		write_data(0b11111111);
+		oled_write_data(0b11111111);
 	}
-    oled_goto_line(line) //Go back to the 
+    oled_goto_line(line); //Go back to the 
 
 }
-void oled_clear_line(line){
+void oled_clear_line(int line){
     oled_goto_pos(line, 0); // Go to the right line and start at the first column
     for (int i = 0; i < 128; i++) { //For every column write the data to 0 so that the line is cleared
-		write_data(0b00000000);
+		oled_write_data(0b00000000);
 	}
-    oled_goto_line(line) //Go back to the 
+    oled_goto_line(line); //Go back to the 
 
 
 }
@@ -103,10 +99,10 @@ void oled_goto_pos(int row, int column){
 
 void oled_print_char(char character){
     //This is if the page adressing mode
-    character = character - 32 //To make it line up with fonts.h since there are no special characters
-        for (int i = 0; i < 7; i++) {
-        int column = pgm_read_byte(&font8[character][i]);
-        write_data(column);
+    character = character - 32; //To make it line up with fonts.h since there are no special characters
+        for (int i = 0; i < 8; i++) {
+        char column = pgm_read_byte(&font8[character][i]);
+        oled_write_data(column);
   }
 }
 

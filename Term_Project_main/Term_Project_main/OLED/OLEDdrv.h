@@ -2,7 +2,7 @@
 #define OLEDDRV_H_
 
 #include <avr/pgmspace.h>
-#include "fonts.h"
+#include <string.h>
 
 #include <avr/io.h>
 #include <stdio.h>
@@ -11,14 +11,14 @@
 #define OLED_COMMAND_ADDRESS  0x1000
 #define OLED_DATA_ADDRESS 0x1200
 
-void write_command(uint8_t data);
-void write_data(uint8_t data);
+void oled_write_command(uint8_t data);
+void oled_write_data(uint8_t data);
 void oled_init(void);
 void oled_reset(void);
 void oled_home(void);
 void oled_goto_line(int line);
 void oled_goto_column(int column);
-void oled_fill_line(void);
+void oled_fill_line(int line);
 void oled_clear_line(int line);
 void oled_goto_pos(int row, int column);
 void oled_print_char(char character);
