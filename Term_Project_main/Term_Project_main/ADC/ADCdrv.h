@@ -19,6 +19,9 @@
 #define left_slider_ch 2
 #define right_slider_ch 3 
 
+// USEFUL DEFINITIONS
+#define ADC_MAX_VALUE 255
+
 void ADC_Init(void);
 uint8_t ADC_read(uint8_t channel);
 void ADC_calibrate(void);

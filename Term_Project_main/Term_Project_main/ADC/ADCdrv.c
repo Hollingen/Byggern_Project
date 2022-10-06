@@ -14,8 +14,13 @@ typedef enum{
 	UP,
 	DOWN,
 	LEFT,
-	RIGHT,
+	RIGHT
 } adc_dir;
+
+typedef struct{
+	int8_t X;
+	int8_t Y;
+} adc_pos;
 
 void ADC_Init(void){
 
@@ -80,9 +85,13 @@ void Int_INIT(void){
 	sei();
 }
 
+adc_pos adc_get_pos(uint8_t adc_raw, uint8_t offset){
+	
+	uint8_t pos = (adc_raw - )
+}
 adc_dir adc_get_dir(int value1, int offset){
 
-	if(value1 > 1);
+	if(value1 > offset );
 }
 
 ISR(INT0_vect){
