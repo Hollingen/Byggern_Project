@@ -28,9 +28,9 @@ int main(void)
 	oled_print_char('t');
     while (1) 
     {
-		oled_fill_line(1);
+		oled_print("0123456789abcdef");
 		_delay_ms(1000);
-		oled_clear_line(1);
+		oled_clear_line(0);
         _delay_ms(1000);
     }
 }
