@@ -11,6 +11,7 @@
 #include "UART/UARTdrv.h"
 #include "SRAM/SRAMdrv.h"
 #include "ADC/ADCdrv.h"
+#include "OLED/OLEDdrv.h"
 
 int main(void)
 {

@@ -145,6 +145,15 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="OLED\fonts.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="OLED\OLEDdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="OLED\OLEDdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="SRAM\SRAMdrv.c">
       <SubType>compile</SubType>
     </Compile>
@@ -160,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ADC\" />
+    <Folder Include="OLED\" />
     <Folder Include="SRAM\" />
     <Folder Include="UART\" />
   </ItemGroup>
