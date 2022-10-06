@@ -62,14 +62,14 @@ void oled_home(){
     oled_goto_pos(0, 0);
 }
 
-void oled_goto_line(line){
+void oled_goto_line(int line){
     //Add check for if line is between 0-7
     //page adressing mode
     int command = 0xB0 + line;
     write_command(command);
 }
 
-void oled_goto_column(column){
+void oled_goto_column(int column){
     //Add check if line is between 0-127
     //This is page adressing mode
     write_command(0x00 + (column % 16)); // Lower nibble
@@ -94,7 +94,7 @@ void oled_clear_line(line){
 
 }
 
-void oled_goto_pos(row, column){
+void oled_goto_pos(int row, int column){
     //Page adressing mode
     oled_goto_line(row);
     oled_goto_column(column);
