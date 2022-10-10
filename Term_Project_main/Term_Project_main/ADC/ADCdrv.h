@@ -21,11 +21,33 @@
 
 // USEFUL DEFINITIONS
 #define ADC_MAX_VALUE 255
+#define ADC_THRESHHOLD 4
+
+typedef enum{
+	NEUTRAL,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+} adc_dir;
+
+typedef struct{
+	int8_t X;
+	int8_t Y;
+} adc_pos;
+
+typedef struct{
+	uint8_t X;
+	uint8_t Y;
+} adc_offset;
+
 
 void ADC_Init(void);
 uint8_t ADC_read(uint8_t channel);
 void ADC_calibrate(void);
 void int_Init(void);
+adc_pos adc_get_pos(void);
+adc_dir adc_get_dir(adc_pos pos);
 
 
 #endif //__ADCDRV__

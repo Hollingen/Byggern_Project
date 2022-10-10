@@ -34,7 +34,9 @@ LINKER_SCRIPT_DEP:=
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
 ../ADC/ \
+../MCP2515/ \
 ../OLED/ \
+../SPI/ \
 ../SRAM/ \
 ../UART/
 
@@ -43,7 +45,9 @@ SUBDIRS :=  \
 C_SRCS +=  \
 ../ADC/ADCdrv.c \
 ../main.c \
+../MCP2515/MCP2515drv.c \
 ../OLED/OLEDdrv.c \
+../SPI/SPIdrv.c \
 ../SRAM/SRAMdrv.c \
 ../UART/UARTdrv.c
 
@@ -57,28 +61,36 @@ ASM_SRCS +=
 OBJS +=  \
 ADC/ADCdrv.o \
 main.o \
+MCP2515/MCP2515drv.o \
 OLED/OLEDdrv.o \
+SPI/SPIdrv.o \
 SRAM/SRAMdrv.o \
 UART/UARTdrv.o
 
 OBJS_AS_ARGS +=  \
 ADC/ADCdrv.o \
 main.o \
+MCP2515/MCP2515drv.o \
 OLED/OLEDdrv.o \
+SPI/SPIdrv.o \
 SRAM/SRAMdrv.o \
 UART/UARTdrv.o
 
 C_DEPS +=  \
 ADC/ADCdrv.d \
 main.d \
+MCP2515/MCP2515drv.d \
 OLED/OLEDdrv.d \
+SPI/SPIdrv.d \
 SRAM/SRAMdrv.d \
 UART/UARTdrv.d
 
 C_DEPS_AS_ARGS +=  \
 ADC/ADCdrv.d \
 main.d \
+MCP2515/MCP2515drv.d \
 OLED/OLEDdrv.d \
+SPI/SPIdrv.d \
 SRAM/SRAMdrv.d \
 UART/UARTdrv.d
 
@@ -110,7 +122,21 @@ ADC/ADCdrv.o: ../ADC/ADCdrv.c
 	@echo Finished building: $<
 	
 
+MCP2515/MCP2515drv.o: ../MCP2515/MCP2515drv.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 OLED/OLEDdrv.o: ../OLED/OLEDdrv.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+SPI/SPIdrv.o: ../SPI/SPIdrv.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

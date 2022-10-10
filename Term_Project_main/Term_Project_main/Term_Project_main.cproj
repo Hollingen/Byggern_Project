@@ -145,6 +145,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MCP2515\MCP2515drv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCP2515\MCP2515drv.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="OLED\fonts.h">
       <SubType>compile</SubType>
     </Compile>
@@ -152,6 +158,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="OLED\OLEDdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI\SPIdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI\SPIdrv.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="SRAM\SRAMdrv.c">
@@ -169,7 +181,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ADC\" />
+    <Folder Include="MCP2515\" />
     <Folder Include="OLED\" />
+    <Folder Include="SPI\" />
     <Folder Include="SRAM\" />
     <Folder Include="UART\" />
   </ItemGroup>

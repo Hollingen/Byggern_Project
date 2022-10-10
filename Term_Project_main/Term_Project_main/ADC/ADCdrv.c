@@ -1,26 +1,13 @@
 #include "ADCdrv.h"
 
 
-uint8_t neutral_data_x = 0;
-uint8_t neutral_data_y = 0;
+adc_offset offset;
 uint8_t right_data = 0;
 uint8_t left_data = 0;
 uint8_t up_data = 0;
 uint8_t down_data = 0;
 
 uint8_t BUSY_flag = 0;
-
-typedef enum{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT
-} adc_dir;
-
-typedef struct{
-	int8_t X;
-	int8_t Y;
-} adc_pos;
 
 void ADC_Init(void){
 
@@ -70,9 +57,9 @@ uint8_t ADC_read(uint8_t channel){
 }
 
 void ADC_calibrate(void){
-	neutral_data_x = ADC_read(x_axis_ch);
-	neutral_data_y = ADC_read(y_axis_ch);
-	printf("x offset: %d, y offset: %d\n\r", neutral_data_x, neutral_data_y);
+	offset.x = ADC_read(x_axis_ch);
+	offset.y = ADC_read(y_axis_ch);
+	printf("x offset: %d, y offset: %d\n\r", offset.x, offset.y);
 }
 
 void Int_INIT(void){
@@ -85,13 +72,47 @@ void Int_INIT(void){
 	sei();
 }
 
-adc_pos adc_get_pos(uint8_t adc_raw, uint8_t offset){
+adc_pos adc_get_pos(){
 	
-	uint8_t pos = (adc_raw - )
-}
-adc_dir adc_get_dir(int value1, int offset){
+	adc_pos pos;
+	uint8_t adc_raw[2];
 
-	if(value1 > offset );
+	adc_raw[0] = ADC_read(x_axis_ch);
+	adc_raw[1] = ADC_read(y_axis_ch);
+
+	if (adc_raw[0] > offset.x){
+		pos.x = (adc_raw[0] - offset.x)*100/(ADC_MAX_VALUE - offset.x);
+	}else if(adc_raw[0] < offset.x){
+		pos.x = (offset.x - adc_raw[0])*100/offset.x;
+	}
+
+	if (adc_raw[1] > offset.y){
+		pos.y = (adc_raw[1] - offset.y)*100/(ADC_MAX_VALUE - offset.y);
+	}else if(adc_raw[1] < offset.y){
+		pos.y = (offset.y - adc_raw[1])*100/offset.y;
+	}
+
+	return pos;
+
+}
+
+adc_dir adc_get_dir(adc_pos pos){
+
+	if(abs(pos.y) >= ADC_THRESHHOLD){
+		if(pos.y >= ADC_THRESHHOLD){
+			return UP;
+		}else if(pos.y <= (-ADC_THRESHHOLD)){
+			return DOWN;
+		}
+	}else if(abs(pos.x) >= ADC_THRESHHOLD){
+		if(pos.x >= ADC_THRESHHOLD){
+			return RIGHT;
+		}else if(pos.x <= (-ADC_THRESHHOLD)){
+			return LEFT;
+		}
+	}else{
+		return NEUTRAL;
+	}
 }
 
 ISR(INT0_vect){
