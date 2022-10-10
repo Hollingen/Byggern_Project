@@ -14,10 +14,10 @@
 #define ADC_ADDRESS_SPACE 0x0400
 
 // CHANNELS
-#define x_axis_ch 0
-#define y_axis_ch  1
-#define left_slider_ch 2
-#define right_slider_ch 3 
+#define CHANNEL_X 0
+#define CHANNEL_Y  1
+#define CHANNEL_LS
+#define CHANNEL_RS 3 
 
 // USEFUL DEFINITIONS
 #define ADC_MAX_VALUE 255

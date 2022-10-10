@@ -1,10 +1,6 @@
 #include "ADCdrv.h"
 
 adc_offset offset;
-uint8_t right_data = 0;
-uint8_t left_data = 0;
-uint8_t up_data = 0;
-uint8_t down_data = 0;
 
 uint8_t BUSY_flag = 0;
 
@@ -23,7 +19,7 @@ uint8_t ADC_read(uint8_t channel){
 	
 	volatile *adc_in = (char *) ADC_ADDRESS;
 	
-	uint8_t test0, test1, test2, test3;
+	uint8_t data_x, data_y, data_ls, data_rs;
 	
 	adc_in[0] = 0x00;
 	
@@ -31,23 +27,23 @@ uint8_t ADC_read(uint8_t channel){
 	while(!BUSY_flag){};
 	cli();
 	
-	test0 = XMEM_read(0x400);
-	test1 = XMEM_read(0x400);
-	test2 = XMEM_read(0x400);
-	test3 = XMEM_read(0x400);
+	data_x = XMEM_read(0x400);
+	data_y = XMEM_read(0x400);
+	data_ls = XMEM_read(0x400);
+	data_rs = XMEM_read(0x400);
 	
 	switch (channel){
 		case 0:
-			return test0;
+			return data_x;
 			break;
 		case 1:
-			return test1;
+			return data_y;
 			break;
 		case 2:
-			return test2;
+			return data_ls;
 			break;
 		case 3:
-			return test3;
+			return data_rs;
 			break;
 		default:
 			break;
@@ -56,8 +52,8 @@ uint8_t ADC_read(uint8_t channel){
 }
 
 void ADC_calibrate(void){
-	offset.x = ADC_read(x_axis_ch);
-	offset.y = ADC_read(y_axis_ch);
+	offset.x = ADC_read(CHANNEL_X);
+	offset.y = ADC_read(CHANNEL_Y);
 	printf("x offset: %d, y offset: %d\n\r", offset.x, offset.y);
 }
 
@@ -76,8 +72,8 @@ adc_pos adc_get_pos(){
 	adc_pos pos;
 	uint8_t adc_raw[2];
 
-	adc_raw[0] = ADC_read(x_axis_ch);
-	adc_raw[1] = ADC_read(y_axis_ch);
+	adc_raw[0] = ADC_read(CHANNEL_X);
+	adc_raw[1] = ADC_read(CHANNEL_Y);
 
 	if (adc_raw[0] > offset.x){
 		pos.x = (adc_raw[0] - offset.x)*100/(ADC_MAX_VALUE - offset.x);
