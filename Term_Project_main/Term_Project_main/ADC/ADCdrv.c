@@ -1,6 +1,5 @@
 #include "ADCdrv.h"
 
-
 adc_offset offset;
 uint8_t right_data = 0;
 uint8_t left_data = 0;
