@@ -45,7 +45,26 @@ void mcp2515_write(uint8_t address, uint8_t data){
 void mcp2515_request_to_send(){
     PORTB &= ~(1 << CAN_CS); // Select CAN - controller
     spi_write_char(MCP_RTS_ALL);   //Write RTS bit to SPI
-        //IKKE FERDIG
+        //IKKE FERDIGx
+    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
+}
 
-    
+uint8_t mcp2515_read_status(){
+    uint8_t status;
+    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+    spi_write_char(MCP_READ_STATUS);   //Write read_status bit to SPI
+    status = SPI_read();
+    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
+
+    return status;
+
+}
+
+void mcp2515_bit_modify(uint8_t address, uint8_t mask, uint8_t data){
+    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+    spi_write_char(MCP_BITMOD);   //Write read_status bit to SPI
+    spi_write_char(address); // Send address
+    spi_write_char(mask); // Send mask
+    spi_write_char(data); // Send data
+    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
 }
