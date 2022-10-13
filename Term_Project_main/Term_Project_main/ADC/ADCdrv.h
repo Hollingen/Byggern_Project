@@ -21,7 +21,7 @@
 
 // USEFUL DEFINITIONS
 #define ADC_MAX_VALUE 255
-#define ADC_THRESHHOLD 4
+#define ADC_THRESHHOLD 10
 
 typedef enum{
 	NEUTRAL,

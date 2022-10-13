@@ -17,6 +17,8 @@ Copyright 2003 Kimberly Otten Software Consulting
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../SPI/SPIdrv.h"
+
 // Define MCP2515 register addresses
 
 #define MCP_RXF0SIDH	0x00
@@ -162,7 +164,7 @@ Copyright 2003 Kimberly Otten Software Consulting
 
 
 uint8_t mcp2515_init(void);
-uint8_t mcp2515_read(uint8_t address);
+uint8_t mcp2515_read(uint8_t instruction, uint8_t address);
 void mcp2515_reset(void);
 void mcp2515_write(uint8_t address, uint8_t data);
 void mcp2515_request_to_send();
