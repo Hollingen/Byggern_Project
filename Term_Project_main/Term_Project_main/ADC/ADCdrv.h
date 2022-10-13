@@ -32,13 +32,13 @@ typedef enum{
 } adc_dir;
 
 typedef struct{
-	int8_t X;
-	int8_t Y;
+	int8_t x;
+	int8_t y;
 } adc_pos;
 
 typedef struct{
-	uint8_t X;
-	uint8_t Y;
+	uint8_t x;
+	uint8_t y;
 } adc_offset;
 
 
