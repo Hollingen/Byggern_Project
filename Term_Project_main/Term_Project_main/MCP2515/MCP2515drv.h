@@ -164,7 +164,7 @@ Copyright 2003 Kimberly Otten Software Consulting
 
 
 uint8_t mcp2515_init(void);
-uint8_t mcp2515_read(uint8_t instruction, uint8_t address);
+uint8_t mcp2515_read(uint8_t address, uint8_t *value);
 void mcp2515_reset(void);
 void mcp2515_write(uint8_t address, uint8_t data);
 void mcp2515_request_to_send();

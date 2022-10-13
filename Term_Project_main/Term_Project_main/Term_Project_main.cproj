@@ -151,6 +151,12 @@
     <Compile Include="MCP2515\MCP2515drv.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MENU\MENUdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MENU\MENUdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="OLED\fonts.h">
       <SubType>compile</SubType>
     </Compile>
@@ -182,6 +188,7 @@
   <ItemGroup>
     <Folder Include="ADC\" />
     <Folder Include="MCP2515\" />
+    <Folder Include="MENU\" />
     <Folder Include="OLED\" />
     <Folder Include="SPI\" />
     <Folder Include="SRAM\" />
