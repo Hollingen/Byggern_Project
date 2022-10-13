@@ -4,13 +4,15 @@
 
 
 uint8_t mcp2515_init(){
-    uint8_t value ;
+    uint8_t value;
     spi_init_master(); // Initialize SPI
     mcp2515_reset(); // Send reset - command
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
     // Self - test
     mcp2515_read(MCP_CANSTAT, &value);
-    if ((value & MODE_MASK) != MODE_CONFIG) {
-    printf ("MCP2515 is NOT in configuration mode after reset !\n");
+	printf("value: %d\n\r", value);
+    if ((value & MODE_MASK) != MODE_LOOPBACK) {
+    printf ("MCP2515 is NOT in loopback mode after reset !\n\r");
     return 1;
     }
     // More initialization
@@ -18,14 +20,15 @@ uint8_t mcp2515_init(){
 }
 
 
-uint8_t mcp2515_read (uint8_t address){
+uint8_t mcp2515_read ( uint8_t address, uint8_t *value){
     uint8_t result;
     PORTB &= ~(1 << CAN_CS); // Select CAN - controller
     spi_write_char(MCP_READ); // Send read instruction
+	//spi_write_char(instruction);
     spi_write_char(address); // Send address
     result = spi_read_char() ; // Read result
     PORTB |= (1 << CAN_CS); // Deselect CAN - controller
-    return result;
+    *value = result;
 }
 
 void mcp2515_reset(){

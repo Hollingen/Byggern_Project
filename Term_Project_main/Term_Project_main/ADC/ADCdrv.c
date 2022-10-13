@@ -78,13 +78,13 @@ adc_pos adc_get_pos(){
 	if (adc_raw[0] > offset.x){
 		pos.x = (adc_raw[0] - offset.x)*100/(ADC_MAX_VALUE - offset.x);
 	}else if(adc_raw[0] < offset.x){
-		pos.x = (offset.x - adc_raw[0])*100/offset.x;
+		pos.x = -(offset.x - adc_raw[0])*100/offset.x;
 	}
 
 	if (adc_raw[1] > offset.y){
 		pos.y = (adc_raw[1] - offset.y)*100/(ADC_MAX_VALUE - offset.y);
 	}else if(adc_raw[1] < offset.y){
-		pos.y = (offset.y - adc_raw[1])*100/offset.y;
+		pos.y = -(offset.y - adc_raw[1])*100/offset.y;
 	}
 
 	return pos;
