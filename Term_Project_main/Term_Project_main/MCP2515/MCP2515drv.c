@@ -7,9 +7,10 @@ uint8_t mcp2515_init(){
     uint8_t value ;
     spi_init_master(); // Initialize SPI
     mcp2515_reset(); // Send reset - command
+	mcp2515_write(MCP_CANCTRL, 0b01000111);
     // Self - test
     mcp2515_read(MCP_CANSTAT, &value);
-    if ((value & MODE_MASK) != MODE_NORMAL) {
+    if ((value & MODE_MASK) != MODE_LOOPBACK) {
     printf ("MCP2515 is NOT in loopback mode after reset !\n");
     return 1;
     }
