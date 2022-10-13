@@ -23,7 +23,7 @@ int main(void)
 	ADC_Init();
 	oled_init();
 	printf("her\n\r");
-	mcp2515_init();
+	spi_init_master();
 	
 	printf("men ikke her\n\r");
     /* Replace with your application code */
@@ -41,12 +41,14 @@ int main(void)
 	adc_dir dir;
     while (1) 
     {	
+		spi_write_char('a');
+		//pos = adc_get_pos();
+		//dir = adc_get_dir(pos);
 
-		pos = adc_get_pos();
-		dir = adc_get_dir(pos);
-
-		printf("Positions X: %d%%  Y: %d%%\n\r", pos.x, pos.y);
-		printf("Direction: %d\n\r", dir);
+		//printf("Positions X: %d%%  Y: %d%%\n\r", pos.x, pos.y);
+		//printf("Direction: %d\n\r", dir);
+		//_delay_ms(1000);
+		//spi_read_char();
 		_delay_ms(1000);
     }
 }
