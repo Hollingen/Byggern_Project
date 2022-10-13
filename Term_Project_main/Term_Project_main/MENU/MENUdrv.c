@@ -3,6 +3,7 @@
 
 
 //Add strings to use in game. Update PROGMEM according to 
+//
 const char *const menu_main_strings[] PROGMEM = {
     text_main_menu,
     text_play,
@@ -24,24 +25,39 @@ char buffer[16];  //15 is the max length of chars on the screen to avoid scrolli
 
 uint8_t menu_main_counter = 0;
 uint8_t menu_children_counter = 0;
+uint8_t number_of_strings = 9;
 
 
 void menu_print_screen(uint8_t menu_main_counter, uint8_t menu_children_counter){
+    uint8_t scroll_number = 0;
+    uint8_t string_scroll_number = menu_main_counter;
     oled_reset();
-    oled_home();
-	oled_goto_pos(4,1);
+    oled_goto_pos(4, 0);
     oled_print_char('>');
-	oled_home();
+    oled_home();
     for (int i = 0; i < 8; i++){
-        oled_goto_pos(i, 16);
-        strcpy_P(buffer, (char *)pgm_read_word(&(menu_main_strings[i])));
+        scroll_number = i + 4;
+        if(scroll_number > 8){
+            scroll_number = scroll_number - 8;
+        }
+        string_scroll_number = string_scroll_number + i;
+        if(string_scroll_number > 9){
+            string_scroll_number = 0;
+        }
+
+        oled_goto_pos(scroll_number, 16);
+        //Check to see if the counter is higher than number of elements
+        strcpy_P(buffer, (char *)pgm_read_word(&(menu_main_strings[string_scroll_number])));
         oled_print(buffer);
     }
 
 }
 
 
-
+void menu_main_scroll_logic(uint8_t number_of_strings, uint8_t menu_main_counter){
+    if(menu_main_counter > number_of_strings)
+        menu_main_counter = 0;
+}
 
 
 
