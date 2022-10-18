@@ -34,7 +34,6 @@ int main(void)
 	//oled_print_char('t');
 
 	ADC_calibrate();
-	menu_print_screen(0,0);
 	//oled_home();
 	//oled_print("kisen,1234567891");
 	adc_pos pos;
@@ -49,7 +48,10 @@ int main(void)
 		//printf("Direction: %d\n\r", dir);
 		//_delay_ms(1000);
 		//spi_read_char();
-		_delay_ms(1000);
+		for (int i = 0; i<=9;i++){
+			menu_print_screen(i,0);
+			_delay_ms(2000);
+		}
     }
 }
 
