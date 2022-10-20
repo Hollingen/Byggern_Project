@@ -37,11 +37,11 @@ void menu_print_screen(uint8_t menu_main_counter, uint8_t menu_children_counter)
     oled_home();
     for (int i = 0; i < 8; i++){
         scroll_number = i + 4;
-        if(scroll_number > 8){
+        if(scroll_number > 7){
             scroll_number = scroll_number - 8;
         }
         string_scroll_number = string_scroll_number + i;
-        if(string_scroll_number > 9){
+        if(string_scroll_number > 8){
             string_scroll_number = 0;
         }
 
