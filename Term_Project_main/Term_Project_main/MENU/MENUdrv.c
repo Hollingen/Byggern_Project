@@ -67,17 +67,7 @@ void oled_refresh_rate_init(){
     //Setting Timer 0 to CTC mode
     TCCR0 |= (1<<WGM01);
     TCCR0 &= ~(1<<WGM00);
-void update_menu_main_counter(){
-    adc_dir var = adc_get_dir(adc_get_pos());
-    if(var == UP){
-        menu_main_counter --;
-    }
-    else if (var == DOWN){
-        menu_main_counter ++;
-    }
-    if(menu_main_counter > number_of_strings)
-        menu_main_counter = 0;
-}    //Normal mode, OCn disconnected
+    //Normal mode, OCn disconnected
     TCCR0 &= ~(1<<COM00);
     TCCR0 &= ~(1<<COM01);
 
@@ -93,6 +83,16 @@ void update_menu_main_counter(){
 
 
 }
-
+void update_menu_main_counter(){
+    adc_dir var = adc_get_dir(adc_get_pos());
+    if(var == UP){
+        menu_main_counter --;
+    }
+    else if (var == DOWN){
+        menu_main_counter ++;
+    }
+    if(menu_main_counter > number_of_strings)
+        menu_main_counter = 0;
+}
 
 
