@@ -23,7 +23,6 @@ const char text_placeholder4[] PROGMEM = "placeholder4";
 const char text_quit[] PROGMEM = "Quit";
 
 void menu_print_screen(void);//uint8_t menu_main_counter, uint8_t menu_children_counter);
-void menu_main_scroll_logic(uint8_t number_of_strings, uint8_t menu_main_counter);
 void oled_refresh_rate_init(void);
 void update_menu_main_counter(void);
 
