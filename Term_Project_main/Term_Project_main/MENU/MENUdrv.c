@@ -62,7 +62,28 @@ void menu_main_scroll_logic(uint8_t number_of_strings, uint8_t menu_main_counter
         menu_main_counter = 0;
 }
 
+void oled_refresh_rate_init(){
 
+    //Setting Timer 0 to CTC mode
+    TCCR0 |= (1<<WGM01);
+    TCCR0 &= ~(1<<WGM00);
+
+    //Normal mode, OCn disconnected
+    TCCR0 &= ~(1<<COM00);
+    TCCR0 &= ~(1<<COM01);
+
+    //Prescaler 256, gives 60Hz
+    TCCR0 &= ~(1<<CS00);
+    TCCR0 &= ~(1<<CS01);
+    TCCR0 |= (1<<CS02);
+
+    //Enables interrupt for Timer 0 on compare match
+    TIMSK |= (1<<OCIE0);
+
+    OCR0 = 159;
+
+
+}
 
 
 
