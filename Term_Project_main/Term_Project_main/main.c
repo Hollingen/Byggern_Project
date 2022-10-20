@@ -51,8 +51,9 @@ int main(void)
 		//printf("Direction: %d\n\r", dir);
 		//_delay_ms(1000);
 		//spi_read_char();'
-		//update_menu_main_counter();
+		update_menu_main_counter();
 		menu_print_screen();
+		_delay_ms(100);
 		
     }
 }
