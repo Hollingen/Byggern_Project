@@ -30,25 +30,28 @@ uint8_t number_of_strings = 9;
 
 void menu_print_screen(uint8_t menu_main_counter, uint8_t menu_children_counter){
     uint8_t scroll_number = 0;
-    uint8_t string_scroll_number = menu_main_counter;
+    uint8_t string_scroll_number = 0;
+    uint8_t middle = 4;
+    int start = 0;
+    start = menu_main_counter - middle;
+    if(start < 0){
+        start = number_of_strings - abs(start);
+    }
+    string_scroll_number = start;
+    
     oled_reset();
     oled_goto_pos(4, 0);
     oled_print_char('>');
     oled_home();
     for (int i = 0; i < 8; i++){
-        scroll_number = i + 4;
-        if(scroll_number > 8){
-            scroll_number = scroll_number - 8;
-        }
-        string_scroll_number = string_scroll_number + i;
-        if(string_scroll_number > 9){
+        if(string_scroll_number > 8){
             string_scroll_number = 0;
         }
-
-        oled_goto_pos(scroll_number, 16);
+        oled_goto_pos(i, 16);
         //Check to see if the counter is higher than number of elements
         strcpy_P(buffer, (char *)pgm_read_word(&(menu_main_strings[string_scroll_number])));
         oled_print(buffer);
+        string_scroll_number ++;
     }
 
 }
