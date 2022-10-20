@@ -25,6 +25,7 @@ int main(void)
 	oled_init();
 	printf("her\n\r");
 	spi_init_master();
+	oled_refresh_rate_init();
 	
 	printf("men ikke her\n\r");
     /* Replace with your application code */
@@ -56,3 +57,5 @@ int main(void)
     }
 }
 
+
+ISR()
