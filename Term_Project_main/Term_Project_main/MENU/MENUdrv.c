@@ -31,7 +31,7 @@ volatile int menu_children_counter_last = 0;
 void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_counter){
 
     if(menu_main_counter == menu_main_counter_last){
-        goto end;
+     //   goto end;
     }
     //uint8_t scroll_number = 0;
     uint8_t string_scroll_number = 0;
@@ -58,7 +58,7 @@ void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_coun
         string_scroll_number ++;
     }
 
-    end:
+    //end:
 
 }
 
