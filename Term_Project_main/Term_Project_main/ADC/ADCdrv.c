@@ -23,9 +23,13 @@ uint8_t ADC_read(uint8_t channel){
 	
 	adc_in[0] = 0x00;
 	
-	sei();
+	//sei();
+
+	GICR |= (1<<INT0);
 	while(!BUSY_flag){};
-	cli();
+	GICR &= ~(1<<INT0);
+	
+	//cli();
 	
 	data_x = XMEM_read(0x400);
 	data_y = XMEM_read(0x400);
@@ -64,7 +68,7 @@ void Int_INIT(void){
 	MCUCR |= (1<<ISC00);
 	MCUCR |= (1<<ISC01);
 	
-	sei();
+	
 }
 
 adc_pos adc_get_pos(){

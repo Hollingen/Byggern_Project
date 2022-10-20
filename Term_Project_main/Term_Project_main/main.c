@@ -26,6 +26,7 @@ int main(void)
 	printf("her\n\r");
 	spi_init_master();
 	oled_refresh_rate_init();
+	sei();	
 	
 	printf("men ikke her\n\r");
     /* Replace with your application code */
@@ -58,4 +59,6 @@ int main(void)
 }
 
 
-ISR()
+ISR(TIMER0_COMP_vect){
+	
+}
