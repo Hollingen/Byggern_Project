@@ -2,6 +2,7 @@
 
 
 
+#define number_of_strings 9
 //Add strings to use in game. Update PROGMEM according to 
 //
 const char *const menu_main_strings[] PROGMEM = {
@@ -23,9 +24,8 @@ const char *const menu_main_strings[] PROGMEM = {
 char buffer[16];  //15 is the max length of chars on the screen to avoid scrolling
                   //The screen is really 16 but we use on space on the front for - to indicate where we are
 
-uint8_t menu_main_counter = 0;
-uint8_t menu_children_counter = 0;
-uint8_t number_of_strings = 9;
+volatile uint8_t menu_main_counter = 0;
+volatile uint8_t menu_children_counter = 0;
 
 
 void menu_print_screen(uint8_t menu_main_counter, uint8_t menu_children_counter){
@@ -62,7 +62,16 @@ void menu_main_scroll_logic(uint8_t number_of_strings, uint8_t menu_main_counter
         menu_main_counter = 0;
 }
 
-
-
+void update_menu_main_counter(){
+    adc_dir var = adc_get_dir(adc_get_pos());
+    if(var == UP){
+        menu_main_counter --;
+    }
+    else if (var == DOWN){
+        menu_main_counter ++;
+    }
+    if(menu_main_counter > number_of_strings)
+        menu_main_counter = 0;
+}
 
 
