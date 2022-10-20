@@ -160,8 +160,6 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_WAKIF		0x40
 #define MCP_MERRF		0x80
 
-#define CAN_CS          PB4
-
 
 uint8_t mcp2515_init(void);
 uint8_t mcp2515_read(uint8_t address, uint8_t *value);

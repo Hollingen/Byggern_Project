@@ -1,72 +1,78 @@
 #include "MCP2515drv.h"
+#include "../SPI/SPIdrv.h"
 
 
 
 
 uint8_t mcp2515_init(){
     uint8_t value;
-    spi_init_master(); // Initialize SPI
-    mcp2515_reset(); // Send reset - command
-	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
-    // Self - test
+	spi_init_master(); // Initialize SPI
+    mcp2515_reset(); // end reset - command
+    // Self - testS
+	//mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_CONFIG);
+
     mcp2515_read(MCP_CANSTAT, &value);
 	printf("value: %d\n\r", value);
-    if ((value & MODE_MASK) != MODE_LOOPBACK) {
-    printf ("MCP2515 is NOT in loopback mode after reset !\n\r");
+    if ((value & MODE_MASK) != MODE_CONFIG) {
+        printf ("MCP2515 is NOT in config mode after reset !\n\r");
     return 1;
     }
-    // More initialization
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
+	printf("value: %d\n\r", value);
+
     return 0;
 }
 
 
-uint8_t mcp2515_read ( uint8_t address, uint8_t *value){
-    uint8_t result;
-    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+uint8_t mcp2515_read(uint8_t address, uint8_t *value){
+
+    DDRB &= ~(1 << PB4); // Select CAN - controller
+
     spi_write_char(MCP_READ); // Send read instruction
-	//spi_write_char(instruction);
     spi_write_char(address); // Send address
-    result = spi_read_char() ; // Read result
-    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
-    *value = result;
+	
+    *value = spi_read_char() ; // Read result
+    
+	DDRB |= (1 << PB4); // Deselect CAN - controller
+	//*value = result;
 }
 
 void mcp2515_reset(){
-    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+    DDRB &= ~(1 << PB4); // Select CAN - controller
     spi_write_char(MCP_RESET);   //Write reset bit to SPI
-    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
+    DDRB |= (1 << PB4); // Deselect CAN - controller
 }
 
 void mcp2515_write(uint8_t address, uint8_t data){
-    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+    DDRB &= ~(1 << PB4); // Select CAN - controller
     spi_write_char(MCP_WRITE); // Send write instruction
     spi_write_char(address); // Send address
     spi_write_char(data); // Send data
-    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
+    DDRB |= (1 << PB4); // Deselect CAN - controller
 }
 
 void mcp2515_request_to_send(){
-    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+    DDRB &= ~(1 << PB4); // Select CAN - controller
     spi_write_char(MCP_RTS_ALL);   //Write RTS bit to SPI
-    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
+    DDRB |= (1 << PB4); // Deselect CAN - controller
 }
 
 uint8_t mcp2515_read_status(){
     uint8_t status;
-    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+    DDRB &= ~(1 << PB4); // Select CAN - controller
     spi_write_char(MCP_READ_STATUS);   //Write read_status bit to SPI
     status = spi_read_char();
-    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
+    DDRB |= (1 << PB4); // Deselect CAN - controller
 
     return status;
 
 }
 
 void mcp2515_bit_modify(uint8_t address, uint8_t mask, uint8_t data){
-    PORTB &= ~(1 << CAN_CS); // Select CAN - controller
+    DDRB &= ~(1 << DD_SS); // Select CAN - controller
     spi_write_char(MCP_BITMOD);   //Write read_status bit to SPI
     spi_write_char(address); // Send address
     spi_write_char(mask); // Send mask
     spi_write_char(data); // Send data
-    PORTB |= (1 << CAN_CS); // Deselect CAN - controller
+    DDRB |= (1 << DD_SS); // Deselect CAN - controller
 }
