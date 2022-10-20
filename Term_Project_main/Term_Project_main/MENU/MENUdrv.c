@@ -25,7 +25,6 @@ char buffer[16];  //15 is the max length of chars on the screen to avoid scrolli
 volatile uint8_t menu_main_counter = 0;
 volatile uint8_t menu_children_counter = 0;
 
-
 void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_counter){
     //uint8_t scroll_number = 0;
     uint8_t string_scroll_number = 0;
@@ -87,6 +86,9 @@ void update_menu_main_counter(){
     }
     if(menu_main_counter > number_of_strings)
         menu_main_counter = 0;
+    elif(menu_main_counter < 0){
+        menu_main_counter = number_of_strings;
+    }
 }
 
 
