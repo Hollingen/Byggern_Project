@@ -2,7 +2,7 @@
  * Term_Project_main.c
  *
  * Created: 27.09.2022 19:34:22
- * Author : eirik
+ * Author : Espen Schei Haugen
  */ 
 
 #include <avr/io.h>
@@ -23,8 +23,7 @@ int main(void)
 	ADC_Init();
 	oled_init();
 	printf("her\n\r");
-	spi_init_master();
-	
+	mcp2515_init();
 	printf("men ikke her\n\r");
     /* Replace with your application code */
 	
@@ -33,14 +32,18 @@ int main(void)
 	//oled_home();
 	//oled_print_char('t');
 
-	ADC_calibrate();
+	//ADC_calibrate();
 	//oled_home();
 	//oled_print("kisen,1234567891");
 	adc_pos pos;
 	adc_dir dir;
     while (1) 
     {	
-		spi_write_char('a');
+		//spi_write_char('a');
+		PORTB &= ~(1 << DD_SS); // Select CAN - controller
+		_delay_ms(100);
+		PORTB |= (1 << DD_SS); // Select CAN - controller
+
 		//pos = adc_get_pos();
 		//dir = adc_get_dir(pos);
 
@@ -48,10 +51,12 @@ int main(void)
 		//printf("Direction: %d\n\r", dir);
 		//_delay_ms(1000);
 		//spi_read_char();
+		/*
 		for (int i = 0; i<=9;i++){
 			menu_print_screen(i,0);
 			_delay_ms(2000);
-		}
-    }
+		}*/
+		_delay_ms(100);    
+	}
 }
 
