@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include <stdio.h>
+#include <avr/interrupt.h>
 
 #include "UART/UARTdrv.h"
 #include "SRAM/SRAMdrv.h"
@@ -23,7 +24,14 @@ int main(void)
 	ADC_Init();
 	oled_init();
 	printf("her\n\r");
+
 	mcp2515_init();
+
+//	spi_init_master();
+//	oled_refresh_rate_init();
+//	sei();	
+	
+
 	printf("men ikke her\n\r");
     /* Replace with your application code */
 	
@@ -40,9 +48,12 @@ int main(void)
     while (1) 
     {	
 		//spi_write_char('a');
+
 		PORTB &= ~(1 << DD_SS); // Select CAN - controller
 		_delay_ms(100);
 		PORTB |= (1 << DD_SS); // Select CAN - controller
+
+
 
 		//pos = adc_get_pos();
 		//dir = adc_get_dir(pos);
@@ -57,6 +68,12 @@ int main(void)
 			_delay_ms(2000);
 		}*/
 		_delay_ms(100);    
-	}
-}
+	}/*
 
+		//spi_read_char();'
+		update_menu_main_counter();
+		menu_print_screen();
+		_delay_ms(100);
+		
+    }*/
+}
