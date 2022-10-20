@@ -87,7 +87,6 @@ void oled_clear_line(int line){
 	}
     oled_goto_line(line); //Go back to the 
 
-
 }
 
 void oled_goto_pos(int row, int column){
@@ -100,10 +99,18 @@ void oled_goto_pos(int row, int column){
 void oled_print_char(char character){
     //This is if the page adressing mode
     character = character - 32; //To make it line up with fonts.h since there are no special characters
-        for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++) {
         char column = pgm_read_byte(&font8[character][i]);
         oled_write_data(column);
-  }
+    }
+}
+
+void oled_print_arrow(char character){
+
+    for (int i = 0; i < 5; i++) {
+        char column = pgm_read_byte(&font5[character][i]);
+        oled_write_data(column);
+    }
 }
 
 void oled_print(const char string[]) {
