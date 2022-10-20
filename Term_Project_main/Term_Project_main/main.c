@@ -7,6 +7,7 @@
 
 #include <avr/io.h>
 #include <stdio.h>
+#include <avr/interrupt.h>
 
 #include "UART/UARTdrv.h"
 #include "SRAM/SRAMdrv.h"
@@ -40,7 +41,7 @@ int main(void)
 	adc_dir dir;
     while (1) 
     {	
-		spi_write_char('a');
+		//spi_write_char('a');
 		//pos = adc_get_pos();
 		//dir = adc_get_dir(pos);
 
