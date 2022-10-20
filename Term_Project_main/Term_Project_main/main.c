@@ -20,20 +20,16 @@ int main(void)
 {
 	USART_Init(MYUBRR);
 	XMEM_init();
-	Int_INIT();
+	//Int_INIT();
 	ADC_Init();
 	oled_init();
-	printf("her\n\r");
-
 	mcp2515_init();
 
 //	spi_init_master();
 //	oled_refresh_rate_init();
 //	sei();	
 	
-
-	printf("men ikke her\n\r");
-    /* Replace with your application code */
+/* Replace with your application code */
 	
 	//TESTE OLED;
 	//oled_reset();
@@ -43,15 +39,18 @@ int main(void)
 	//ADC_calibrate();
 	//oled_home();
 	//oled_print("kisen,1234567891");
-	adc_pos pos;
-	adc_dir dir;
+	//adc_pos pos;
+	//adc_dir dir;
+	
+	uint8_t value;
     while (1) 
     {	
 		//spi_write_char('a');
-
-		PORTB &= ~(1 << DD_SS); // Select CAN - controller
-		_delay_ms(100);
-		PORTB |= (1 << DD_SS); // Select CAN - controller
+		mcp2515_read(MCP_CANSTAT, &value);
+		printf("%d\n\r" ,value);
+		//PORTB &= ~(1 << DD_SS); // Select CAN - controller
+		//_delay_ms(100);
+		//PORTB |= (1 << DD_SS); // Select CAN - controller
 
 
 
@@ -67,7 +66,7 @@ int main(void)
 			menu_print_screen(i,0);
 			_delay_ms(2000);
 		}*/
-		_delay_ms(100);    
+		_delay_ms(1000);    
 	}/*
 
 		//spi_read_char();'
