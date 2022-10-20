@@ -1,8 +1,6 @@
 #include "MENUdrv.h"
 
-
-
-#define number_of_strings 9
+uint8_t number_of_strings = 9;
 //Add strings to use in game. Update PROGMEM according to 
 //
 const char *const menu_main_strings[] PROGMEM = {
@@ -28,8 +26,8 @@ volatile uint8_t menu_main_counter = 0;
 volatile uint8_t menu_children_counter = 0;
 
 
-void menu_print_screen(uint8_t menu_main_counter, uint8_t menu_children_counter){
-    uint8_t scroll_number = 0;
+void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_counter){
+    //uint8_t scroll_number = 0;
     uint8_t string_scroll_number = 0;
     uint8_t middle = 4;
     int start = 0;
@@ -57,10 +55,6 @@ void menu_print_screen(uint8_t menu_main_counter, uint8_t menu_children_counter)
 }
 
 
-void menu_main_scroll_logic(uint8_t number_of_strings, uint8_t menu_main_counter){
-    if(menu_main_counter > number_of_strings)
-        menu_main_counter = 0;
-}
 
 void oled_refresh_rate_init(){
 

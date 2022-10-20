@@ -50,15 +50,15 @@ int main(void)
 		//printf("Positions X: %d%%  Y: %d%%\n\r", pos.x, pos.y);
 		//printf("Direction: %d\n\r", dir);
 		//_delay_ms(1000);
-		//spi_read_char();
-		for (int i = 0; i<=9;i++){
-			menu_print_screen(i,0);
-			_delay_ms(2000);
-		}
+		//spi_read_char();'
+		//update_menu_main_counter();
+		menu_print_screen();
+		
     }
 }
 
 
 ISR(TIMER0_COMP_vect){
+	
 	
 }
