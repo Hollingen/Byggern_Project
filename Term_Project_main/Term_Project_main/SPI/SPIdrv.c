@@ -11,6 +11,7 @@ void spi_init_master(){
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);//|(1<<SPIE);
 	//SPCR &= ~((1<<CPOL)|(1<<CPHA));
 	spi_set_ss_high();
+	//Comment
 	
 }
 /*
