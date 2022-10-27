@@ -5,7 +5,7 @@ void spi_init_master(){
     // Set MOSI and SCK - og SS - output, all others input
 	DDR_SPI = (1<<DD_MOSI)|(1<<DD_SCK)|(1<<DD_SS);
 	
-	DDR_SPI &= ~(1<<DD_MISO);
+	//DDR_SPI &= ~(1<<DD_MISO);
 	
 	// Enable SPI, Master, set clock rate fck/16
 	SPCR = (1<<SPE)|(1<<MSTR)|(1<<SPR0);//|(1<<SPIE);
@@ -26,28 +26,30 @@ void spi_init_slave(){
 }
 */
 void spi_write_char(char cData){
-	char flushbuffer;
+	//char flushbuffer;
     SPDR = cData;
     //Wait for send to complete
 
 	loop_until_bit_is_set(SPSR, SPIF);
-	flushbuffer = SPDR;
+	//while(!(SPSR & (1<<SPIF)));
+	//flushbuffer = SPDR;
 }
 
 char spi_read_char(){
-    SPDR = 0xFF;
+    SPDR = 0xAA;
 	// Wait for reception to complete
 
     loop_until_bit_is_set(SPSR, SPIF);
+	//while(!(SPSR & (1<<SPIF)));
 	// Return char in data register
 	return SPDR;
 
 }
 
 void spi_set_ss_high(){
-    PORTB |= (1 << DD_SS);
+    PORTB |= (1<<DD_SS);
 }
 
 void spi_clear_ss(){
-    PORTB &= ~(1 << DD_SS);
+    PORTB &= ~(1<<DD_SS);
 }

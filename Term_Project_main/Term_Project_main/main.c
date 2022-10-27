@@ -20,14 +20,16 @@ int main(void)
 {
 	USART_Init(MYUBRR);
 	XMEM_init();
-	Int_INIT();
+	//Int_INIT();
 	ADC_Init();
 	oled_init();
+	//spi_init_master();
 	mcp2515_init();
+
 	//printf("her\n\r");
 	//spi_init_master();
 	//oled_refresh_rate_init();
-	//sei();	
+	sei();	
 	
 	//printf("men ikke her\n\r");
     /* Replace with your application code */
@@ -43,19 +45,34 @@ int main(void)
 	//adc_pos pos;
 	//adc_dir dir;
 	uint8_t value;
+	
     while (1) 
     {	
 		
-		//mcp2515_read(MCP_CANSTAT, &value);
-		//printf("value: %d\n\r", value);
-		//_delay_ms(100);
+		//_delay_ms(1000);
+		DDRB &= ~(1 << PB4);
+
+		spi_write_char(MCP_CNF1);
+		spi_write_char(0xAA);
+		DDRB |= (1 << PB4);
+		_delay_ms(10);
+		DDRB &= ~(1 << PB4);
+		//value = spi_read_char();
+		spi_write_char(MCP_READ); // Send read instruction
+		spi_write_char(MCP_CNF1); // Send address
+		 
+		value = spi_read_char() ; // Read result
+		//mcp2515_write(MCP_CNF1, 0xAA);
+		printf("value: %d\n\r", value);
+		DDRB |= (1 << PB4);
+		//'_delay_ms(100);
 		//spi_write_char('a');
 		//pos = adc_get_pos();
 		//dir = adc_get_dir(pos);
-
+		//mcp2515_init();
 		//printf("Positions X: %d%%  Y: %d%%\n\r", pos.x, pos.y);
 		//printf("Direction: %d\n\r", dir);
-		//_delay_ms(1000);
+		_delay_ms(1000);
 		//spi_read_char();'
 		//update_menu_main_counter();
 		//menu_print_screen();
