@@ -20,15 +20,18 @@ int main(void)
 {
 	USART_Init(MYUBRR);
 	XMEM_init();
-	Int_INIT();
+	//Int_INIT();
 	ADC_Init();
 	//oled_init();
-	//printf("her\n\r");
 	//spi_init_master();
-	//oled_refresh_rate_init();
+	mcp2515_init();
+
+	////printf("her\n\r");
+	////spi_init_master();
+	////oled_refresh_rate_init();
 	sei();	
 	
-	//printf("men ikke her\n\r");
+	printf("men ikke her\n\r");
     /* Replace with your application code */
 	
 	//TESTE OLED;
@@ -36,35 +39,29 @@ int main(void)
 	//oled_home();
 	//oled_print_char('t');
 
-	//ADC_calibrate();
+	ADC_calibrate();
 	//oled_home();
 	//oled_print("kisen,1234567891");
 	adc_pos pos;
 	adc_dir dir;
-	int value;
-	mcp2515_init();
     while (1) 
     {	
-		
-		
-		_delay_ms(1000);
-		
-		
+		//spi_write_char('a');
 		//pos = adc_get_pos();
 		//dir = adc_get_dir(pos);
-
+		//mcp2515_init();
 		//printf("Positions X: %d%%  Y: %d%%\n\r", pos.x, pos.y);
 		//printf("Direction: %d\n\r", dir);
-		//_delay_ms(1000);
+		_delay_ms(1000);
 		//spi_read_char();'
-		//update_menu_main_counter();
-		//menu_print_screen();
+		update_menu_main_counter();
+		menu_print_screen();
 		
     }
 }
 
-
+/*
 ISR(TIMER0_COMP_vect){
 	
 	
-}
+}*/
