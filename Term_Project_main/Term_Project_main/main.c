@@ -9,12 +9,12 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
 
-#include "UART/UARTdrv.h"
-#include "SRAM/SRAMdrv.h"
-#include "ADC/ADCdrv.h"
-#include "OLED/OLEDdrv.h"
-#include "SPI/SPIdrv.h"
-#include "MCP2515/MCP2515drv.h"
+#include "NODE1/UART/UARTdrv.h"
+#include "NODE1/SRAM/SRAMdrv.h"
+#include "NODE1/ADC/ADCdrv.h"
+#include "NODE1/OLED/OLEDdrv.h"
+#include "NODE1/SPI/SPIdrv.h"
+#include "NODE1/MCP2515/MCP2515drv.h"
 
 int main(void)
 {
