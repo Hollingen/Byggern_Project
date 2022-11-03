@@ -77,8 +77,6 @@ Discarded input sections
                 0x00000000       0x1d ADC/ADCdrv.o
  .text.ADC_calibrate
                 0x00000000       0x40 ADC/ADCdrv.o
- .text.Int_INIT
-                0x00000000       0x14 ADC/ADCdrv.o
  .text.adc_get_pos
                 0x00000000       0xc0 ADC/ADCdrv.o
  .text.adc_get_dir
@@ -142,15 +140,19 @@ Discarded input sections
                 0x00000000       0x30 MENU/MENUdrv.o
  .debug_ranges  0x00000000       0x20 MENU/MENUdrv.o
  .debug_line    0x00000000      0x26e MENU/MENUdrv.o
- .debug_str     0x00000000      0x3b0 MENU/MENUdrv.o
+ .debug_str     0x00000000      0x3b2 MENU/MENUdrv.o
  .comment       0x00000000       0x31 MENU/MENUdrv.o
  .debug_frame   0x00000000       0x54 MENU/MENUdrv.o
  COMMON         0x00000000       0x10 MENU/MENUdrv.o
  .text          0x00000000        0x0 OLED/OLEDdrv.o
  .data          0x00000000        0x0 OLED/OLEDdrv.o
  .bss           0x00000000        0x0 OLED/OLEDdrv.o
+ .text.oled_write_command
+                0x00000000        0x6 OLED/OLEDdrv.o
  .text.oled_write_data
                 0x00000000        0x6 OLED/OLEDdrv.o
+ .text.oled_init
+                0x00000000       0x92 OLED/OLEDdrv.o
  .text.oled_goto_line
                 0x00000000        0x8 OLED/OLEDdrv.o
  .text.oled_goto_column
@@ -181,6 +183,16 @@ Discarded input sections
                 0x00000000      0x1e0 OLED/OLEDdrv.o
  .progmem.data.font8
                 0x00000000      0x2f8 OLED/OLEDdrv.o
+ .debug_info    0x00000000      0x7b0 OLED/OLEDdrv.o
+ .debug_abbrev  0x00000000      0x151 OLED/OLEDdrv.o
+ .debug_loc     0x00000000      0x4e3 OLED/OLEDdrv.o
+ .debug_aranges
+                0x00000000       0x80 OLED/OLEDdrv.o
+ .debug_ranges  0x00000000       0x70 OLED/OLEDdrv.o
+ .debug_line    0x00000000      0x37d OLED/OLEDdrv.o
+ .debug_str     0x00000000      0x2c7 OLED/OLEDdrv.o
+ .comment       0x00000000       0x31 OLED/OLEDdrv.o
+ .debug_frame   0x00000000      0x164 OLED/OLEDdrv.o
  .text          0x00000000        0x0 SPI/SPIdrv.o
  .data          0x00000000        0x0 SPI/SPIdrv.o
  .bss           0x00000000        0x0 SPI/SPIdrv.o
@@ -670,7 +682,6 @@ END GROUP
                 0x000000aa                __vector_26
                 0x000000aa                __vector_14
                 0x000000aa                __vector_10
-                0x000000aa                __vector_16
                 0x000000aa                __vector_18
                 0x000000aa                __vector_20
                 0x000000ae                . = ALIGN (0x2)
@@ -678,6 +689,9 @@ END GROUP
  .text.ADC_Init
                 0x000000ae       0x20 ADC/ADCdrv.o
                 0x000000ae                ADC_Init
+ .text.Int_INIT
+                0x000000ce       0x14 ADC/ADCdrv.o
+                0x000000ce                Int_INIT
  .text.__vector_1
                 0x000000ce       0x1e ADC/ADCdrv.o
                 0x000000ce                __vector_1
@@ -877,7 +891,6 @@ END GROUP
                                  0x31 (size before relaxing)
  .comment       0x00000030       0x31 main.o
  .comment       0x00000030       0x31 MCP2515/MCP2515drv.o
- .comment       0x00000030       0x31 OLED/OLEDdrv.o
  .comment       0x00000030       0x31 SPI/SPIdrv.o
  .comment       0x00000030       0x31 SRAM/SRAMdrv.o
  .comment       0x00000030       0x31 UART/UARTdrv.o
@@ -910,22 +923,20 @@ END GROUP
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000      0x1e8
+.debug_aranges  0x00000000      0x170
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x50 ADC/ADCdrv.o
  .debug_aranges
-                0x00000050       0x20 main.o
+                0x00000050       0x28 main.o
  .debug_aranges
-                0x00000070       0x50 MCP2515/MCP2515drv.o
+                0x00000078       0x50 MCP2515/MCP2515drv.o
  .debug_aranges
-                0x000000c0       0x80 OLED/OLEDdrv.o
+                0x000000c8       0x40 SPI/SPIdrv.o
  .debug_aranges
-                0x00000140       0x40 SPI/SPIdrv.o
+                0x00000108       0x38 SRAM/SRAMdrv.o
  .debug_aranges
-                0x00000180       0x38 SRAM/SRAMdrv.o
- .debug_aranges
-                0x000001b8       0x30 UART/UARTdrv.o
+                0x00000140       0x30 UART/UARTdrv.o
 
 .debug_pubnames
  *(.debug_pubnames)
@@ -1018,15 +1029,14 @@ END GROUP
 .debug_pubtypes
  *(.debug_pubtypes)
 
-.debug_ranges   0x00000000      0x1a8
+.debug_ranges   0x00000000      0x140
  *(.debug_ranges)
  .debug_ranges  0x00000000       0x40 ADC/ADCdrv.o
- .debug_ranges  0x00000040       0x10 main.o
- .debug_ranges  0x00000050       0x40 MCP2515/MCP2515drv.o
- .debug_ranges  0x00000090       0x70 OLED/OLEDdrv.o
- .debug_ranges  0x00000100       0x30 SPI/SPIdrv.o
- .debug_ranges  0x00000130       0x58 SRAM/SRAMdrv.o
- .debug_ranges  0x00000188       0x20 UART/UARTdrv.o
+ .debug_ranges  0x00000040       0x18 main.o
+ .debug_ranges  0x00000058       0x40 MCP2515/MCP2515drv.o
+ .debug_ranges  0x00000098       0x30 SPI/SPIdrv.o
+ .debug_ranges  0x000000c8       0x58 SRAM/SRAMdrv.o
+ .debug_ranges  0x00000120       0x20 UART/UARTdrv.o
 
 .debug_macro
  *(.debug_macro)
