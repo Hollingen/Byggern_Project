@@ -9,12 +9,12 @@
 #include <stdio.h>
 #include <avr/interrupt.h>
 
-#include "UART/UARTdrv.h"
-#include "SRAM/SRAMdrv.h"
-#include "ADC/ADCdrv.h"
-#include "OLED/OLEDdrv.h"
-#include "SPI/SPIdrv.h"
-#include "MCP2515/MCP2515drv.h"
+#include "NODE1/UART/UARTdrv.h"
+#include "NODE1/SRAM/SRAMdrv.h"
+#include "NODE1/ADC/ADCdrv.h"
+#include "NODE1/OLED/OLEDdrv.h"
+#include "NODE1/SPI/SPIdrv.h"
+#include "NODE1/MCP2515/MCP2515drv.h"
 
 int main(void)
 {
@@ -31,7 +31,7 @@ int main(void)
 	//oled_refresh_rate_init();
 	//sei();	
 	
-	//printf("men ikke her\n\r");
+	printf("men ikke her\n\r");
     /* Replace with your application code */
 	
 	//TESTE OLED;
@@ -39,13 +39,11 @@ int main(void)
 	//oled_home();
 	//oled_print_char('t');
 
-	//ADC_calibrate();
+	ADC_calibrate();
 	//oled_home();
 	//oled_print("kisen,1234567891");
-	//adc_pos pos;
-	//adc_dir dir;
-	uint8_t value;
-	
+	adc_pos pos;
+	adc_dir dir;
     while (1) 
     {	
 		spi_write_char(0xFF);
@@ -75,8 +73,8 @@ int main(void)
 		//printf("Direction: %d\n\r", dir);
 		_delay_ms(1000);
 		//spi_read_char();'
-		//update_menu_main_counter();
-		//menu_print_screen();
+		update_menu_main_counter();
+		menu_print_screen();
 		
     }
 }
