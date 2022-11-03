@@ -22,14 +22,14 @@ int main(void)
 	XMEM_init();
 	//Int_INIT();
 	ADC_Init();
-	//oled_init();
-	//spi_init_master();
-	mcp2515_init();
+	oled_init();
+	spi_init_master();
+	//mcp2515_init();
 
-	////printf("her\n\r");
-	////spi_init_master();
-	////oled_refresh_rate_init();
-	sei();	
+	//printf("her\n\r");
+	//spi_init_master();
+	//oled_refresh_rate_init();
+	//sei();	
 	
 	printf("men ikke her\n\r");
     /* Replace with your application code */
@@ -46,6 +46,25 @@ int main(void)
 	adc_dir dir;
     while (1) 
     {	
+		spi_write_char(0xFF);
+		
+		//_delay_ms(1000);
+		//DDRB &= ~(1 << PB4);
+
+		//spi_write_char(MCP_CNF1);
+		//spi_write_char(0xAA);
+		//DDRB |= (1 << PB4);
+		//_delay_ms(10);
+		//DDRB &= ~(1 << PB4);
+		//value = spi_read_char();
+		//spi_write_char(MCP_READ); // Send read instruction
+		//spi_write_char(MCP_CNF1); // Send address
+		 
+		//value = spi_read_char() ; // Read result
+		//mcp2515_write(MCP_CNF1, 0xAA);
+		//printf("value: %d\n\r", value);
+		//DDRB |= (1 << PB4);
+		//'_delay_ms(100);
 		//spi_write_char('a');
 		//pos = adc_get_pos();
 		//dir = adc_get_dir(pos);
