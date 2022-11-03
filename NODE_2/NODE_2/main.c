@@ -2,7 +2,7 @@
  * NODE_2.c
  *
  * Created: 03.11.2022 10:30:16
- * Author : eirik
+ * Author : eirik ;)
  */ 
 
 
