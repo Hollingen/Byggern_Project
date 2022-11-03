@@ -139,6 +139,58 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+<<<<<<< HEAD:Term_Project_main/Term_Project_main/Term_Project_main.cproj
+    <Compile Include="MCP2515\MCP2515drv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MCP2515\MCP2515drv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MENU\MENUdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MENU\MENUdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="OLED\fonts.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="OLED\OLEDdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="OLED\OLEDdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI\SPIdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SPI\SPIdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SRAM\SRAMdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="SRAM\SRAMdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UART\UARTdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UART\UARTdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ADC\" />
+    <Folder Include="MCP2515\" />
+    <Folder Include="MENU\" />
+    <Folder Include="NODE1" />
+    <Folder Include="OLED\" />
+    <Folder Include="SPI\" />
+    <Folder Include="SRAM\" />
+    <Folder Include="UART\" />
+=======
+>>>>>>> 71cff991c11b7be5d5b7a2f050922368e1678851:Term_Project_main/Term_Project_main/Node 1/Term_Project_main.cproj
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
