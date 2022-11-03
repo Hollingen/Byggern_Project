@@ -30,15 +30,15 @@
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data>
-  <options />
-  <configurations />
-  <files />
-  <documentation help="" />
-  <offline-documentation help="" />
-  <dependencies>
-    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.44.1" />
-  </dependencies>
-</framework-data>
+        <options />
+        <configurations />
+        <files />
+        <documentation help="" />
+        <offline-documentation help="" />
+        <dependencies>
+          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.44.1" />
+        </dependencies>
+      </framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
     <avrtoolserialnumber>J41800007461</avrtoolserialnumber>
@@ -136,63 +136,9 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ADC\ADCdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="ADC\ADCdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="MCP2515\MCP2515drv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MCP2515\MCP2515drv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MENU\MENUdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="MENU\MENUdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="OLED\fonts.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="OLED\OLEDdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="OLED\OLEDdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SPI\SPIdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SPI\SPIdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM\SRAMdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="SRAM\SRAMdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="UART\UARTdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="UART\UARTdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ADC\" />
-    <Folder Include="MCP2515\" />
-    <Folder Include="MENU\" />
-    <Folder Include="OLED\" />
-    <Folder Include="SPI\" />
-    <Folder Include="SRAM\" />
-    <Folder Include="UART\" />
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
