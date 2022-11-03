@@ -136,15 +136,10 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ADC\ADCdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="ADC\ADCdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+<<<<<<< HEAD:Term_Project_main/Term_Project_main/Term_Project_main.cproj
     <Compile Include="MCP2515\MCP2515drv.c">
       <SubType>compile</SubType>
     </Compile>
@@ -194,6 +189,8 @@
     <Folder Include="SPI\" />
     <Folder Include="SRAM\" />
     <Folder Include="UART\" />
+=======
+>>>>>>> 71cff991c11b7be5d5b7a2f050922368e1678851:Term_Project_main/Term_Project_main/Node 1/Term_Project_main.cproj
   </ItemGroup>
   <Import Project="$(AVRSTUDIO_EXE_PATH)\\Vs\\Compiler.targets" />
 </Project>
