@@ -143,6 +143,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CAN\can_controller.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN\can_controller.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN\can_interrupt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN\can_interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Device_Startup\startup_sam3xa.c">
       <SubType>compile</SubType>
     </Compile>
@@ -152,9 +164,23 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="UART\printf-stdarg.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UART\printf-stdarg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UART\uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UART\uart.h">
+      <SubType>compile</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CAN\" />
     <Folder Include="Device_Startup\" />
+    <Folder Include="UART\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Device_Startup\sam3x8e_flash.ld">
