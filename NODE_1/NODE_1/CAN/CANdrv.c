@@ -52,8 +52,16 @@ can_msg can_recieve_msg(){
     can_msg msg;
 
     uint8_t idLSB = mcp2515_read(MCP_RXB0SIDL);
-    uint8_t idMSB = msp2515_read(MCP_RXB0SIDH);
-    uint8_t msg_length = mcp
+    uint8_t idMSB = mcp2515_read(MCP_RXB0SIDH);
+    uint8_t msg_length = mcp2515_read(MCP_RXB0DLC);
+    msg.id = ((idLSB & 0b11100000) >> 5) | ((idMSB & 0b00011111) << 3);
+    
+    msg.data_len = msg_length;
 
+    for(uint8_t i = 0; i <= msg.data_len - 1; i++){
+        msg.data[i] = mcp2515_read(MCP_RXBD0 + i, msg.data[i]);
+    }
+
+    return msg;
 
 }
