@@ -1,5 +1,6 @@
 {
     "files.associations": {
-        "adcdrv.h": "c"
+        "adcdrv.h": "c",
+        "mcp2515drv.h": "c"
     }
 }
