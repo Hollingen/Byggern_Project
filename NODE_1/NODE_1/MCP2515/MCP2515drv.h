@@ -57,9 +57,18 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_RXM1SIDL	0x25
 #define MCP_RXM1EID8	0x26
 #define MCP_RXM1EID0	0x27
+
+// BRP CONFIG
+#define MCP_CNF1_VAL   0x04
+#define MCP_CNF2_VAL    0x31
+#define MCP_CNF3_VAL    0x05
 #define MCP_CNF3		0x28
 #define MCP_CNF2		0x29
 #define MCP_CNF1		0x2A
+#define MCP_CNF3_MASK   0x07
+#define MCP_CNF2_MASK   0x3F
+#define MCP_CNF1_MASK   0xFF
+
 #define MCP_CANINTE		0x2B
 #define MCP_CANINTF		0x2C
 #define MCP_EFLG		0x2D
@@ -69,13 +78,14 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_TXB0SIDH    0x31
 #define MCP_TXB0SIDL    0x32
 #define MCP_TXB0DLC     0x35
-#define MCP_TXB0DLC     0x35
 #define MCP_TXBD0       0x36
 
 #define MCP_TXB1CTRL	0x40
 #define MCP_TXB2CTRL	0x50
 #define MCP_RXB0CTRL	0x60
 #define MCP_RXB0SIDH	0x61
+#define MCP_RXB0SIDL    0x62
+#define MCP_RXB0DLC     0x65
 #define MCP_RXB1CTRL	0x70
 #define MCP_RXB1SIDH	0x71
 
@@ -174,11 +184,12 @@ struct (
 
 
 uint8_t mcp2515_init(void);
+uint8_t mcp2515_brp_init(void);
 //void mcp2515_read(uint8_t address, int *value);
 uint8_t mcp2515_read(uint8_t address);
 void mcp2515_reset(void);
 void mcp2515_write(uint8_t address, uint8_t data);
-void mcp2515_request_to_send();
+void mcp2515_request_to_send(uint8_t buffer);
 uint8_t mcp2515_read_status();
 void mcp2515_bit_modify(uint8_t address, uint8_t mask, uint8_t data);
 

@@ -15,14 +15,53 @@ uint8_t mcp2515_init(){
 	//printf("value: %d\n\r", value);
     if ((value & MODE_MASK) != MODE_CONFIG) {
         printf ("MCP2515 is NOT in config mode after reset !\n\r");
-		return 1;
+		return -1;
     }
+
+    if(mcp2515_brp_init() < 0){
+        return -2;
+    }
+
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
 	mcp2515_read(MCP_CANSTAT, &value);
 	printf("value: %d\n\r", value);
 	if ((value & MODE_MASK) != MODE_LOOPBACK) {
         printf ("MCP2515 is NOT in config mode after reset !\n\r");
 		return 1;
+    }
+
+    return 0;
+}
+
+uint8_t mcp2515_brp_init(){
+
+    // SJW<2:0> = 0b000 (0)-> 1 * Tq
+    // BRP<5:0> = 0b00100 (4) -> BRP * Tosc
+    mcp2515_bit_modify(MCP_CNF1, MCP_CNF1_MASK, MCP_CNF1_VAL);
+    value = mcp2515_read(MCP_CNF1);
+	//printf("value: %d\n\r", value);
+    if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
+        printf ("Wrong CNF1 value !\n\r");
+		return -1;
+    }
+
+    // PHSEG1<5:3> = 0b110 (6) -> PS1 = (PHSEG + 1) * Tq
+    // PHSEG2<2:0> = 0b001 (1) -> Progseg = (PHSEG2 + 1) * Tq
+    mcp2515_bit_modify(MCP_CNF2, MCP_CNF2_MASK, MCP_CNF2_VAL);
+    value = mcp2515_read(MCP_CNF1);
+	//printf("value: %d\n\r", value);
+    if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
+        printf ("Wrong CNF1 value !\n\r");
+		return -2;
+    }
+    
+    // PHSEG2<2:0> = 0b101 (5) -> PS2 = (PHSEG2 + 1) * Tq
+    mcp2515_bit_modify(MCP_CNF3, MCP_CNF3_MASK, MCP_CNF3_VAL);
+    value = mcp2515_read(MCP_CNF1);
+	//printf("value: %d\n\r", value);
+    if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
+        printf ("Wrong CNF1 value !\n\r");
+		return -3;
     }
 
     return 0;
@@ -56,9 +95,10 @@ void mcp2515_write(uint8_t address, uint8_t data){
     PORTB |= (1 << PB4); // Deselect CAN - controller
 }
 
-void mcp2515_request_to_send(){
+void mcp2515_request_to_send(uint8_t buffer){
     PORTB &= ~(1 << PB4); // Select CAN - controller
-    spi_write_char(MCP_RTS_ALL);   //Write RTS bit to SPI
+    //spi_write_char(MCP_RTS_ALL);   Write RTS bit to SPI
+    spi_write_char(buffer);
     PORTB |= (1 << PB4); // Deselect CAN - controller
 }
 

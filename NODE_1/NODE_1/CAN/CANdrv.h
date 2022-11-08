@@ -12,5 +12,5 @@ struct can_msg{
     uint16_t id;
     uint8_t data_len;
     char data[8];
-};
+} can_msg;
 
