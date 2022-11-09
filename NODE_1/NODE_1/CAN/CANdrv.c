@@ -11,22 +11,22 @@ can_msg can_handle_msg(uint16_t id, uint8_t size, char msg[8]){
     return msg;
 }
 
-void can_send_msg(can_msg* msg){
+void can_send_msg(can_msg* msg, BUFFER buffer){
 
     uint8_t idLSB = (msg.id & 0x7) << 5;
     uint8_t idMSB = (msg.id & 0x7F8) >> 3;
-    uint8_t buffer0stat;
+    //uint8_t buffer0stat;
 
-    mcp2515_write(MCP_TXB0SIDH, idMSB);
-    mcp2515_write(MCP_TXB0SIDL, idLSB);
-    mcp2515_write(MCP_TXB0DLC, msg.data_len);
+    mcp2515_write(MCP_TXB0SIDH + 16*buffer, idMSB);
+    mcp2515_write(MCP_TXB0SIDL + 16*buffer, idLSB);
+    mcp2515_write(MCP_TXB0DLC + 16*buffer, msg.data_len);
 
     // Checcking if the MCP is already requesting transmission in bffer 0
     if((mcp2515_read(MCP_TXB0CTRL) & 0x08) != 0x08){
         for(uint8_t i = 0; i <= msg.data_len - 1; i++){
-            mcp2515_write(MCP_TXBD0 + i, msg.data[i]);
+            mcp2515_write(MCP_TXBD0 + 16*buffer + i, msg.data[i]);
         }
-        mcp2515_request_to_send(MCP_RTS_TX0);
+        mcp2515_request_to_send(MCP_RTS_TX0 + buffer);
     }
     
 
