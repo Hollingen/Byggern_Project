@@ -8,7 +8,7 @@
 #include "../SPI/SPIdrv.h"
 #include "../MCP2515/MCP2515drv.h"
 
-struct can_msg{
+typedef struct{
     uint16_t id;
     uint8_t data_len;
     char data[8];

@@ -179,12 +179,21 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_WAKIF		0x40
 #define MCP_MERRF		0x80
 
-struct (
-    
-)
+#define stat_buff0_r    0x01
+#define stat_buff1_r    0x02
+#define stat_buff0_busy 0x04
+#define stat_buff0_tx   0x08
+#define stat_buff1_busy 0x10
+#define stat_buff1_tx   0x20
+
+typedef enum{
+    BUFFER0,
+    BUFFER1
+} BUFFER;
 
 
 uint8_t mcp2515_init(void);
+void can_interrupt_en(void);
 uint8_t mcp2515_brp_init(void);
 //void mcp2515_read(uint8_t address, int *value);
 uint8_t mcp2515_read(uint8_t address);

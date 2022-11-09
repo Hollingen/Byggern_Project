@@ -16,7 +16,7 @@
 // CHANNELS
 #define CHANNEL_X 0
 #define CHANNEL_Y  1
-#define CHANNEL_LS
+#define CHANNEL_LS 2
 #define CHANNEL_RS 3 
 
 // USEFUL DEFINITIONS

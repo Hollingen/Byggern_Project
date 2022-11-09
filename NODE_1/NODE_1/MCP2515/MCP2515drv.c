@@ -21,7 +21,9 @@ uint8_t mcp2515_init(){
     if(mcp2515_brp_init() < 0){
         return -2;
     }
-
+	
+    can_interrupt_en();
+	
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
 	mcp2515_read(MCP_CANSTAT, &value);
 	printf("value: %d\n\r", value);
@@ -31,6 +33,18 @@ uint8_t mcp2515_init(){
     }
 
     return 0;
+}
+
+void can_interrupt_en(){
+	
+    // making pd3 input
+    DDRD &= ~(1<<PD3);
+    // Enablign external interrupt on MCU on INT1
+    GICR |= (1<<INT1);
+	
+	MCUCR |= (1<<ISC01);
+	MCUCR |= (1<<ISC11);
+
 }
 
 uint8_t mcp2515_brp_init(){
@@ -52,7 +66,7 @@ uint8_t mcp2515_brp_init(){
 	//printf("value: %d\n\r", value);
     if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
         printf ("Wrong CNF1 value !\n\r");
-		return -2;
+		return -1;
     }
     
     // PHSEG2<2:0> = 0b101 (5) -> PS2 = (PHSEG2 + 1) * Tq
@@ -61,7 +75,7 @@ uint8_t mcp2515_brp_init(){
 	//printf("value: %d\n\r", value);
     if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
         printf ("Wrong CNF1 value !\n\r");
-		return -3;
+		return -1;
     }
 
     return 0;
@@ -121,3 +135,4 @@ void mcp2515_bit_modify(uint8_t address, uint8_t mask, uint8_t data){
     spi_write_char(data); // Send data
     PORTB |= (1 << DD_SS); // Deselect CAN - controller
 }
+
