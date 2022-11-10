@@ -31,7 +31,6 @@ int main(void)
 	//printf("her\n\r");
 	//spi_init_master();
 	//oled_refresh_rate_init();
-	//sei();	
 	
 
  	/*//LAB 3
@@ -46,10 +45,10 @@ int main(void)
 	//LAB 5
 	mcp2515_init();
 	can_msg melding;
-	melding = can_handle_msg(3, 3, "eei");
-	
-	//melding = can_recieve_msg(BUFFER0);
-	//printf("%d\n\r", melding.id);
+	melding = can_handle_msg(0, 3, "Hei");
+	//printf("length: %d\n\r", melding.data_len);
+	//melding = can_recieve_msg(BUFFER0);*/
+	sei();	
 
 	/* oled_reset();
 	ADC_calibrate();*/ 
@@ -70,19 +69,20 @@ int main(void)
 		
 		
 		//LAB 5
-		can_send_msg(&melding, BUFFER0);
-		_delay_ms(400);
+		//can_send_msg(&melding, BUFFER0);
+		//_delay_ms(400);
+		//can_msg melding2 = can_recieve_msg(BUFFER0);
+		//printf("%d\n\r", melding.data[0]);
+		//printf("%d\n\r", melding2.data[0]);
+		
+		/*
 		can_msg melding2 = can_recieve_msg(BUFFER0);
-		printf("%d\n\r", melding.data[0]);
-		printf("%d\n\r", melding2.data[0]);
+		printf("data0: %d\n\r", melding2.data[0]);
+		printf("data1: %d\n\r", melding2.data[1]);
+		printf("data2: %d\n\r", melding2.data[2]);
 		
 		_delay_ms(1000);
-		
-		/*melding = can_recieve_msg(BUFFER0);
-		printf("data0: %d\n\r", melding.data[0]);
-		printf("data1: %d\n\r", melding.data[1]);
-		printf("data2: %d\n\r", melding.data[2]);
-		_delay_ms(1000);*/
+		*/
 		//LAB
 		
     }

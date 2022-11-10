@@ -13,19 +13,24 @@ uint8_t mcp2515_init(){
 
 
 	mcp2515_read(MCP_CANSTAT, &value);	//printf("value: %d\n\r", value);
-	printf("val %d\n\r", value);
+	//printf("val %d\n\r", value);
     if ((value & MODE_MASK) != MODE_CONFIG) {
         printf ("MCP2515 is NOT in config mode after reset !\n\r");
 		return -1;
     }
 	
 	
-   /*  if(mcp2515_brp_init() < 0){
+    if(mcp2515_brp_init() < 0){
         return -2;
-    } */
+    } 
 	
-    //can_interrupt_en();
+    can_interrupt_en();
 	//mcp2515_bit_modify(MCP_CANINTF, 0xFF, 0x00);
+		
+	mcp2515_bit_modify(MCP_RXB0CTRL, 0x60, 0x60);
+    mcp2515_bit_modify(MCP_RXB1CTRL, 0x60, 0x60);
+
+
 	
 	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
 	mcp2515_read(MCP_CANSTAT, &value);
@@ -48,7 +53,7 @@ void can_interrupt_en(){
 	MCUCR &= ~(1<<ISC10);
 	MCUCR |= (1<<ISC11);
 	
-	mcp2515_bit_modify(MCP_CANINTE, 0xFF, 0x05);
+	mcp2515_bit_modify(MCP_CANINTE, 0xFF, 0x0F);
 
 }
 
