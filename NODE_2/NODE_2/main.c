@@ -12,7 +12,9 @@
 int main(void)
 {
     /* Initialize the SAM system */
+	
     SystemInit();
+	PWM_init_periph();
 
     /* Replace with your application code */
     while (1) 

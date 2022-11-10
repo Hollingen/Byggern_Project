@@ -1,3 +1,7 @@
+#include "PWMdrvperiph.h"
+
+
+/*
 void PWM_setup() {
   // PWM Set-up on pin: DAC1
   PMC_PCER1 |= PMC_PCER1_PID36;                     // Enable PWM 
@@ -11,6 +15,7 @@ void PWM_setup() {
   PWM_CDTY0 = 1050;                                  // Set the PWM duty cycle 50% (2100/2=1050)
   PWM_ENA = PWM_ENA_CHID0;                          // Enable the PWM channel     
 }
+*/
 void PWM_init_periph(){
     PMC->PMC_PCER1 |= PMC_PCER1_PID36;                      // Enable peripheral TC6 (TC2 Channel 0)
     PIOC->PIO_ABSR |= PIO_ABSR_P18 | PIO_ABSR_P19;          // Switch the multiplexer to peripheral B for TIOA6 and TIOB6
@@ -24,8 +29,8 @@ void PWM_init_periph(){
                             TC_CMR_EEVT_XC0 |           // Set event selection to XC0 to make TIOB an output
                             TC_CMR_TCCLKS_TIMER_CLOCK1; // Set the timer clock to TCLK1 (MCK/2 = 84MHz/2 = 42MHz)
 
-    NVIC_SetPriority(TC6_IRQn, 0);    // Set the Nested Vector Interrupt Controller (NVIC) priority for TC6 to 0 (highest) 
-    NVIC_EnableIRQ(TC6_IRQn);         // Connect TC6 to Nested Vector Interrupt Controller (NVIC)
+    //NVIC_SetPriority(TC6_IRQn, 0);    // Set the Nested Vector Interrupt Controller (NVIC) priority for TC6 to 0 (highest) 
+    //NVIC_EnableIRQ(TC6_IRQn);         // Connect TC6 to Nested Vector Interrupt Controller (NVIC)
 
     TC2->TC_CHANNEL[0].TC_RA = 5250;                        // Load the RA0 register
     TC2->TC_CHANNEL[0].TC_RB = 5250;                        // Load the RB0 register

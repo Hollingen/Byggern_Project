@@ -13,7 +13,8 @@
 #include <stdio.h>
 #include "sam.h"
 
-#include "../uart_and_printf/printf-stdarg.h"
+#include "../UART/printf-stdarg.h"
+#include "../UART/uart.h"
 
 #include "can_controller.h"
 

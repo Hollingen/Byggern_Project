@@ -33,20 +33,16 @@ LINKER_SCRIPT_DEP:=
 
 # Every subdirectory with source files must be described here
 SUBDIRS :=  \
-../CAN/ \
 ../Device_Startup/ \
-../UART/
+../PWM/
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
-../CAN/can_controller.c \
-../CAN/can_interrupt.c \
 ../Device_Startup/startup_sam3xa.c \
 ../Device_Startup/system_sam3xa.c \
 ../main.c \
-../UART/printf-stdarg.c \
-../UART/uart.c
+../PWM/PWMdrvperiph.c
 
 
 PREPROCESSING_SRCS += 
@@ -56,40 +52,28 @@ ASM_SRCS +=
 
 
 OBJS +=  \
-CAN/can_controller.o \
-CAN/can_interrupt.o \
 Device_Startup/startup_sam3xa.o \
 Device_Startup/system_sam3xa.o \
 main.o \
-UART/printf-stdarg.o \
-UART/uart.o
+PWM/PWMdrvperiph.o
 
 OBJS_AS_ARGS +=  \
-CAN/can_controller.o \
-CAN/can_interrupt.o \
 Device_Startup/startup_sam3xa.o \
 Device_Startup/system_sam3xa.o \
 main.o \
-UART/printf-stdarg.o \
-UART/uart.o
+PWM/PWMdrvperiph.o
 
 C_DEPS +=  \
-CAN/can_controller.d \
-CAN/can_interrupt.d \
 Device_Startup/startup_sam3xa.d \
 Device_Startup/system_sam3xa.d \
 main.d \
-UART/printf-stdarg.d \
-UART/uart.d
+PWM/PWMdrvperiph.d
 
 C_DEPS_AS_ARGS +=  \
-CAN/can_controller.d \
-CAN/can_interrupt.d \
 Device_Startup/startup_sam3xa.d \
 Device_Startup/system_sam3xa.d \
 main.d \
-UART/printf-stdarg.d \
-UART/uart.d
+PWM/PWMdrvperiph.d
 
 OUTPUT_FILE_PATH +=NODE_2.elf
 
@@ -109,20 +93,6 @@ LINKER_SCRIPT_DEP+=  \
 
 
 # AVR32/GNU C Compiler
-CAN/can_controller.o: ../CAN/can_controller.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-CAN/can_interrupt.o: ../CAN/can_interrupt.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
 Device_Startup/startup_sam3xa.o: ../Device_Startup/startup_sam3xa.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
@@ -144,14 +114,7 @@ Device_Startup/system_sam3xa.o: ../Device_Startup/system_sam3xa.c
 	@echo Finished building: $<
 	
 
-UART/printf-stdarg.o: ../UART/printf-stdarg.c
-	@echo Building file: $<
-	@echo Invoking: ARM/GNU C Compiler : 6.3.1
-	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
-	@echo Finished building: $<
-	
-
-UART/uart.o: ../UART/uart.c
+PWM/PWMdrvperiph.o: ../PWM/PWMdrvperiph.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
