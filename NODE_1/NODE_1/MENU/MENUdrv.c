@@ -59,13 +59,14 @@ void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_coun
         oled_print(buffer);
         string_scroll_number ++;
     }
-    }
-
     //end:
 
 }
 
-
+uint8_t return_menu_pos();
+    if(!PB3) {
+        return menu_main_counter;
+    }
 
 void oled_refresh_rate_init(){
 

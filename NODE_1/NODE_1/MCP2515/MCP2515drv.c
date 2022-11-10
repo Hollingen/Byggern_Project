@@ -24,10 +24,10 @@ uint8_t mcp2515_init(){
 	
     can_interrupt_en();
 	
-	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 	mcp2515_read(MCP_CANSTAT, &value);
 	printf("value: %d\n\r", value);
-	if ((value & MODE_MASK) != MODE_LOOPBACK) {
+	if ((value & MODE_MASK) != MODE_NORMAL) {
         printf ("MCP2515 is NOT in config mode after reset !\n\r");
 		return 1;
     }
@@ -65,7 +65,7 @@ uint8_t mcp2515_brp_init(){
     value = mcp2515_read(MCP_CNF1);
 	//printf("value: %d\n\r", value);
     if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
-        printf ("Wrong CNF1 value !\n\r");
+        printf ("Wrong CNF2 value !\n\r");
 		return -1;
     }
     
@@ -74,7 +74,7 @@ uint8_t mcp2515_brp_init(){
     value = mcp2515_read(MCP_CNF1);
 	//printf("value: %d\n\r", value);
     if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
-        printf ("Wrong CNF1 value !\n\r");
+        printf ("Wrong CNF3 value !\n\r");
 		return -1;
     }
 
