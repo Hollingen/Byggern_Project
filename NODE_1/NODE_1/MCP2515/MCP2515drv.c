@@ -32,11 +32,11 @@ uint8_t mcp2515_init(){
 
 
 	
-	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 	mcp2515_read(MCP_CANSTAT, &value);
 	//printf("value: %d\n\r", value);
-	if ((value & MODE_MASK) != MODE_LOOPBACK) {
-        printf ("MCP2515 is NOT in LOOPBACK mode after reset !\n\r");
+	if ((value & MODE_MASK) != MODE_NORMAL) {
+        printf ("MCP2515 is NOT in  NORMAL mode after reset !\n\r");
 		return -1;
     }
 	
