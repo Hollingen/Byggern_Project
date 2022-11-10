@@ -28,12 +28,12 @@ volatile int menu_main_counter_last = 0;
 volatile int menu_children_counter_last = 0;
 
 
-void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_counter){
+void menu_print_screen(){	//uint8_t menu_main_counter, uint8_t menu_children_counter){
 
     if(menu_main_counter == menu_main_counter_last){
      //   goto end;
     }
-    else{
+   
     //uint8_t scroll_number = 0;
     uint8_t string_scroll_number = 0;
     uint8_t middle = 4;
@@ -60,12 +60,16 @@ void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_coun
     }
     //end:
 
+    
 }
 
-uint8_t return_menu_pos();
-    if(!PB3) {
+uint8_t return_menu_pos(){
+    if(!(PINB & (1<<PB2))) {
+        
+        printf("Menu item: %d \n\r", menu_main_counter);
         return menu_main_counter;
     }
+}
 
 void oled_refresh_rate_init(){
 
@@ -103,6 +107,7 @@ void update_menu_main_counter(){
         menu_main_counter = number_of_strings;
     }
     menu_main_counter_last = menu_main_counter;
+    //_delay_ms(100);
 }
 
 

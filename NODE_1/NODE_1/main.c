@@ -2,7 +2,7 @@
  * Term_Project_main.c
  *
  * Created: 27.09.2022 19:34:22
- * Author : eirik
+ * Author : Espen
  */ 
 
 #include <avr/io.h>
@@ -15,12 +15,14 @@
 #include "OLED/OLEDdrv.h"
 #include "SPI/SPIdrv.h"
 #include "MCP2515/MCP2515drv.h"
+//#include "MENU/MENUdrv.h"
+#include "CAN/CANdrv.h"
 
 int main(void)
 {
 	USART_Init(MYUBRR);
 	XMEM_init();
-	Int_INIT();
+	//Int_INIT();
 	ADC_Init();
 	oled_init();
 	spi_init_master();
@@ -32,29 +34,37 @@ int main(void)
 	sei();	
 	
 
-	//LAB 3
+/* 	//LAB 3
 	ADC_calibrate();
 	adc_pos pos;
-	adc_dir dir;
+	adc_dir dir; */
 
 	//LAB 4
-	oled_refresh_rate_init();
+	//oled_refresh_rate_init();
 
 	//LAB 5
-	
+	mcp2515_init();
+	can_msg melding;
+	melding = can_handle_msg(69, 1, "h");
+	can_send_msg(&melding, BUFFER0);
+
+	/* oled_reset();
+	ADC_calibrate(); */
     while (1) 
     {	
-		//LAB 3
+		/* //LAB 3
 		pos = adc_get_pos();
 		dir	= adc_get_dir(pos);
-		printf("X pos: %d, X dir: %d \n\r", pos.x, dir.x);
-		printf("Y pos: %d, Y dir: %d \n\r", pos.y, dir.y);
-		_delay_ms(1000);
+		printf("X pos: %d, Y pos: %d \n\r", pos.x, pos.y);
+		printf("Dir: %d \n\r", dir);
+		_delay_ms(1000); */
 
-		//LAB 4
+		/* //LAB 4
 		update_menu_main_counter();
 		menu_print_screen();
-
+		_delay_ms(200);
+		return_menu_pos(); */
+		
 		//LAB 5
 
 		//LAB

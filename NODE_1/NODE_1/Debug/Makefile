@@ -35,6 +35,7 @@ LINKER_SCRIPT_DEP:=
 SUBDIRS :=  \
 ../ADC/ \
 ../BUTTON/ \
+../CAN/ \
 ../Debug/ \
 ../Debug/ADC/ \
 ../Debug/MCP2515/ \
@@ -55,6 +56,7 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../ADC/ADCdrv.c \
+../CAN/CANdrv.c \
 ../main.c \
 ../MCP2515/MCP2515drv.c \
 ../MENU/MENUdrv.c \
@@ -72,6 +74,7 @@ ASM_SRCS +=
 
 OBJS +=  \
 ADC/ADCdrv.o \
+CAN/CANdrv.o \
 main.o \
 MCP2515/MCP2515drv.o \
 MENU/MENUdrv.o \
@@ -82,6 +85,7 @@ UART/UARTdrv.o
 
 OBJS_AS_ARGS +=  \
 ADC/ADCdrv.o \
+CAN/CANdrv.o \
 main.o \
 MCP2515/MCP2515drv.o \
 MENU/MENUdrv.o \
@@ -92,6 +96,7 @@ UART/UARTdrv.o
 
 C_DEPS +=  \
 ADC/ADCdrv.d \
+CAN/CANdrv.d \
 main.d \
 MCP2515/MCP2515drv.d \
 MENU/MENUdrv.d \
@@ -102,6 +107,7 @@ UART/UARTdrv.d
 
 C_DEPS_AS_ARGS +=  \
 ADC/ADCdrv.d \
+CAN/CANdrv.d \
 main.d \
 MCP2515/MCP2515drv.d \
 MENU/MENUdrv.d \
@@ -125,6 +131,13 @@ LINKER_SCRIPT_DEP+=
 
 # AVR32/GNU C Compiler
 ADC/ADCdrv.o: ../ADC/ADCdrv.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+CAN/CANdrv.o: ../CAN/CANdrv.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega162 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega162" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

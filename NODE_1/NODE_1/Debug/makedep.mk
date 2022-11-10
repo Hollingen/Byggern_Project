@@ -4,6 +4,8 @@
 
 ADC\ADCdrv.c
 
+CAN\CANdrv.c
+
 main.c
 
 MCP2515\MCP2515drv.c

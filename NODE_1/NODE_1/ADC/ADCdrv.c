@@ -10,8 +10,9 @@ void ADC_Init(void){
 	TCCR1B = (1<<WGM12)|(1<<WGM13)|(1<<CS10);   // Fast PWM, TOP=ICRn, Update OCRnx on TOP. // Prescaler = 1
 	ICR1 = 5;
 	OCR1A = 2;  // 50% Duty Cycle, ~0,8Mhz
-	DDRB &= ~(1<<PB3);
-	PORTB |= (1<<PB3);
+	DDRB &= ~(1<<PB2);
+	PORTB |= (1<<PB2);
+	//SFIOR &= ~(1<<PUD);
 	
 	DDRD |= (1<<PD5);
 

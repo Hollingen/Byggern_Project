@@ -11,12 +11,17 @@ uint8_t mcp2515_init(){
     // Self - testS
 	//mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_CONFIG);
 
-    value = mcp2515_read(MCP_CANSTAT);
-	//printf("value: %d\n\r", value);
+
+	mcp2515_read(MCP_CANCTRL, &value);	//printf("value: %d\n\r", value);
     if ((value & MODE_MASK) != MODE_CONFIG) {
         printf ("MCP2515 is NOT in config mode after reset !\n\r");
-		return -1;
+		//return -1;
     }
+	if ((value & MODE_MASK) != MODE_NORMAL) {
+        printf ("MCP2515 is NOT in connormfig mode after reset !\n\r");
+		//return -1;
+    }
+	return -1;
 
     if(mcp2515_brp_init() < 0){
         return -2;
@@ -24,12 +29,12 @@ uint8_t mcp2515_init(){
 	
     can_interrupt_en();
 	
-	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
 	mcp2515_read(MCP_CANSTAT, &value);
 	printf("value: %d\n\r", value);
-	if ((value & MODE_MASK) != MODE_NORMAL) {
+	if ((value & MODE_MASK) != MODE_LOOPBACK) {
         printf ("MCP2515 is NOT in config mode after reset !\n\r");
-		return 1;
+		return -1;
     }
 
     return 0;
@@ -48,11 +53,11 @@ void can_interrupt_en(){
 }
 
 uint8_t mcp2515_brp_init(){
-
+	uint8_t value;
     // SJW<2:0> = 0b000 (0)-> 1 * Tq
     // BRP<5:0> = 0b00100 (4) -> BRP * Tosc
     mcp2515_bit_modify(MCP_CNF1, MCP_CNF1_MASK, MCP_CNF1_VAL);
-    value = mcp2515_read(MCP_CNF1);
+	mcp2515_read(MCP_CNF1, &value);
 	//printf("value: %d\n\r", value);
     if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
         printf ("Wrong CNF1 value !\n\r");
@@ -62,8 +67,7 @@ uint8_t mcp2515_brp_init(){
     // PHSEG1<5:3> = 0b110 (6) -> PS1 = (PHSEG + 1) * Tq
     // PHSEG2<2:0> = 0b001 (1) -> Progseg = (PHSEG2 + 1) * Tq
     mcp2515_bit_modify(MCP_CNF2, MCP_CNF2_MASK, MCP_CNF2_VAL);
-    value = mcp2515_read(MCP_CNF1);
-	//printf("value: %d\n\r", value);
+	mcp2515_read(MCP_CNF1, &value);	//printf("value: %d\n\r", value);
     if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
         printf ("Wrong CNF2 value !\n\r");
 		return -1;
@@ -71,8 +75,7 @@ uint8_t mcp2515_brp_init(){
     
     // PHSEG2<2:0> = 0b101 (5) -> PS2 = (PHSEG2 + 1) * Tq
     mcp2515_bit_modify(MCP_CNF3, MCP_CNF3_MASK, MCP_CNF3_VAL);
-    value = mcp2515_read(MCP_CNF1);
-	//printf("value: %d\n\r", value);
+	mcp2515_read(MCP_CNF1, &value);	//printf("value: %d\n\r", value);
     if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
         printf ("Wrong CNF3 value !\n\r");
 		return -1;
@@ -82,7 +85,7 @@ uint8_t mcp2515_brp_init(){
 }
 
 
-uint8_t mcp2515_read(uint8_t address, uint8_t *value){
+void mcp2515_read(uint8_t address, uint8_t *value){
 
     PORTB &= ~(1 << PB4); // Select CAN - controller
 
