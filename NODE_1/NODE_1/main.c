@@ -46,7 +46,7 @@ int main(void)
 	mcp2515_init();
 	sei();
 	can_msg melding;
-	melding = can_handle_msg(0, 3, "Hei");
+	melding = can_handle_msg(0, 1, "H");
 	can_send_msg(&melding, BUFFER0);
 	//printf("length: %d\n\r", melding.data_len);
 	//melding = can_recieve_msg(BUFFER0);*/
