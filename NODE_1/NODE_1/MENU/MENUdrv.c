@@ -153,11 +153,3 @@ void choose_menu_item(uint8_t menu_counter){
         // default statements
     }
 }
-
-
-    text_highscores,
-    text_placeholder1,
-    text_placeholder2,
-    text_placeholder3,
-    text_placeholder4,
-    text_quit
