@@ -33,6 +33,7 @@ void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_coun
     if(menu_main_counter == menu_main_counter_last){
      //   goto end;
     }
+    else{
     //uint8_t scroll_number = 0;
     uint8_t string_scroll_number = 0;
     uint8_t middle = 4;
@@ -57,12 +58,14 @@ void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_coun
         oled_print(buffer);
         string_scroll_number ++;
     }
-
     //end:
 
 }
 
-
+uint8_t return_menu_pos();
+    if(!PB3) {
+        return menu_main_counter;
+    }
 
 void oled_refresh_rate_init(){
 
