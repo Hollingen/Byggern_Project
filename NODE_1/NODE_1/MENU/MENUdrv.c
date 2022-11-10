@@ -16,6 +16,7 @@ const char *const menu_main_strings[] PROGMEM = {
 };
 
 
+
 //Have to use this to copy the value from memory into the program
 // strcpy_P(buffer, (char *)pgm_read_word(&(menu_main_strings[i])));
 //It will be copied into this buffer
@@ -104,4 +105,58 @@ void update_menu_main_counter(){
     menu_main_counter_last = menu_main_counter;
 }
 
+void choose_menu_item(uint8_t menu_counter){
+    switch (menu_counter){
+        //main menu
+        case 0:
+        // statements
+        break;
 
+        //play
+        case 1:
+        // statements
+        break;
+        
+        //settings
+        case 2:
+        // statements
+        break;
+
+        //highscore
+        case 3:
+        // statements
+        break;
+
+        //Placeholder1
+        case 4:
+        // statements
+        break;
+
+        //Placeholder2
+        case 5:
+        // statements
+        break;
+
+        //Placeholder3
+        case 6:
+        // statements
+        break;
+
+        //Placeholder4
+        case 7:
+        // statements
+        break;
+
+        //quit
+        default:
+        // default statements
+    }
+}
+
+
+    text_highscores,
+    text_placeholder1,
+    text_placeholder2,
+    text_placeholder3,
+    text_placeholder4,
+    text_quit
