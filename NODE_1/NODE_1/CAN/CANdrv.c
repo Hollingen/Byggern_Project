@@ -113,7 +113,7 @@ void interrupt_handler(){
 
 }
 
-ISR(INT1_vector){
+ISR(INT1_vect){
     interrupt_handler();
 	printf("nei\n\r");
 }

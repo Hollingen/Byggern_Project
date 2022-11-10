@@ -44,11 +44,13 @@ int main(void)
 	
 	//LAB 5
 	mcp2515_init();
+	sei();
 	can_msg melding;
 	melding = can_handle_msg(0, 3, "Hei");
+	can_send_msg(&melding, BUFFER0);
 	//printf("length: %d\n\r", melding.data_len);
 	//melding = can_recieve_msg(BUFFER0);*/
-	sei();	
+		
 
 	/* oled_reset();
 	ADC_calibrate();*/ 
