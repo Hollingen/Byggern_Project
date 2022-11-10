@@ -22,3 +22,19 @@ void PWM_init()
 	PWM->PWM_ENA |= PWM_ENA_CHID5;                                          //Enables PWM channel 0 
 
 }
+
+uint32_t PWM_set_period_percentage(int16_t value)
+{
+	
+	
+	if (value > 100) {
+		value = 100;
+	} else if (value < -100) {
+		value = -100;
+	}
+		
+	uint32_t pwm_value =  PWM_CHN_5_MIN_VAL + (value * PWM_CHN_5_RANGE)/100;
+	
+	PWM->PWM_CH_NUM[5].PWM_CDTYUPD = (pwm_value);
+	return pwm_value;
+}
