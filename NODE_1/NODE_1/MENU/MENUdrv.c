@@ -33,6 +33,7 @@ void menu_print_screen(){//uint8_t menu_main_counter, uint8_t menu_children_coun
     if(menu_main_counter == menu_main_counter_last){
      //   goto end;
     }
+    else{
     //uint8_t scroll_number = 0;
     uint8_t string_scroll_number = 0;
     uint8_t middle = 4;
