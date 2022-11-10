@@ -33,9 +33,10 @@ int main(void)
 	//WTD->WTD_MR = WTD_MR_WDDIS;
 	CAN_MESSAGE meld; 
     uint8_t what;
-   
-	can_receive(&meld, 0);
-	printf("%d", meld.data[0]);
+	sei();
+	CAN0_Handler();
+	//can_receive(&meld, 0);
+	//printf("%d", meld.data[0]);
     /* Replace with your application code */
     while (1) {
 		
