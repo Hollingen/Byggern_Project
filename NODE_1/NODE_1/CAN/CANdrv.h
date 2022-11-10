@@ -4,6 +4,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <avr/interrupt.h>
 
 #include "../SPI/SPIdrv.h"
 #include "../MCP2515/MCP2515drv.h"

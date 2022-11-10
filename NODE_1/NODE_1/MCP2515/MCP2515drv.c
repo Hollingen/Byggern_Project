@@ -9,34 +9,32 @@ uint8_t mcp2515_init(){
 	spi_init_master(); // Initialize SPI
     mcp2515_reset(); // end reset - command
     // Self - testS
-	//mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_CONFIG);
+	//mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_NORMAL);
 
 
-	mcp2515_read(MCP_CANCTRL, &value);	//printf("value: %d\n\r", value);
+	mcp2515_read(MCP_CANSTAT, &value);	//printf("value: %d\n\r", value);
+	printf("val %d\n\r", value);
     if ((value & MODE_MASK) != MODE_CONFIG) {
-        printf ("MCP2515 is NOT in config mode after reset !\n\r");
-		//return -1;
-    }
-	if ((value & MODE_MASK) != MODE_NORMAL) {
-        printf ("MCP2515 is NOT in connormfig mode after reset !\n\r");
-		//return -1;
-    }
-	return -1;
-
-    if(mcp2515_brp_init() < 0){
-        return -2;
-    }
-	
-    can_interrupt_en();
-	
-	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
-	mcp2515_read(MCP_CANSTAT, &value);
-	printf("value: %d\n\r", value);
-	if ((value & MODE_MASK) != MODE_LOOPBACK) {
         printf ("MCP2515 is NOT in config mode after reset !\n\r");
 		return -1;
     }
-
+	
+	
+   /*  if(mcp2515_brp_init() < 0){
+        return -2;
+    } */
+	
+    //can_interrupt_en();
+	//mcp2515_bit_modify(MCP_CANINTF, 0xFF, 0x00);
+	
+	mcp2515_bit_modify(MCP_CANCTRL, MODE_MASK, MODE_LOOPBACK);
+	mcp2515_read(MCP_CANSTAT, &value);
+	//printf("value: %d\n\r", value);
+	if ((value & MODE_MASK) != MODE_LOOPBACK) {
+        printf ("MCP2515 is NOT in LOOPBACK mode after reset !\n\r");
+		return -1;
+    }
+	
     return 0;
 }
 
@@ -47,8 +45,10 @@ void can_interrupt_en(){
     // Enablign external interrupt on MCU on INT1
     GICR |= (1<<INT1);
 	
-	MCUCR |= (1<<ISC01);
+	MCUCR &= ~(1<<ISC10);
 	MCUCR |= (1<<ISC11);
+	
+	mcp2515_bit_modify(MCP_CANINTE, 0xFF, 0x05);
 
 }
 
@@ -92,7 +92,9 @@ void mcp2515_read(uint8_t address, uint8_t *value){
     spi_write_char(MCP_READ); // Send read instruction
     spi_write_char(address); // Send address
 	
-    value = spi_read_char() ; // Read result
+    *value = spi_read_char() ; // Read result
+	
+	//printf("value %d\n\r", value);
     
 	PORTB |= (1 << PB4); // Deselect CAN - controller
 	//*value = result;

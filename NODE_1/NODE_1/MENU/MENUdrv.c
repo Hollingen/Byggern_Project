@@ -111,7 +111,7 @@ void update_menu_main_counter(){
     //_delay_ms(100);
 }
 
-void choose_menu_item(uint8_t menu_counter){
+/* void choose_menu_item(uint8_t menu_counter){
     switch (menu_counter){
         //main menu
         case 0:
@@ -157,4 +157,4 @@ void choose_menu_item(uint8_t menu_counter){
         default:
         // default statements
     }
-}
+} */
