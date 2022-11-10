@@ -93,6 +93,7 @@ void SystemInit( void )
   }
 
   SystemCoreClock = CHIP_FREQ_CPU_MAX;
+  
 }
 
 void SystemCoreClockUpdate( void )

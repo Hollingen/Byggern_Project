@@ -35,7 +35,7 @@ void can_send_msg(can_msg* msg, BUFFER buffer){
     if((value & 0x08) != 0x08){
         for(uint8_t i = 0; i < msg->data_len; i++){
             mcp2515_write(MCP_TXBD0 + 16*buffer + i, msg->data[i]);
-			//printf("data %d\n\r", msg->data[i]);
+			printf("data %d\n\r", msg->data[i]);
 			
         }
         mcp2515_request_to_send(MCP_RTS_TX0 + buffer);
@@ -115,5 +115,5 @@ void interrupt_handler(){
 
 ISR(INT1_vect){
     interrupt_handler();
-	printf("nei\n\r");
+	//printf("nei\n\r");
 }
