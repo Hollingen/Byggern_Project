@@ -30,15 +30,15 @@
     <EraseKey />
     <AsfFrameworkConfig>
       <framework-data>
-        <options />
-        <configurations />
-        <files />
-        <documentation help="" />
-        <offline-documentation help="" />
-        <dependencies>
-          <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.42.0" />
-        </dependencies>
-      </framework-data>
+  <options />
+  <configurations />
+  <files />
+  <documentation help="" />
+  <offline-documentation help="" />
+  <dependencies>
+    <content-extension eid="atmel.asf" uuidref="Atmel.ASF" version="3.44.1" />
+  </dependencies>
+</framework-data>
     </AsfFrameworkConfig>
     <avrtool>com.atmel.avrdbg.tool.atmelice</avrtool>
     <avrtoolserialnumber>J41800007461</avrtoolserialnumber>
@@ -159,6 +159,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="CAN\can_controller.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN\can_controller.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN\can_interrupt.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="CAN\can_interrupt.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="Device_Startup\startup_sam3xa.c">
       <SubType>compile</SubType>
     </Compile>
@@ -168,18 +180,93 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="PWM\PWMdrvperiph.c">
+    <Compile Include="UART\printf-stdarg.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="PWM\PWMdrvperiph.h">
+    <Compile Include="UART\printf-stdarg.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UART\uart.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="UART\uart.h">
       <SubType>compile</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CAN\" />
+    <Folder Include="Debug\" />
+    <Folder Include="Debug\CAN\" />
+    <Folder Include="Debug\Device_Startup\" />
+    <Folder Include="Debug\PWM\" />
+    <Folder Include="Debug\UART\" />
     <Folder Include="Device_Startup\" />
-    <Folder Include="PWM\" />
+    <Folder Include="UART\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Debug\Device_Startup\startup_sam3xa.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Device_Startup\startup_sam3xa.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Device_Startup\system_sam3xa.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Device_Startup\system_sam3xa.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\main.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\main.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\makedep.mk">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\Makefile">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\NODE_2.bin">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\NODE_2.eep">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\NODE_2.elf">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\NODE_2.hex">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\NODE_2.lss">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\NODE_2.map">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\NODE_2.srec">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\PWM\PWMdrvperiph.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\PWM\PWMdrvperiph.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\UART\printf-stdarg.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\UART\printf-stdarg.o">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\UART\uart.d">
+      <SubType>compile</SubType>
+    </None>
+    <None Include="Debug\UART\uart.o">
+      <SubType>compile</SubType>
+    </None>
     <None Include="Device_Startup\sam3x8e_flash.ld">
       <SubType>compile</SubType>
     </None>
