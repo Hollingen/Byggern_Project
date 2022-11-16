@@ -59,7 +59,7 @@ Copyright 2003 Kimberly Otten Software Consulting
 #define MCP_RXM1EID0	0x27
 
 // BRP CONFIG
-#define MCP_CNF1_VAL   0x04
+#define MCP_CNF1_VAL    0x03
 #define MCP_CNF2_VAL    0x31
 #define MCP_CNF3_VAL    0x05
 #define MCP_CNF3		0x28
