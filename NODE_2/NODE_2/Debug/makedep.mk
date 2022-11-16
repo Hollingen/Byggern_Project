@@ -16,6 +16,8 @@ main.c
 
 PWM\PWMdrvperiph.c
 
+SOLENOID\SOLENOIDdrv.c
+
 UART\printf-stdarg.c
 
 UART\uart.c
