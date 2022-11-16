@@ -8,6 +8,7 @@
 
 #include "sam.h"
 
-
+void ADC2_init(void);
+uint16_t ADC2_read(void);
 
 #endif

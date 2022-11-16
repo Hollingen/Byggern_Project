@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include "sam.h"
 
+
 #include "../UART/printf-stdarg.h"
 #include "../UART/uart.h"
 
@@ -35,6 +36,7 @@ void CAN0_Handler( void )
 	//RX interrupt
 	if(can_sr & (CAN_SR_MB1 | CAN_SR_MB2) )//Only mailbox 1 and 2 specified for receiving
 	{
+		printf("hei\n\r");
 		CAN_MESSAGE message;
 		if(can_sr & CAN_SR_MB1)  //Mailbox 1 event
 		{

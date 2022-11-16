@@ -60,13 +60,13 @@ Copyright 2003 Kimberly Otten Software Consulting
 
 // BRP CONFIG
 #define MCP_CNF1_VAL    0x03
-#define MCP_CNF2_VAL    0x31
+#define MCP_CNF2_VAL    0xB1
 #define MCP_CNF3_VAL    0x05
 #define MCP_CNF3		0x28
 #define MCP_CNF2		0x29
 #define MCP_CNF1		0x2A
 #define MCP_CNF3_MASK   0x07
-#define MCP_CNF2_MASK   0x3F
+#define MCP_CNF2_MASK   0xFF
 #define MCP_CNF1_MASK   0xFF
 
 #define MCP_CANINTE		0x2B

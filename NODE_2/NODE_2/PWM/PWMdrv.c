@@ -1,5 +1,3 @@
-#include <avr/io.h>
-
 #include "PWMdrv.h"
 
 #define SYS_CLK_FREQ		84000000
