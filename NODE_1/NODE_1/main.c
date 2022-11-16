@@ -33,35 +33,38 @@ int main(void)
 	//oled_refresh_rate_init();
 	
 
- 	/*//LAB 3
-	ADC_calibrate();
+
+	//ADC_calibrate();
 	adc_pos pos;
-	adc_dir dir; */
+	adc_dir dir;
 
 	//LAB 4
 	//oled_refresh_rate_init();
 	
-	
+	uint8_t en = 0x1;
+	uint8_t to = 0x2;
 	//LAB 5
 	mcp2515_init();
 	sei();
 	can_msg melding;
-	melding = can_handle_msg(0, 1, "H");
-	can_send_msg(&melding, BUFFER0);
+	//melding = can_handle_msg(0, 2, 0);
+	//can_send_msg(&melding, BUFFER0);
 	//printf("length: %d\n\r", melding.data_len);
 	//melding = can_recieve_msg(BUFFER0);*/
 		
 
-	/* oled_reset();
-	ADC_calibrate();*/ 
+	ADC_calibrate();
     while (1) 
     {	
-		/*//LAB 3
+		
 		pos = adc_get_pos();
 		dir	= adc_get_dir(pos);
 		printf("X pos: %d, Y pos: %d \n\r", pos.x, pos.y);
 		printf("Dir: %d \n\r", dir);
-		_delay_ms(1000); */
+		signed char m[8] = {pos.x, pos.y, dir};
+		melding = can_handle_msg(2, 3, m);
+		can_send_msg(&melding, BUFFER0);
+		_delay_ms(1000); 
 
 		/* //LAB 4
 		update_menu_main_counter();

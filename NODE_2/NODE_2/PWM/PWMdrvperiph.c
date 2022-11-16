@@ -1,7 +1,7 @@
 #include "PWMdrvperiph.h"
 
 #define PWM_center_val 12141
-#define PWM_range_val 189
+#define PWM_range_val 350
 #define PWM_period_val 13125
 
 
@@ -36,7 +36,7 @@ uint32_t PWM_set_period_percentage(int16_t value)
 		value = -100;
 	}
 		
-	uint32_t pwm_value =  PWM_center_val + (value * PWM_range_val)/100;
+	uint32_t pwm_value =  PWM_center_val - (value * PWM_range_val)/100;
 	
 	PWM->PWM_CH_NUM[5].PWM_CDTYUPD = (pwm_value);
 	return pwm_value;

@@ -186,12 +186,6 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="PWM\PWMdrv.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="PWM\PWMdrv.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="PWM\PWMdrvperiph.c">
       <SubType>compile</SubType>
     </Compile>

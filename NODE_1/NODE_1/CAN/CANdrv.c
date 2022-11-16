@@ -2,7 +2,7 @@
 #include "../MCP2515/MCP2515drv.h"
 
 
-can_msg can_handle_msg(uint16_t id, uint8_t size, char msg_data[8]){
+can_msg can_handle_msg(uint16_t id, uint8_t size, signed char msg_data[8]){
     can_msg msg;
     msg.id = id;
     msg.data_len = size;
@@ -64,7 +64,7 @@ can_msg can_recieve_msg(BUFFER buffer){
     msg.data_len = msg_length;
 	
     for(uint8_t i = 0; i < msg.data_len; i++){
-		uint8_t data_tmp;
+		signed char data_tmp;
 		mcp2515_read(MCP_RXBD0 + 16*buffer + i, &data_tmp);
         msg.data[i] = data_tmp;
     }
@@ -82,7 +82,7 @@ void interrupt_handler(){
         msg = can_recieve_msg(BUFFER0);
         printf("BUFFER0: ID = %d, MESSAGE = ", msg.id);
         for (uint8_t i = 0; i < msg.data_len; i++){
-            printf("%d", msg.data[i]);
+            printf("%d ", msg.data[i]);
         }
         printf("\n\r");
     }
