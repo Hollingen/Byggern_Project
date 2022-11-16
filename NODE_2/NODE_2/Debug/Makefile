@@ -42,6 +42,7 @@ SUBDIRS :=  \
 ../Debug/UART/ \
 ../Device_Startup/ \
 ../PWM/ \
+../SOLENOID/ \
 ../UART/
 
 
@@ -53,8 +54,8 @@ C_SRCS +=  \
 ../Device_Startup/startup_sam3xa.c \
 ../Device_Startup/system_sam3xa.c \
 ../main.c \
-../PWM/PWMdrv.c \
 ../PWM/PWMdrvperiph.c \
+../SOLENOID/SOLENOIDdrv.c \
 ../UART/printf-stdarg.c \
 ../UART/uart.c
 
@@ -72,8 +73,8 @@ CAN/can_interrupt.o \
 Device_Startup/startup_sam3xa.o \
 Device_Startup/system_sam3xa.o \
 main.o \
-PWM/PWMdrv.o \
 PWM/PWMdrvperiph.o \
+SOLENOID/SOLENOIDdrv.o \
 UART/printf-stdarg.o \
 UART/uart.o
 
@@ -84,8 +85,8 @@ CAN/can_interrupt.o \
 Device_Startup/startup_sam3xa.o \
 Device_Startup/system_sam3xa.o \
 main.o \
-PWM/PWMdrv.o \
 PWM/PWMdrvperiph.o \
+SOLENOID/SOLENOIDdrv.o \
 UART/printf-stdarg.o \
 UART/uart.o
 
@@ -96,8 +97,8 @@ CAN/can_interrupt.d \
 Device_Startup/startup_sam3xa.d \
 Device_Startup/system_sam3xa.d \
 main.d \
-PWM/PWMdrv.d \
 PWM/PWMdrvperiph.d \
+SOLENOID/SOLENOIDdrv.d \
 UART/printf-stdarg.d \
 UART/uart.d
 
@@ -108,8 +109,8 @@ CAN/can_interrupt.d \
 Device_Startup/startup_sam3xa.d \
 Device_Startup/system_sam3xa.d \
 main.d \
-PWM/PWMdrv.d \
 PWM/PWMdrvperiph.d \
+SOLENOID/SOLENOIDdrv.d \
 UART/printf-stdarg.d \
 UART/uart.d
 
@@ -173,14 +174,14 @@ Device_Startup/system_sam3xa.o: ../Device_Startup/system_sam3xa.c
 	@echo Finished building: $<
 	
 
-PWM/PWMdrv.o: ../PWM/PWMdrv.c
+PWM/PWMdrvperiph.o: ../PWM/PWMdrvperiph.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
 	@echo Finished building: $<
 	
 
-PWM/PWMdrvperiph.o: ../PWM/PWMdrvperiph.c
+SOLENOID/SOLENOIDdrv.o: ../SOLENOID/SOLENOIDdrv.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
