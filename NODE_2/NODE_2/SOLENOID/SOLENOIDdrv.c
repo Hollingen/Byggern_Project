@@ -1,0 +1,21 @@
+#include "Solenoid.h"
+
+void solenoid_init()
+{
+	// Enable IOs
+	PIOB->PIO_PER = PIO_PB26;
+	// Set PIN22 as output
+	PIOB->PIO_OER = PIO_PB26;
+	// Disable pull-up
+	PIOB->PIO_PUDR = PIO_PB26;
+	// Setting Pin Low
+	PIOB->PIO_SODR = PIO_PB26;
+}
+
+void solenoid_pulse()
+{
+	//Setting and resetting pin for solenoid, with an ideal delay inbetween
+	PIOB->PIO_CODR = PIO_PB26;
+	delay_ch1_micro(12000);
+	PIOB->PIO_SODR = PIO_PB26;
+}
