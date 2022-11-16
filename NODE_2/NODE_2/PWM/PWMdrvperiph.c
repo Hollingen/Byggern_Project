@@ -1,5 +1,8 @@
 #include "PWMdrvperiph.h"
 
+#define PWM_center_val 12141
+#define PWM_range_val 189
+#define PWM_period_val 13125
 
 
 void PWM_init()
@@ -13,8 +16,8 @@ void PWM_init()
 	
 	
 	PWM->PWM_CH_NUM[5].PWM_CMR |= PWM_CMR_CPRE_MCK_DIV_128;           // Prescales MCLK with 128
-	uint32_t CPRD = 13125;                                                  //CPRD = (84MHz*20ms)/128
-	uint32_t CDTY = 12141;
+	uint32_t CPRD = PWM_period_val;                                                  //CPRD = (84MHz*20ms)/128
+	uint32_t CDTY = PWM_center_val;
 	PWM->PWM_CH_NUM[5].PWM_CPRD |= PWM_CPRD_CPRD(CPRD);               //Set period to 20ms
 	
 	PWM->PWM_CH_NUM[5].PWM_CDTY |= PWM_CDTY_CDTY(CDTY); //Set duty cycle to 1.5 ms 
@@ -33,7 +36,7 @@ uint32_t PWM_set_period_percentage(int16_t value)
 		value = -100;
 	}
 		
-	uint32_t pwm_value =  PWM_CHN_5_MIN_VAL + (value * PWM_CHN_5_RANGE)/100;
+	uint32_t pwm_value =  PWM_center_val + (value * PWM_range_val)/100;
 	
 	PWM->PWM_CH_NUM[5].PWM_CDTYUPD = (pwm_value);
 	return pwm_value;
