@@ -1,4 +1,4 @@
-#include "Solenoid.h"
+#include "SOLENOIDdrv.h"
 
 void solenoid_init()
 {
