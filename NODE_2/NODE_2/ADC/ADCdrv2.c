@@ -34,7 +34,7 @@ uint16_t ADC2_read(){
 }
 
 
-IR_check_goal(){
+bool IR_check_goal(){
     IR_value = ADC2_read();
     if((IR_value < IR_THRESHOLD) && (IR_prev_value >= IR_THRESHOLD) && !IR_goal) {
 		IR_prev_value = IR_value;
@@ -49,7 +49,7 @@ IR_check_goal(){
 void IR_reset()
 {
 	IR_goal = false;
-    
+
 }
 
 
