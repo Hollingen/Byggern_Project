@@ -14,6 +14,8 @@ Device_Startup\system_sam3xa.c
 
 main.c
 
+MOTOR\MOTORdrv.c
+
 PWM\PWMdrvperiph.c
 
 SOLENOID\SOLENOIDdrv.c

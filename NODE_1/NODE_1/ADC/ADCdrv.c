@@ -117,6 +117,15 @@ adc_dir adc_get_dir(adc_pos pos){
 	}
 }
 
+uint8_t check_js_button(){
+    if(!(PINB & (1<<PB2))) {
+		return 1;
+		while(!(PINB & (1<<PB2))){}
+    }else{
+		return 0;
+	}
+}
+
 ISR(INT0_vect){
     BUSY_flag = 1;
 }
