@@ -44,6 +44,7 @@ SUBDIRS :=  \
 ../MOTOR/ \
 ../PWM/ \
 ../SOLENOID/ \
+../TIMER/ \
 ../UART/
 
 
@@ -58,6 +59,7 @@ C_SRCS +=  \
 ../MOTOR/MOTORdrv.c \
 ../PWM/PWMdrvperiph.c \
 ../SOLENOID/SOLENOIDdrv.c \
+../TIMER/timerdrv.c \
 ../UART/printf-stdarg.c \
 ../UART/uart.c
 
@@ -78,6 +80,7 @@ main.o \
 MOTOR/MOTORdrv.o \
 PWM/PWMdrvperiph.o \
 SOLENOID/SOLENOIDdrv.o \
+TIMER/timerdrv.o \
 UART/printf-stdarg.o \
 UART/uart.o
 
@@ -91,6 +94,7 @@ main.o \
 MOTOR/MOTORdrv.o \
 PWM/PWMdrvperiph.o \
 SOLENOID/SOLENOIDdrv.o \
+TIMER/timerdrv.o \
 UART/printf-stdarg.o \
 UART/uart.o
 
@@ -104,6 +108,7 @@ main.d \
 MOTOR/MOTORdrv.d \
 PWM/PWMdrvperiph.d \
 SOLENOID/SOLENOIDdrv.d \
+TIMER/timerdrv.d \
 UART/printf-stdarg.d \
 UART/uart.d
 
@@ -117,6 +122,7 @@ main.d \
 MOTOR/MOTORdrv.d \
 PWM/PWMdrvperiph.d \
 SOLENOID/SOLENOIDdrv.d \
+TIMER/timerdrv.d \
 UART/printf-stdarg.d \
 UART/uart.d
 
@@ -195,6 +201,13 @@ PWM/PWMdrvperiph.o: ../PWM/PWMdrvperiph.c
 	
 
 SOLENOID/SOLENOIDdrv.o: ../SOLENOID/SOLENOIDdrv.c
+	@echo Building file: $<
+	@echo Invoking: ARM/GNU C Compiler : 6.3.1
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+TIMER/timerdrv.o: ../TIMER/timerdrv.c
 	@echo Building file: $<
 	@echo Invoking: ARM/GNU C Compiler : 6.3.1
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\arm\arm-gnu-toolchain\bin\arm-none-eabi-gcc.exe$(QUOTE)  -x c -mthumb -D__SAM3X8E__ -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\arm\CMSIS\5.4.0\CMSIS\Core\Include" -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include"  -Og -ffunction-sections -mlong-calls -g3 -Wall -mcpu=cortex-m3 -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

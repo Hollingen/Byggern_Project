@@ -109,7 +109,7 @@ main.d main.o: .././main.c \
  .././CAN/can_controller.h .././CAN/can_controller.h \
  C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include/sam3x8e.h \
  .././PWM/PWMdrvperiph.h .././SOLENOID/SOLENOIDdrv.h \
- .././MOTOR/MOTORdrv.h
+ .././SOLENOID/../TIMER/TIMERdrv.h .././MOTOR/MOTORdrv.h
 
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\arm\arm-gnu-toolchain\arm-none-eabi\include\stdio.h:
 
@@ -338,5 +338,7 @@ C:\Program\ Files\ (x86)\Atmel\Studio\7.0\Packs\atmel\SAM3X_DFP\1.0.50\include/s
 .././PWM/PWMdrvperiph.h:
 
 .././SOLENOID/SOLENOIDdrv.h:
+
+.././SOLENOID/../TIMER/TIMERdrv.h:
 
 .././MOTOR/MOTORdrv.h:

@@ -1,5 +1,5 @@
 #include "SOLENOIDdrv.h"
-
+#include "../TIMER/timerdrv.h"
 uint8_t already_shote = 0;
 void solenoid_init(){
     //Enable IO
@@ -16,7 +16,7 @@ void solenoid_pulse(){
 	//Setting and resetting pin for solenoid, with an ideal delay inbetween
     PIOA->PIO_CODR |= PIO_PA16;
     //Need timer inbetween
-    delay_us(15000);
+    //delay_us(15000);
     printf("shoot\n\r");
     PIOA->PIO_SODR |= PIO_PA16;
 }

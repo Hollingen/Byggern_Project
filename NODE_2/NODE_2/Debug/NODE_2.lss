@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      00000059  00000000  00000000  0002045d  2**0
                   CONTENTS, READONLY
-  7 .debug_info   0000830b  00000000  00000000  000204b6  2**0
+  7 .debug_info   00008361  00000000  00000000  000204b6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 000014c5  00000000  00000000  000287c1  2**0
+  8 .debug_abbrev 00001512  00000000  00000000  00028817  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00000fa6  00000000  00000000  00029c86  2**0
+  9 .debug_loc    00000f9a  00000000  00000000  00029d29  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 00000220  00000000  00000000  0002ac2c  2**0
+ 10 .debug_aranges 00000228  00000000  00000000  0002acc3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000001a0  00000000  00000000  0002ae4c  2**0
+ 11 .debug_ranges 000001a8  00000000  00000000  0002aeeb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  00013571  00000000  00000000  0002afec  2**0
+ 12 .debug_macro  00013597  00000000  00000000  0002b093  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   000053c8  00000000  00000000  0003e55d  2**0
+ 13 .debug_line   00005431  00000000  00000000  0003e62a  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00055668  00000000  00000000  00043925  2**0
+ 14 .debug_str    000556a3  00000000  00000000  00043a5b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  000005e0  00000000  00000000  00098f90  2**2
+ 15 .debug_frame  000005f8  00000000  00000000  00099100  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -805,15 +805,15 @@ int main(void)
    80528:	00080689 	.word	0x00080689
 
 0008052c <motor_init>:
-#include "MOTORdrv.h"
-#include <stdio.h>
 #include <stdlib.h>
+//#include "..\TIMER\timerdrv.h"
+
 
 
 void motor_init(){
    8052c:	b410      	push	{r4}
     //PIOD output motor
-    //PIOC input encoder
+
     PMC->PMC_PCER0 |= PMC_PCER0_PID13;
    8052e:	4b17      	ldr	r3, [pc, #92]	; (8058c <motor_init+0x60>)
    80530:	691a      	ldr	r2, [r3, #16]
@@ -861,11 +861,12 @@ void motor_init(){
    80576:	6859      	ldr	r1, [r3, #4]
    80578:	f441 7180 	orr.w	r1, r1, #256	; 0x100
    8057c:	6059      	str	r1, [r3, #4]
-
+    
     PIOD->PIO_SODR |= NOT_OE | NOT_RST;
    8057e:	6b13      	ldr	r3, [r2, #48]	; 0x30
    80580:	f043 0303 	orr.w	r3, r3, #3
    80584:	6313      	str	r3, [r2, #48]	; 0x30
+
 }
    80586:	bc10      	pop	{r4}
    80588:	4770      	bx	lr
@@ -965,7 +966,7 @@ uint32_t PWM_set_period_percentage(int16_t value)
 
 00080638 <solenoid_init>:
 #include "SOLENOIDdrv.h"
-
+#include "../TIMER/timerdrv.h"
 uint8_t already_shote = 0;
 void solenoid_init(){
     //Enable IO
@@ -1004,7 +1005,8 @@ void solenoid_pulse(){
    80666:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
    8066a:	6363      	str	r3, [r4, #52]	; 0x34
     //Need timer inbetween
-    printf("shote\n\r");
+    //delay_us(15000);
+    printf("shoot\n\r");
    8066c:	4804      	ldr	r0, [pc, #16]	; (80680 <solenoid_pulse+0x20>)
    8066e:	4b05      	ldr	r3, [pc, #20]	; (80684 <solenoid_pulse+0x24>)
    80670:	4798      	blx	r3
@@ -1926,8 +1928,8 @@ void UART_Handler(void)
    80bec:	69616d20 	.word	0x69616d20
    80bf0:	786f626c 	.word	0x786f626c
    80bf4:	00000d0a 	.word	0x00000d0a
-   80bf8:	746f6873 	.word	0x746f6873
-   80bfc:	000d0a65 	.word	0x000d0a65
+   80bf8:	6f6f6873 	.word	0x6f6f6873
+   80bfc:	000d0a74 	.word	0x000d0a74
    80c00:	6c756e28 	.word	0x6c756e28
    80c04:	0000296c 	.word	0x0000296c
    80c08:	3a525245 	.word	0x3a525245
