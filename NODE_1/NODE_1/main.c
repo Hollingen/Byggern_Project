@@ -58,12 +58,13 @@ int main(void)
     {	
 		
 		pos = adc_get_pos();
+		uint8_t rs_data = ADC_read(CHANNEL_RS);
 		
 		dir	= adc_get_dir(pos);
 		printf("X pos: %d, Y pos: %d \n\r", pos.x, pos.y);
 		printf("Dir: %d \n\r", dir);
-		signed char m[8] = {pos.x, pos.y, check_js_button()};
-		melding = can_handle_msg(0, 3, m);
+		signed char m[8] = {pos.x, pos.y, check_js_button(), rs_data};
+		melding = can_handle_msg(0, 4, m);
 		can_send_msg(&melding, BUFFER0);
 		_delay_ms(10); 
 

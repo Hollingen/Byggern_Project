@@ -192,6 +192,18 @@
     <Compile Include="MOTOR\MOTORdrv.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="PID\pid.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PID\pid.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PID\PIDdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="PID\PIDdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="PWM\PWMdrvperiph.c">
       <SubType>compile</SubType>
     </Compile>
@@ -233,6 +245,7 @@
     <Folder Include="Debug\UART\" />
     <Folder Include="Device_Startup\" />
     <Folder Include="MOTOR\" />
+    <Folder Include="PID\" />
     <Folder Include="PWM\" />
     <Folder Include="SOLENOID\" />
     <Folder Include="TIMER\" />

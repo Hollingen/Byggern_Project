@@ -16,6 +16,10 @@ main.c
 
 MOTOR\MOTORdrv.c
 
+PID\pid.c
+
+PID\PIDdrv.c
+
 PWM\PWMdrvperiph.c
 
 SOLENOID\SOLENOIDdrv.c

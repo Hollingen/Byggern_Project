@@ -20,6 +20,7 @@
 #include "SOLENOID/SOLENOIDdrv.h"
 #include "MOTOR/MOTORdrv.h"
 #include "TIMER/timerdrv.h"
+#include "PID/pid.h"
 
 
 #define can_br 0x290165
@@ -34,6 +35,7 @@ int main(void)
 	configure_uart();
 	WDT->WDT_MR = WDT_MR_WDDIS;
 	CAN_MESSAGE meld; 
+	pidData_t pidData;
 	
 	CAN0_Handler();
 	solenoid_init();
@@ -42,19 +44,34 @@ int main(void)
 	ADC2_init();
 	motor_init();
 	timer_init();
-	motor_encoder_init();
+	pid_Init(10, 10, 0, &pidData);
+	//motor_encoder_init();
+	
 	
 	//can_receive(&meld, 0);
 	//printf("%d", meld.data[0]);
     /* Replace with your application code */
+	PIOD->PIO_CODR|=NOT_RST;
+	old_delay_us(100);
+	PIOD->PIO_SODR|=NOT_RST;
+	
+	int16_t pid_output;
     while (1) {
 		
 		
 		// LAB 7
 		meld = get_msg();
-		uint16_t kisen =  motor_encoder_read();
-		printf("%d\n\r", kisen);
-		old_delay_us(500000);
+		uint8_t rs_data = meld.data[3];
+		uint16_t rs = rs_map(rs_data, 8000);
+		//printf("%d ",rs);
+		
+		//printf("%d\n\r", rs_data);
+		int16_t encoder_data =  motor_encoder_read();
+		printf("%d\n\r", encoder_data);
+		//motor_control_speed(position);
+		pid_output = pid_Controller(rs, encoder_data, &pidData);
+		//printf("%d\r\n", pid_output);
+		motor_control_speed(pid_output);/*
 		/*if(abs(meld.data[0]) > 95){
 			meld.data[0] = 100;
 		}else{
@@ -63,7 +80,7 @@ int main(void)
 		//motor_control_speed(meld.data[0]);
 	
 		//printf("%d %d %d\n\r", meld.data[0], meld.data[1], meld.data[2]);
-		SHOOT(meld.data[2]);
+		//SHOOT(meld.data[2]);
 		
 		/*PWM_set_period_percentage(meld.data[0]);
 		printf("%d\n\r", meld.data[0]);*/
