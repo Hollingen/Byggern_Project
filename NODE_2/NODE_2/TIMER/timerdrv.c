@@ -1,4 +1,4 @@
-#include "timerdrv.h"
+#include "TIMERdrv.h"
 
 void timer_init(){
     //Enable TC clock TC0

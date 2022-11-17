@@ -2,6 +2,7 @@
     "files.associations": {
         "adcdrv.h": "c",
         "mcp2515drv.h": "c",
-        "can_interrupt.h": "c"
+        "can_interrupt.h": "c",
+        "uart.h": "c"
     }
 }
