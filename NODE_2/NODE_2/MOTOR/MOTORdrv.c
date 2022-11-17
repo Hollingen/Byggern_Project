@@ -31,13 +31,15 @@ int16_t motor_encoder_read() {
     PIOB->POI_CODR = SEL;
 
     //Delay 20 usec
-    
+    for (int i = 0; i>1000000; i++);
     uint32_t PIOC_PIN_DATA = PIOC->PIO_PDSR;
 
     encoder_value_high =  (PIOC_PIN_DATA & (0x1FE));
 
     PIOD->PIO_SODR = SEL;
+
     //delay 20 usec
+    for (int i = 0; i>1000000; i++);
 
     uint32_t PIOC_PIN_DATA1 = PIOC->PIO_PDSR;
     encoder_value_low = (PIOC_PIN_DATA & (0x1FE));
