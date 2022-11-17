@@ -17,7 +17,7 @@ void solenoid_pulse(){
     PIOA->PIO_CODR |= PIO_PA16;
     //Need timer inbetween
     delay_us(15000);
-    printf("shote\n\r");
+    printf("shoot\n\r");
     PIOA->PIO_SODR |= PIO_PA16;
 }
 
