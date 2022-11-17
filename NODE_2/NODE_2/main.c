@@ -43,17 +43,17 @@ int main(void)
 	//printf("%d", meld.data[0]);
     /* Replace with your application code */
     while (1) {
-		
-		/*meld = get_msg();
+		/*// LAB 7
+		meld = get_msg();
 		PWM_set_period_percentage(meld.data[0]);
 		printf("%d\n\r", meld.data[0]);*/
 		//Setting and resetting pin for solenoid, with an ideal delay inbetween
-		
+		/*
 		uint16_t ir = ADC2_read();
-		//delay_ch1_micro(12000);
+		
 		printf("%d\n\r", ir);
 		for(int i=0; i<12500000; i++){
-		}
+		}*/
 		
 		/*
 		PIOA->PIO_SODR = PIO_PA16;
