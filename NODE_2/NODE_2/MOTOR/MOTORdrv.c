@@ -25,6 +25,8 @@ void motor_init(){
     DACC->DACC_MR|= DACC_MR_TRGEN_DIS;
     // Enabling refresh rate under 20us to prevent loss of voltage
     DACC->DACC_MR |= DACC_MR_REFRESH(0x1);
+    
+    PIOD->PIO_SODR |= NOT_OE | NOT_RST;
 
 }
 
@@ -33,7 +35,7 @@ void motor_encoder_init() {
     PMC->PMC_PCER1 |= PMC_PCER1_PID38;
     PIOC->PIO_PER |= 0b111111110;
     
-    PIOD->PIO_SODR |= NOT_OE | NOT_RST;
+    
 }
 
 int16_t motor_encoder_read() {
