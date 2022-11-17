@@ -1,11 +1,13 @@
 #include "MOTORdrv.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "timerdrv.h"
+
 
 
 void motor_init(){
     //PIOD output motor
-    //PIOC input encoder
+
     PMC->PMC_PCER0 |= PMC_PCER0_PID13;
     PIOD->PIO_PER |= DIR | EN | NOT_OE | NOT_RST | SEL;  
 
@@ -24,6 +26,13 @@ void motor_init(){
     // Enabling refresh rate under 20us to prevent loss of voltage
     DACC->DACC_MR |= DACC_MR_REFRESH(0x1);
 
+}
+
+void motor_encoder_init() {
+
+    PMC->PMC_PCER1 |= PMC_PCER1_PID38;
+    PIOC->PIO_PER |= 0b111111110;
+    
     PIOD->PIO_SODR |= NOT_OE | NOT_RST;
 }
 
@@ -36,14 +45,16 @@ int16_t motor_encoder_read() {
     PIOB->PIO_CODR = NOT_OE;
     PIOB->PIO_CODR = SEL;
 
-    //Delay 20 usec
-    
+    delay_us(20);
+
     uint32_t PIOC_PIN_DATA = PIOC->PIO_PDSR;
 
     encoder_value_high =  (PIOC_PIN_DATA & (0x1FE));
 
     PIOD->PIO_SODR = SEL;
-    //delay 20 usec
+
+    delay_us(20);
+        
 
     uint32_t PIOC_PIN_DATA1 = PIOC->PIO_PDSR;
     encoder_value_low = (PIOC_PIN_DATA & (0x1FE));
