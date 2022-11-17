@@ -13,13 +13,15 @@
 #include <stdio.h>
 #include "sam.h"
 
+
 #include "../UART/printf-stdarg.h"
 #include "../UART/uart.h"
 
 #include "can_controller.h"
 
-#define DEBUG_INTERRUPT 1
+#define DEBUG_INTERRUPT 0
 
+CAN_MESSAGE msgs;
 /**
  * \brief CAN0 Interrupt handler for RX, TX and bus error interrupts
  *
@@ -27,6 +29,8 @@
  *
  * \retval 
  */
+
+
 void CAN0_Handler( void )
 {
 	if(DEBUG_INTERRUPT)printf("CAN0 interrupt\n\r");
@@ -39,6 +43,7 @@ void CAN0_Handler( void )
 		if(can_sr & CAN_SR_MB1)  //Mailbox 1 event
 		{
 			can_receive(&message, 1);
+			
 
 		}
 		else if(can_sr & CAN_SR_MB2) //Mailbox 2 event
@@ -52,12 +57,17 @@ void CAN0_Handler( void )
 		}
 
 		if(DEBUG_INTERRUPT)printf("message id: %d\n\r", message.id);
+		msgs.id = message.id;
 		if(DEBUG_INTERRUPT)printf("message data length: %d\n\r", message.data_length);
+		msgs.data_length = message.data_length;
 		for (int i = 0; i < message.data_length; i++)
 		{
+			msgs.data[i] = message.data[i];
 			if(DEBUG_INTERRUPT)printf("%d ", message.data[i]);
 		}
 		if(DEBUG_INTERRUPT)printf("\n\r");
+		
+		//can_send(&message, 0);
 	}
 	
 	if(can_sr & CAN_SR_MB0)
@@ -82,4 +92,8 @@ void CAN0_Handler( void )
 	
 	NVIC_ClearPendingIRQ(ID_CAN0);
 	//sei();*/
+}
+
+CAN_MESSAGE get_msg(){
+	return msgs;
 }

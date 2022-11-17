@@ -12,10 +12,10 @@
 typedef struct{
     uint16_t id;
     uint8_t data_len;
-    char data[8];
+    signed char data[8];
 } can_msg;
 
-can_msg can_handle_msg(uint16_t id, uint8_t size, char msg_data[8]);
+can_msg can_handle_msg(uint16_t id, uint8_t size, signed char msg_data[8]);
 void can_send_msg(can_msg* msg, BUFFER buffer);
 can_msg can_recieve_msg(BUFFER buffer);
 void interrupt_handler(void);

@@ -62,25 +62,31 @@ uint8_t mcp2515_brp_init(){
     // SJW<2:0> = 0b000 (0)-> 1 * Tq
     // BRP<5:0> = 0b00100 (4) -> BRP * Tosc
     mcp2515_bit_modify(MCP_CNF1, MCP_CNF1_MASK, MCP_CNF1_VAL);
-	mcp2515_read(MCP_CNF1, &value);
+	
 	//printf("value: %d\n\r", value);
-    if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
-        printf ("Wrong CNF1 value !\n\r");
-		return -1;
-    }
+    
 
     // PHSEG1<5:3> = 0b110 (6) -> PS1 = (PHSEG + 1) * Tq
     // PHSEG2<2:0> = 0b001 (1) -> Progseg = (PHSEG2 + 1) * Tq
     mcp2515_bit_modify(MCP_CNF2, MCP_CNF2_MASK, MCP_CNF2_VAL);
-	mcp2515_read(MCP_CNF2, &value);	//printf("value: %d\n\r", value);
-    if ((value & MCP_CNF1_MASK) != MCP_CNF2_VAL) {
-        printf ("Wrong CNF2 value !\n\r");
-		return -1;
-    }
+		//printf("value: %d\n\r", value);
+    
     
     // PHSEG2<2:0> = 0b101 (5) -> PS2 = (PHSEG2 + 1) * Tq
     mcp2515_bit_modify(MCP_CNF3, MCP_CNF3_MASK, MCP_CNF3_VAL);
-	mcp2515_read(MCP_CNF3, &value);	//printf("value: %d\n\r", value);
+		//printf("value: %d\n\r", value);
+	mcp2515_read(MCP_CNF1, &value);
+	if ((value & MCP_CNF1_MASK) != MCP_CNF1_VAL) {
+		printf ("Wrong CNF1 value !\n\r");
+		return -1;
+	}
+	
+	mcp2515_read(MCP_CNF2, &value);
+	if ((value & MCP_CNF1_MASK) != MCP_CNF2_VAL) {
+		printf ("Wrong CNF2 value !\n\r");
+		return -1;
+	}
+	mcp2515_read(MCP_CNF3, &value);
     if ((value & MCP_CNF3_MASK) != MCP_CNF3_VAL) {
         printf ("Wrong CNF3 value !\n\r");
 		return -1;
