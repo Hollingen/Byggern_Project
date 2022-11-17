@@ -61,10 +61,11 @@ int16_t motor_encoder_read() {
     uint32_t PIOC_PIN_DATA1 = PIOC->PIO_PDSR;
     encoder_value_low = (PIOC_PIN_DATA & (0x1FE));
 
+    
+
+    encoder_value = (encoder_value_high << 7) | (encoder_value_low << 1);
+
     PIOB->PIO_SODR = NOT_OE;
-
-    encoder_value = (encoder_value_high << 7) | encoder_value_low;
-
     return encoder_value;
     
 /*
@@ -96,7 +97,5 @@ void motor_control_speed(int8_t position){
     DACC->DACC_MR |= DACC_MR_USER_SEL_CHANNEL1;
     DACC->DACC_CDR = test;
 	printf("%d\n\r", test);
-    //for (int i = 0; i>100000; i++);
-
-    
+    //for (int i = 0; i>100000; i++);   
 }
