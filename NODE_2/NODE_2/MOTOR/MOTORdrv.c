@@ -1,7 +1,7 @@
 #include "MOTORdrv.h"
 #include <stdio.h>
 #include <stdlib.h>
-//#include "..\TIMER\timerdrv.h"
+#include "..\TIMER\timerdrv.h"
 
 
 
@@ -47,7 +47,7 @@ int16_t motor_encoder_read() {
     PIOB->PIO_CODR = NOT_OE;
     PIOB->PIO_CODR = SEL;
 
-    delay_us(20);
+    old_delay_us(20);
 
     uint32_t PIOC_PIN_DATA = PIOC->PIO_PDSR;
 
@@ -55,7 +55,7 @@ int16_t motor_encoder_read() {
 
     PIOD->PIO_SODR = SEL;
 
-    delay_us(20);
+    old_delay_us(20);
         
 
     uint32_t PIOC_PIN_DATA1 = PIOC->PIO_PDSR;
@@ -95,7 +95,7 @@ void motor_control_speed(int8_t position){
 	uint16_t test = abs(position)*20;
     DACC->DACC_MR |= DACC_MR_USER_SEL_CHANNEL1;
     DACC->DACC_CDR = test;
-	printf("%d\n\r", test);
+	//printf("%d\n\r", test);
     //for (int i = 0; i>100000; i++);
 
     

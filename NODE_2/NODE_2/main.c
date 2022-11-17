@@ -19,6 +19,7 @@
 #include "PWM/PWMdrvperiph.h"
 #include "SOLENOID/SOLENOIDdrv.h"
 #include "MOTOR/MOTORdrv.h"
+#include "TIMER/timerdrv.h"
 
 
 #define can_br 0x290165
@@ -40,6 +41,8 @@ int main(void)
 	PWM_set_period_percentage(100);
 	ADC2_init();
 	motor_init();
+	timer_init();
+	motor_encoder_init();
 	
 	//can_receive(&meld, 0);
 	//printf("%d", meld.data[0]);
@@ -49,6 +52,9 @@ int main(void)
 		
 		// LAB 7
 		meld = get_msg();
+		uint16_t kisen =  motor_encoder_read();
+		printf("%d\n\r", kisen);
+		old_delay_us(500000);
 		/*if(abs(meld.data[0]) > 95){
 			meld.data[0] = 100;
 		}else{
@@ -58,6 +64,7 @@ int main(void)
 	
 		//printf("%d %d %d\n\r", meld.data[0], meld.data[1], meld.data[2]);
 		SHOOT(meld.data[2]);
+		
 		/*PWM_set_period_percentage(meld.data[0]);
 		printf("%d\n\r", meld.data[0]);*/
 		//Setting and resetting pin for solenoid, with an ideal delay inbetween

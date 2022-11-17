@@ -11,6 +11,7 @@
 #define NOT_OE          PIO_PD0
 
 void motor_init(void);
+void motor_encoder_init(void);
 int16_t motor_encoder_read(void);
 void motor_control_speed(int8_t position);
 
