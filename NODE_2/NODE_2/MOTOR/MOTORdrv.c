@@ -63,7 +63,7 @@ int16_t motor_encoder_read() {
 
     
 
-    encoder_value = (encoder_value_high << 7) | (encoder_value_low << 1);
+    encoder_value = (encoder_value_high << 7) | (encoder_value_low >> 1);
 
     PIOB->PIO_SODR = NOT_OE;
     return encoder_value;
