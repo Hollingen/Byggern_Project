@@ -64,7 +64,7 @@ int main(void)
 		signed char m[8] = {pos.x, pos.y, dir};
 		melding = can_handle_msg(2, 3, m);
 		can_send_msg(&melding, BUFFER0);
-		_delay_ms(1000); 
+		_delay_ms(10); 
 
 		/* //LAB 4
 		update_menu_main_counter();

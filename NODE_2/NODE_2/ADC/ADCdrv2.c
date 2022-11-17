@@ -6,7 +6,7 @@ void ADC2_init(){
     // Starts a new conversion when it's done
     ADC->ADC_MR = ADC_MR_FREERUN;
     // Choosing channel 0
-    ADC->ADC_CHER = ADC_CHER_CH0;
+    ADC->ADC_CHER = ADC_CHER_CH7;
     // Starting the ADC conversion
     ADC->ADC_CR = ADC_CR_START;
     
@@ -14,7 +14,7 @@ void ADC2_init(){
 
 uint16_t ADC2_read(){
     // Reading from channel 0
-    uint16_t readings = ADC->ADC_CDR[0];
+    uint16_t readings = ADC->ADC_CDR[7];
 
     return readings;
 }
