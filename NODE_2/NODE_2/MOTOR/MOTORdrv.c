@@ -1,7 +1,7 @@
 #include "MOTORdrv.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "..\TIMER\timerdrv.h"
+//#include "..\TIMER\timerdrv.h"
 
 
 
@@ -90,7 +90,7 @@ void motor_control_speed(int8_t position){
         PIOD->PIO_CODR |= DIR;        
         PIOD->PIO_SODR |= EN;
     }
-    else{PIOD->PIO_CODR |= EN;}
+    else{PIOD->PIO_CODR |= EN;;}
 	//printf("%d\n\r", position);
 	uint16_t test = abs(position)*20;
     DACC->DACC_MR |= DACC_MR_USER_SEL_CHANNEL1;

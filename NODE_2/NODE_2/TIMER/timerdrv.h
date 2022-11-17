@@ -7,6 +7,8 @@
 
 #define CLK_FREQ 84000000
 
-void delay_us(uint32_t microsec)
+
+void timer_init();
+void old_delay_us(uint32_t microsec)
 
 #endif

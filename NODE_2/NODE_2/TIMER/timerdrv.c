@@ -13,7 +13,7 @@ void timer_init(){
 
 }
 
-void delay_us(uint32_t microsec){
+void old_delay_us(uint32_t microsec){
     //Reset counter
     uint32_t now_time;
     TC0->TC_CHANNEL[0].TC_CCR = TC_CCR_SWTRG;
