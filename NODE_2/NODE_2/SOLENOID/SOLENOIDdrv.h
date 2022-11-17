@@ -3,6 +3,7 @@
 
 #include "sam.h"
 #include "sam3x8e.h"
+#include "../TIMER/TIMERdrv.h"
 
 void solenoid_init(void);
 void solenoid_pulse(void);
