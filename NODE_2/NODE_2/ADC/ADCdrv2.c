@@ -1,5 +1,13 @@
 #include "ADCdrv2.h"
 
+
+#define IR_THRESHOLD 500
+
+static uint32_t IR_prev_value, IR_value;
+static uint8_t goal_counter = 0;
+bool IR_activated = false;
+
+
 void ADC2_init(){
 
     // SEting the peropheral clock
@@ -24,5 +32,25 @@ uint16_t ADC2_read(){
 
     return readings;
 }
+
+
+IR_check_goal(){
+    IR_value = ADC2_read();
+    if((IR_value < IR_THRESHOLD) && (IR_prev_value >= IR_THRESHOLD) && !IR_goal) {
+		IR_prev_value = IR_value;
+		IR_goal = true;
+		return true;
+	} else {
+		IR_prev_value = IR_value;
+		return false;
+	}
+}
+
+void IR_reset()
+{
+	IR_goal = false;
+    
+}
+
 
 
