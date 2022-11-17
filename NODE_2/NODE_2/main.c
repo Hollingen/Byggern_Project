@@ -33,25 +33,37 @@ int main(void)
 	WDT->WDT_MR = WDT_MR_WDDIS;
 	CAN_MESSAGE meld; 
 	
-	//CAN0_Handler();
+	CAN0_Handler();
 	solenoid_init();
 	PWM_init();
 	PWM_set_period_percentage(100);
+	ADC2_init();
+	
 	//can_receive(&meld, 0);
 	//printf("%d", meld.data[0]);
     /* Replace with your application code */
     while (1) {
-		/*
-		meld = get_msg();
+		
+		/*meld = get_msg();
 		PWM_set_period_percentage(meld.data[0]);
 		printf("%d\n\r", meld.data[0]);*/
 		//Setting and resetting pin for solenoid, with an ideal delay inbetween
-		PIOB->PIO_CODR = PIO_PB26;
+		
+		uint16_t ir = ADC2_read();
+		//delay_ch1_micro(12000);
+		printf("%d\n\r", ir);
+		for(int i=0; i<12500000; i++){
+		}
+		
+		/*
+		PIOA->PIO_SODR = PIO_PA16;
 		//delay_ch1_micro(12000);
 		
-		for(int i=0; i<1000000; i++){
+		for(int i=0; i<22500000; i++){
 		}
-		PIOB->PIO_SODR = PIO_PB26;
+		PIOA->PIO_CODR = PIO_PA16;
+		for(int i=0; i<22500000; i++){
+		}*/
 		//printf("%d\n\r", meld.id);
 		//CAN0_Handler();
 		

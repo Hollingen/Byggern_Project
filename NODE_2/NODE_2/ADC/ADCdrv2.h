@@ -1,6 +1,7 @@
 #ifndef ADCDRV2_H_
 #define ADCDRV2_H_
-
+// BRUN NED
+// RØD OPP
 #include "sam3x8e.h"
 #include <stdio.h>
 #include <stdint.h>
