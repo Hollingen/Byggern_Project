@@ -20,6 +20,8 @@ PWM\PWMdrvperiph.c
 
 SOLENOID\SOLENOIDdrv.c
 
+TIMER\timerdrv.c
+
 UART\printf-stdarg.c
 
 UART\uart.c

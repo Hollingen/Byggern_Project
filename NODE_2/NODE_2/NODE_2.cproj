@@ -204,6 +204,12 @@
     <Compile Include="SOLENOID\SOLENOIDdrv.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="TIMER\timerdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="TIMER\timerdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="UART\printf-stdarg.c">
       <SubType>compile</SubType>
     </Compile>
@@ -229,6 +235,7 @@
     <Folder Include="MOTOR\" />
     <Folder Include="PWM\" />
     <Folder Include="SOLENOID\" />
+    <Folder Include="TIMER\" />
     <Folder Include="UART\" />
   </ItemGroup>
   <ItemGroup>
