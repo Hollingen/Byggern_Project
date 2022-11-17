@@ -15,5 +15,6 @@ void solenoid_pulse(){
 	//Setting and resetting pin for solenoid, with an ideal delay inbetween
     PIOA->PIO_CODR |= PIO_PA16;
     //Need timer inbetween
+    delay_us(15000);
     PIOA->PIO_SODR |= PIO_PA16;
 }
