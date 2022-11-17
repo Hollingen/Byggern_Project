@@ -5,7 +5,6 @@
 void motor_init(){
     //PIOD output motor
     //PIOC input encoder
-    PMC->PMC_PCR |= PMC_PCR_EN;
     PMC->PMC_PCER0 |= PMC_PCER0_PID13;
     PIOD->PIO_PER |= DIR | EN | NOT_OE | NOT_RST | SEL;  
 
