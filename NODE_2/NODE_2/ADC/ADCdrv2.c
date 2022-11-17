@@ -5,7 +5,7 @@
 
 static uint32_t IR_prev_value, IR_value;
 static uint8_t goal_counter = 0;
-bool IR_activated = false;
+uint8_t IR_goal = 0;
 
 
 void ADC2_init(){
@@ -34,21 +34,21 @@ uint16_t ADC2_read(){
 }
 
 
-IR_check_goal(){
-    IR_value = ADC2_read();
+uint8_t IR_check_goal(){
+    uint16_t IR_value = ADC2_read();
     if((IR_value < IR_THRESHOLD) && (IR_prev_value >= IR_THRESHOLD) && !IR_goal) {
 		IR_prev_value = IR_value;
-		IR_goal = true;
-		return true;
+		IR_goal = 1;
+		return 1;
 	} else {
 		IR_prev_value = IR_value;
-		return false;
+		return 0;
 	}
 }
 
 void IR_reset()
 {
-	IR_goal = false;
+	IR_goal = 0;
     
 }
 

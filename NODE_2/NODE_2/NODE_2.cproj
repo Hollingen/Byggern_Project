@@ -186,6 +186,12 @@
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="MOTOR\MOTORdrv.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="MOTOR\MOTORdrv.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="PWM\PWMdrvperiph.c">
       <SubType>compile</SubType>
     </Compile>
@@ -220,6 +226,7 @@
     <Folder Include="Debug\PWM\" />
     <Folder Include="Debug\UART\" />
     <Folder Include="Device_Startup\" />
+    <Folder Include="MOTOR\" />
     <Folder Include="PWM\" />
     <Folder Include="SOLENOID\" />
     <Folder Include="UART\" />

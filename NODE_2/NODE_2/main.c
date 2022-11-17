@@ -18,6 +18,7 @@
 #include "sam3x8e.h"
 #include "PWM/PWMdrvperiph.h"
 #include "SOLENOID/SOLENOIDdrv.h"
+#include "MOTOR/MOTORdrv.h"
 
 
 #define can_br 0x290165
@@ -38,14 +39,26 @@ int main(void)
 	PWM_init();
 	PWM_set_period_percentage(100);
 	ADC2_init();
+	motor_init();
 	
 	//can_receive(&meld, 0);
 	//printf("%d", meld.data[0]);
     /* Replace with your application code */
     while (1) {
-		/*// LAB 7
+		
+		
+		// LAB 7
 		meld = get_msg();
-		PWM_set_period_percentage(meld.data[0]);
+		/*if(abs(meld.data[0]) > 95){
+			meld.data[0] = 100;
+		}else{
+			meld.data[0] = 50;
+		}*/
+		//motor_control_speed(meld.data[0]);
+	
+		//printf("%d %d %d\n\r", meld.data[0], meld.data[1], meld.data[2]);
+		SHOOT(meld.data[2]);
+		/*PWM_set_period_percentage(meld.data[0]);
 		printf("%d\n\r", meld.data[0]);*/
 		//Setting and resetting pin for solenoid, with an ideal delay inbetween
 		/*

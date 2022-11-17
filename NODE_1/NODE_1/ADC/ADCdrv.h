@@ -48,6 +48,7 @@ void ADC_calibrate(void);
 void int_Init(void);
 adc_pos adc_get_pos(void);
 adc_dir adc_get_dir(adc_pos pos);
+uint8_t check_js_button(void);
 
 
 #endif //__ADCDRV__
