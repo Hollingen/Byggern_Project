@@ -18,7 +18,6 @@ int PID_ctrl(int input, int current_value, struct PID_DATA *pid){
 
     i_calc = pid->K_i*pid->timestep * pid->error;
 
-    d_calc = (pid->K_d/pid->timestep) * (pid->prev_error - current_value);
 
     pid->prev_error = current_value;
 
