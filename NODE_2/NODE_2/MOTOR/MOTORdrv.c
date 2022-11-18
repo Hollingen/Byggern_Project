@@ -109,7 +109,8 @@ void motor_control_speed(int8_t position){
 
 uint16_t rs_map(uint8_t rs_raw, uint16_t max_enc){
 	uint16_t rs_mapped;
-	rs_mapped = abs(rs_raw-255) * max_enc/255;
+	rs_mapped = rs_raw * max_enc/255;
+    //rs_mapped = abs(rs_raw-255) * max_enc/255;
 	
 	return rs_mapped;
 }
