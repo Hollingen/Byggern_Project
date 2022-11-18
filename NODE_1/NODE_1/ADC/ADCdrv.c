@@ -25,11 +25,11 @@ uint8_t ADC_read(uint8_t channel){
 	
 	adc_in[0] = 0x00;
 	
-	
 
 	GICR |= (1<<INT0);
 	while(!BUSY_flag){};
 	GICR &= ~(1<<INT0);
+	
 	
 	
 	data_x = XMEM_read(0x400);

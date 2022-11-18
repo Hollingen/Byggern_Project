@@ -8,10 +8,8 @@ can_msg can_handle_msg(uint16_t id, uint8_t size, signed char msg_data[8]){
     msg.data_len = size;
 	for(uint8_t i = 0; i < size; i++){
 		msg.data[i] = msg_data[i];
-		//printf("array: %d\n\r",msg_data[i]);
 		
 	}
-	//printf("kis %d og %d\n\r", msg.data[0], msg.data[1]);
     return msg;
 	
 }
@@ -20,36 +18,29 @@ void can_send_msg(can_msg* msg, BUFFER buffer){
 
     uint8_t idLSB = (msg->id & 0x7) << 5;
     uint8_t idMSB = (msg->id & 0x1F) >> 3;
-    //uint8_t buffer0stat;
 
     mcp2515_write(MCP_TXB0SIDH + 16*buffer, idMSB);
     mcp2515_write(MCP_TXB0SIDL + 16*buffer, idLSB);
     mcp2515_write(MCP_TXB0DLC + 16*buffer, msg->data_len);
-	//printf("length: %d\n\r", msg->data_len);
 
     // Checking if the MCP is already requesting transmission in buffer 0
 	uint8_t value;
 	mcp2515_read(MCP_TXB0CTRL, &value);
-	//char* data_bytes = msg->data;
     if((value & 0x08) != 0x08){
         for(uint8_t i = 0; i < msg->data_len; i++){
             mcp2515_write(MCP_TXBD0 + 16*buffer + i, msg->data[i]);
-			//printf("data %d\n\r", msg->data[i]);
 			
         }
-		//printf("data %d\n\r", msg->data[2]);
         mcp2515_request_to_send(MCP_RTS_TX0 + buffer);
     }
-    //printf("id %d\n\r", msg.id);
 
 
 }
 
 
 can_msg can_recieve_msg(BUFFER buffer){
-	//printf("her");
+    
     can_msg msg;
-	//printf("buffer%d\n\r", buffer);
     uint8_t idLSB;
 	mcp2515_read(MCP_RXB0SIDL + 16*buffer, &idLSB);
     uint8_t idMSB;
@@ -59,7 +50,6 @@ can_msg can_recieve_msg(BUFFER buffer){
 	msg_length = msg_length & 0b00001111;
     msg.id = ((idLSB & 0b11100000) >> 5) | ((idMSB & 0b00011111) << 3);
     
-	//printf("length %d\n\r", msg_length);
 
     msg.data_len = msg_length;
 	
@@ -114,5 +104,4 @@ void interrupt_handler(){
 
 ISR(INT1_vect){
     interrupt_handler();
-	//printf("nei\n\r");
 }
