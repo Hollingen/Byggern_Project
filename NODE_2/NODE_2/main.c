@@ -88,7 +88,7 @@ int main(void)
 				printf("GAME OVER\n\r");
 			}
 
-			old_delay_us(20000);
+			delay_us(20000);
 			
 		}
 		if(goal){

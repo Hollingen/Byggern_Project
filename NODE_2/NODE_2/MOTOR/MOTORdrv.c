@@ -28,7 +28,7 @@ void motor_init(){
     
 	motor_control_speed(-1500);
 	
-	old_delay_us(1000000);
+	delay_us(1000000);
     
     PIOD->PIO_SODR |= NOT_OE | NOT_RST;
 
@@ -50,7 +50,7 @@ uint16_t motor_encoder_read() {
     PIOD->PIO_CODR = NOT_OE;
     PIOD->PIO_CODR = SEL;
 
-    old_delay_us(20);
+    delay_us(20);
 
     uint32_t PIOC_PIN_DATA = PIOC->PIO_PDSR;
 
@@ -58,7 +58,7 @@ uint16_t motor_encoder_read() {
 
     PIOD->PIO_SODR = SEL;
 
-    old_delay_us(20);
+    delay_us(20);
         
 
     uint32_t PIOC_PIN_DATA1 = PIOC->PIO_PDSR;

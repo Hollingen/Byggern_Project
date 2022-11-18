@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      00000059  00000000  00000000  0002045d  2**0
                   CONTENTS, READONLY
-  7 .debug_info   00008d5c  00000000  00000000  000204b6  2**0
+  7 .debug_info   00008d34  00000000  00000000  000204b6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 0000171e  00000000  00000000  00029212  2**0
+  8 .debug_abbrev 0000170f  00000000  00000000  000291ea  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00001282  00000000  00000000  0002a930  2**0
+  9 .debug_loc    00001282  00000000  00000000  0002a8f9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 00000280  00000000  00000000  0002bbb2  2**0
+ 10 .debug_aranges 00000280  00000000  00000000  0002bb7b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000001e0  00000000  00000000  0002be32  2**0
+ 11 .debug_ranges 000001e0  00000000  00000000  0002bdfb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  0001397e  00000000  00000000  0002c012  2**0
+ 12 .debug_macro  00013978  00000000  00000000  0002bfdb  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00005c1b  00000000  00000000  0003f990  2**0
+ 13 .debug_line   00005c1b  00000000  00000000  0003f953  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00055899  00000000  00000000  000455ab  2**0
+ 14 .debug_str    00055875  00000000  00000000  0004556e  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  00000724  00000000  00000000  0009ae44  2**2
+ 15 .debug_frame  00000724  00000000  00000000  0009ade4  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -835,7 +835,7 @@ int main(void)
    8052e:	4798      	blx	r3
 	PID_init(3, 1, 0, (1/50),&pidData);
    80530:	2200      	movs	r2, #0
-   80532:	ab06      	add	r3, sp, #24
+   80532:	ab07      	add	r3, sp, #28
    80534:	9300      	str	r3, [sp, #0]
    80536:	4613      	mov	r3, r2
    80538:	f04f 517e 	mov.w	r1, #1065353216	; 0x3f800000
@@ -861,7 +861,7 @@ int main(void)
    80548:	b984      	cbnz	r4, 8056c <main+0x74>
 			}
 
-			old_delay_us(20000);
+			delay_us(20000);
 			
 		}
 		if(goal){
@@ -916,7 +916,7 @@ int main(void)
    8059c:	4b1e      	ldr	r3, [pc, #120]	; (80618 <main+0x120>)
    8059e:	4798      	blx	r3
 			pid_output = PID_ctrl(rs, encoder_data, &pidData);
-   805a0:	aa06      	add	r2, sp, #24
+   805a0:	aa07      	add	r2, sp, #28
    805a2:	b201      	sxth	r1, r0
    805a4:	4628      	mov	r0, r5
    805a6:	4b1d      	ldr	r3, [pc, #116]	; (8061c <main+0x124>)
@@ -931,7 +931,7 @@ int main(void)
    805b4:	b2c5      	uxtb	r5, r0
 			if(goal){
    805b6:	b925      	cbnz	r5, 805c2 <main+0xca>
-			old_delay_us(20000);
+			delay_us(20000);
    805b8:	f644 6020 	movw	r0, #20000	; 0x4e20
    805bc:	4b1a      	ldr	r3, [pc, #104]	; (80628 <main+0x130>)
    805be:	4798      	blx	r3
@@ -1001,7 +1001,7 @@ uint16_t motor_encoder_read() {
    8064a:	f04f 0904 	mov.w	r9, #4
    8064e:	f8c4 9034 	str.w	r9, [r4, #52]	; 0x34
 
-    old_delay_us(20);
+    delay_us(20);
    80652:	2014      	movs	r0, #20
    80654:	f8df 802c 	ldr.w	r8, [pc, #44]	; 80684 <motor_encoder_read+0x44>
    80658:	47c0      	blx	r8
@@ -1016,7 +1016,7 @@ uint16_t motor_encoder_read() {
     PIOD->PIO_SODR = SEL;
    80662:	f8c4 9030 	str.w	r9, [r4, #48]	; 0x30
 
-    old_delay_us(20);
+    delay_us(20);
    80666:	2014      	movs	r0, #20
    80668:	47c0      	blx	r8
         
@@ -1152,7 +1152,7 @@ void motor_init(){
    8073a:	f6a0 30e3 	subw	r0, r0, #3043	; 0xbe3
    8073e:	4b08      	ldr	r3, [pc, #32]	; (80760 <motor_init+0x7c>)
    80740:	4798      	blx	r3
-	old_delay_us(1000000);
+	delay_us(1000000);
    80742:	4808      	ldr	r0, [pc, #32]	; (80764 <motor_init+0x80>)
    80744:	4b08      	ldr	r3, [pc, #32]	; (80768 <motor_init+0x84>)
    80746:	4798      	blx	r3
@@ -1416,7 +1416,7 @@ void solenoid_pulse(){
    808de:	6323      	str	r3, [r4, #48]	; 0x30
     //Need timer inbetween
 	//printf("shote\n\r");
-	old_delay_us(20000);
+	delay_us(20000);
    808e0:	f644 6020 	movw	r0, #20000	; 0x4e20
    808e4:	4b04      	ldr	r3, [pc, #16]	; (808f8 <solenoid_pulse+0x24>)
    808e6:	4798      	blx	r3
@@ -1489,33 +1489,33 @@ void timer_init(){
    80944:	400e0600 	.word	0x400e0600
    80948:	40080000 	.word	0x40080000
 
-0008094c <old_delay_us>:
+0008094c <delay_us>:
+
 }
 
-void old_delay_us(uint32_t microsec){
-    //Reset counter
-    //uint32_t now_time;
-    uint32_t hvorfor = TC0->TC_CHANNEL[0].TC_CCR = TC_CCR_SWTRG;
-   8094c:	4b07      	ldr	r3, [pc, #28]	; (8096c <old_delay_us+0x20>)
+void delay_us(uint32_t microsec){
+    
+    TC0->TC_CHANNEL[0].TC_CCR = TC_CCR_SWTRG;
+   8094c:	4b07      	ldr	r3, [pc, #28]	; (8096c <delay_us+0x20>)
    8094e:	2204      	movs	r2, #4
    80950:	601a      	str	r2, [r3, #0]
     //Read counter value
-    //0.000001 / (1/84MHz) / 2 = num of microsec per count
+    //0.000001 / (1/84MHz) / 2 = 42 num of microsec per count
     uint32_t now_time = TC0->TC_CHANNEL[0].TC_CV;
    80952:	6919      	ldr	r1, [r3, #16]
    80954:	460b      	mov	r3, r1
 	uint32_t prev_time = now_time;
     while((now_time - prev_time) < (microsec*42)){
-   80956:	e001      	b.n	8095c <old_delay_us+0x10>
+   80956:	e001      	b.n	8095c <delay_us+0x10>
         now_time = TC0->TC_CHANNEL[0].TC_CV;
-   80958:	4b04      	ldr	r3, [pc, #16]	; (8096c <old_delay_us+0x20>)
+   80958:	4b04      	ldr	r3, [pc, #16]	; (8096c <delay_us+0x20>)
    8095a:	691b      	ldr	r3, [r3, #16]
     while((now_time - prev_time) < (microsec*42)){
    8095c:	1a5b      	subs	r3, r3, r1
    8095e:	222a      	movs	r2, #42	; 0x2a
    80960:	fb02 f200 	mul.w	r2, r2, r0
    80964:	4293      	cmp	r3, r2
-   80966:	d3f7      	bcc.n	80958 <old_delay_us+0xc>
+   80966:	d3f7      	bcc.n	80958 <delay_us+0xc>
     }
    80968:	4770      	bx	lr
    8096a:	bf00      	nop

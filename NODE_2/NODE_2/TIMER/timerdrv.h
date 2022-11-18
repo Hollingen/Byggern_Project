@@ -9,6 +9,6 @@
 
 
 void timer_init();
-void old_delay_us(uint32_t microsec);
+void delay_us(uint32_t microsec);
 
 #endif

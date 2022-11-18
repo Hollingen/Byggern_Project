@@ -2,7 +2,7 @@
 #define PIDDRV_H_
 
 #define MAX_OUTPUT 2000
-#define MIN_VALUE 1500
+
 
 typedef struct PID_DATA{
     float K_p;

@@ -1360,7 +1360,7 @@ Discarded input sections
  .data          0x00000000        0x0 PID/PIDdrv.o
  .bss           0x00000000        0x0 PID/PIDdrv.o
  .debug_macro   0x00000000      0x8b0 PID/PIDdrv.o
- .debug_macro   0x00000000       0x16 PID/PIDdrv.o
+ .debug_macro   0x00000000       0x10 PID/PIDdrv.o
  .group         0x00000000        0x8 PWM/PWMdrvperiph.o
  .group         0x00000000        0x8 PWM/PWMdrvperiph.o
  .group         0x00000000        0x8 PWM/PWMdrvperiph.o
@@ -2337,9 +2337,9 @@ LOAD c:/program files (x86)/atmel/studio/7.0/toolchain/arm/arm-gnu-toolchain/bin
  .text.timer_init
                 0x00080928       0x24 TIMER/timerdrv.o
                 0x00080928                timer_init
- .text.old_delay_us
+ .text.delay_us
                 0x0008094c       0x24 TIMER/timerdrv.o
-                0x0008094c                old_delay_us
+                0x0008094c                delay_us
  .text.printchar
                 0x00080970       0x10 UART/printf-stdarg.o
  .text.prints   0x00080980       0x84 UART/printf-stdarg.o
@@ -2625,22 +2625,22 @@ OUTPUT(NODE_2.elf elf32-littlearm)
  .comment       0x00000059       0x5a UART/printf-stdarg.o
  .comment       0x00000059       0x5a UART/uart.o
 
-.debug_info     0x00000000     0x8d5c
+.debug_info     0x00000000     0x8d34
  .debug_info    0x00000000      0xf8a ADC/ADCdrv2.o
  .debug_info    0x00000f8a      0xd68 CAN/can_controller.o
  .debug_info    0x00001cf2      0xfbd CAN/can_interrupt.o
  .debug_info    0x00002caf      0x74e Device_Startup/startup_sam3xa.o
  .debug_info    0x000033fd      0x444 Device_Startup/system_sam3xa.o
- .debug_info    0x00003841      0xeb2 main.o
- .debug_info    0x000046f3     0x1361 MOTOR/MOTORdrv.o
- .debug_info    0x00005a54      0x1f6 PID/PIDdrv.o
- .debug_info    0x00005c4a      0xb8f PWM/PWMdrvperiph.o
- .debug_info    0x000067d9      0x510 SOLENOID/SOLENOIDdrv.o
- .debug_info    0x00006ce9      0x550 TIMER/timerdrv.o
- .debug_info    0x00007239      0x60b UART/printf-stdarg.o
- .debug_info    0x00007844     0x1518 UART/uart.o
+ .debug_info    0x00003841      0xea4 main.o
+ .debug_info    0x000046e5     0x1361 MOTOR/MOTORdrv.o
+ .debug_info    0x00005a46      0x1e8 PID/PIDdrv.o
+ .debug_info    0x00005c2e      0xb8f PWM/PWMdrvperiph.o
+ .debug_info    0x000067bd      0x510 SOLENOID/SOLENOIDdrv.o
+ .debug_info    0x00006ccd      0x544 TIMER/timerdrv.o
+ .debug_info    0x00007211      0x60b UART/printf-stdarg.o
+ .debug_info    0x0000781c     0x1518 UART/uart.o
 
-.debug_abbrev   0x00000000     0x171e
+.debug_abbrev   0x00000000     0x170f
  .debug_abbrev  0x00000000      0x251 ADC/ADCdrv2.o
  .debug_abbrev  0x00000251      0x212 CAN/can_controller.o
  .debug_abbrev  0x00000463      0x2e6 CAN/can_interrupt.o
@@ -2651,9 +2651,9 @@ OUTPUT(NODE_2.elf elf32-littlearm)
  .debug_abbrev  0x00000e80       0xe8 PID/PIDdrv.o
  .debug_abbrev  0x00000f68      0x115 PWM/PWMdrvperiph.o
  .debug_abbrev  0x0000107d      0x12d SOLENOID/SOLENOIDdrv.o
- .debug_abbrev  0x000011aa      0x120 TIMER/timerdrv.o
- .debug_abbrev  0x000012ca      0x194 UART/printf-stdarg.o
- .debug_abbrev  0x0000145e      0x2c0 UART/uart.o
+ .debug_abbrev  0x000011aa      0x111 TIMER/timerdrv.o
+ .debug_abbrev  0x000012bb      0x194 UART/printf-stdarg.o
+ .debug_abbrev  0x0000144f      0x2c0 UART/uart.o
 
 .debug_loc      0x00000000     0x1282
  .debug_loc     0x00000000       0x3e ADC/ADCdrv2.o
@@ -2712,7 +2712,7 @@ OUTPUT(NODE_2.elf elf32-littlearm)
  .debug_ranges  0x00000160       0x58 UART/printf-stdarg.o
  .debug_ranges  0x000001b8       0x28 UART/uart.o
 
-.debug_macro    0x00000000    0x1397e
+.debug_macro    0x00000000    0x13978
  .debug_macro   0x00000000      0x4d3 ADC/ADCdrv2.o
  .debug_macro   0x000004d3      0x8b0 ADC/ADCdrv2.o
  .debug_macro   0x00000d83       0x22 ADC/ADCdrv2.o
@@ -2832,21 +2832,21 @@ OUTPUT(NODE_2.elf elf32-littlearm)
  .debug_macro   0x0001229e       0x57 main.o
  .debug_macro   0x000122f5       0x10 main.o
  .debug_macro   0x00012305       0x2e main.o
- .debug_macro   0x00012333       0x16 main.o
- .debug_macro   0x00012349      0x50f MOTOR/MOTORdrv.o
- .debug_macro   0x00012858       0x28 MOTOR/MOTORdrv.o
- .debug_macro   0x00012880       0x16 MOTOR/MOTORdrv.o
- .debug_macro   0x00012896       0x35 MOTOR/MOTORdrv.o
- .debug_macro   0x000128cb       0x16 MOTOR/MOTORdrv.o
- .debug_macro   0x000128e1       0x29 MOTOR/MOTORdrv.o
- .debug_macro   0x0001290a       0x10 MOTOR/MOTORdrv.o
- .debug_macro   0x0001291a       0x1a PID/PIDdrv.o
- .debug_macro   0x00012934      0x391 PWM/PWMdrvperiph.o
- .debug_macro   0x00012cc5      0x38c SOLENOID/SOLENOIDdrv.o
- .debug_macro   0x00013051      0x385 TIMER/timerdrv.o
- .debug_macro   0x000133d6       0x8e UART/printf-stdarg.o
- .debug_macro   0x00013464       0x58 UART/printf-stdarg.o
- .debug_macro   0x000134bc      0x4c2 UART/uart.o
+ .debug_macro   0x00012333       0x10 main.o
+ .debug_macro   0x00012343      0x50f MOTOR/MOTORdrv.o
+ .debug_macro   0x00012852       0x28 MOTOR/MOTORdrv.o
+ .debug_macro   0x0001287a       0x16 MOTOR/MOTORdrv.o
+ .debug_macro   0x00012890       0x35 MOTOR/MOTORdrv.o
+ .debug_macro   0x000128c5       0x16 MOTOR/MOTORdrv.o
+ .debug_macro   0x000128db       0x29 MOTOR/MOTORdrv.o
+ .debug_macro   0x00012904       0x10 MOTOR/MOTORdrv.o
+ .debug_macro   0x00012914       0x1a PID/PIDdrv.o
+ .debug_macro   0x0001292e      0x391 PWM/PWMdrvperiph.o
+ .debug_macro   0x00012cbf      0x38c SOLENOID/SOLENOIDdrv.o
+ .debug_macro   0x0001304b      0x385 TIMER/timerdrv.o
+ .debug_macro   0x000133d0       0x8e UART/printf-stdarg.o
+ .debug_macro   0x0001345e       0x58 UART/printf-stdarg.o
+ .debug_macro   0x000134b6      0x4c2 UART/uart.o
 
 .debug_line     0x00000000     0x5c1b
  .debug_line    0x00000000      0x861 ADC/ADCdrv2.o
@@ -2863,7 +2863,7 @@ OUTPUT(NODE_2.elf elf32-littlearm)
  .debug_line    0x00004fc6      0x3ce UART/printf-stdarg.o
  .debug_line    0x00005394      0x887 UART/uart.o
 
-.debug_str      0x00000000    0x55899
+.debug_str      0x00000000    0x55875
  .debug_str     0x00000000    0x540ef ADC/ADCdrv2.o
                               0x54371 (size before relaxing)
  .debug_str     0x000540ef      0x609 CAN/can_controller.o
@@ -2874,21 +2874,21 @@ OUTPUT(NODE_2.elf elf32-littlearm)
                               0x504cb (size before relaxing)
  .debug_str     0x00054c79      0x195 Device_Startup/system_sam3xa.o
                               0x5025e (size before relaxing)
- .debug_str     0x00054e0e      0x232 main.o
-                              0x54404 (size before relaxing)
- .debug_str     0x00055040      0x23c MOTOR/MOTORdrv.o
-                              0x546c0 (size before relaxing)
- .debug_str     0x0005527c       0x44 PID/PIDdrv.o
-                               0x25e5 (size before relaxing)
- .debug_str     0x000552c0      0x242 PWM/PWMdrvperiph.o
+ .debug_str     0x00054e0e      0x216 main.o
+                              0x543e8 (size before relaxing)
+ .debug_str     0x00055024      0x23c MOTOR/MOTORdrv.o
+                              0x546bc (size before relaxing)
+ .debug_str     0x00055260       0x44 PID/PIDdrv.o
+                               0x25cd (size before relaxing)
+ .debug_str     0x000552a4      0x242 PWM/PWMdrvperiph.o
                               0x5050f (size before relaxing)
- .debug_str     0x00055502       0x41 SOLENOID/SOLENOIDdrv.o
-                              0x5022e (size before relaxing)
- .debug_str     0x00055543       0xd3 TIMER/timerdrv.o
-                              0x501d0 (size before relaxing)
- .debug_str     0x00055616      0x17d UART/printf-stdarg.o
+ .debug_str     0x000554e6       0x41 SOLENOID/SOLENOIDdrv.o
+                              0x5022a (size before relaxing)
+ .debug_str     0x00055527       0xcb TIMER/timerdrv.o
+                              0x501c4 (size before relaxing)
+ .debug_str     0x000555f2      0x17d UART/printf-stdarg.o
                                0x3654 (size before relaxing)
- .debug_str     0x00055793      0x106 UART/uart.o
+ .debug_str     0x0005576f      0x106 UART/uart.o
                               0x547bb (size before relaxing)
 
 .debug_frame    0x00000000      0x724
