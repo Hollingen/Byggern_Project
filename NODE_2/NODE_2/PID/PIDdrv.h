@@ -11,7 +11,6 @@ typedef struct PID_DATA{
     int error;
     int prev_error;
     int timestep;
-    int max_calc;
 
 } pidData_t;
 
