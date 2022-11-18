@@ -6,7 +6,6 @@ can_msg can_handle_msg(uint16_t id, uint8_t size, signed char msg_data[8]){
     can_msg msg;
     msg.id = id;
     msg.data_len = size;
-	//printf("her\n\r");
 	for(uint8_t i = 0; i < size; i++){
 		msg.data[i] = msg_data[i];
 		//printf("array: %d\n\r",msg_data[i]);
