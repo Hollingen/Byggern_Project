@@ -1,6 +1,6 @@
 #include "PIDdrv.h"
 
-void PID_init(float K_p, float K_i, float K_d, float timestep, int max_calc, struct PID_DATA *pid){
+void PID_init(float K_p, float K_i, float K_d, float timestep, struct PID_DATA *pid){
     pid->K_p = K_p;
     pid->K_i = K_i;
     pid->K_d = K_d;
