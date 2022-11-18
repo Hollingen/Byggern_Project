@@ -22,41 +22,56 @@ int main(void)
 {
 	USART_Init(MYUBRR);
 	XMEM_init();
-	//Int_INIT();
+	Int_INIT();
 	ADC_Init();
 	oled_init();
-	//spi_init_master();
-	//mcp2515_init();
+
 
 	//printf("her\n\r");
 	//spi_init_master();
 	//oled_refresh_rate_init();
 	
-
-
 	//ADC_calibrate();
 	adc_pos pos;
 	adc_dir dir;
 
-	//LAB 4
-	//oled_refresh_rate_init();
-	
-	uint8_t en = 0x1;
-	uint8_t to = 0x2;
 	//LAB 5
 	mcp2515_init();
 	sei();
 	can_msg melding;
-	//melding = can_handle_msg(0, 2, 0);
-	//can_send_msg(&melding, BUFFER0);
-	//printf("length: %d\n\r", melding.data_len);
-	//melding = can_recieve_msg(BUFFER0);*/
 		
-
+	uint8_t game_on = 0;
 	ADC_calibrate();
+	//menu_print_screen();
     while (1) 
     {	
 		
+		//THE GAME
+		if(game_on == 0){
+			update_menu_main_counter();
+			menu_print_screen();
+			_delay_ms(200);
+			uint8_t menu = return_menu_pos();
+			if(menu == 1){
+				game_on = 1;
+				printf("GAME IS ON\n\r");
+			}
+			//printf("%d", menu);
+		}else if(game_on){
+			
+			pos = adc_get_pos();
+			uint8_t rs_data = ADC_read(CHANNEL_RS);
+			
+			dir	= adc_get_dir(pos);
+			//printf("X pos: %d, Y pos: %d \n\r", pos.x, pos.y);
+			//printf("Dir: %d \n\r", dir);
+			signed char m[8] = {pos.x, pos.y, check_js_button(), rs_data, game_on};
+			melding = can_handle_msg(0, 5, m);
+			can_send_msg(&melding, BUFFER0);
+			_delay_ms(10);
+			
+		}
+		/*
 		pos = adc_get_pos();
 		uint8_t rs_data = ADC_read(CHANNEL_RS);
 		
@@ -66,13 +81,10 @@ int main(void)
 		signed char m[8] = {pos.x, pos.y, check_js_button(), rs_data};
 		melding = can_handle_msg(0, 4, m);
 		can_send_msg(&melding, BUFFER0);
-		_delay_ms(10); 
+		_delay_ms(10); */
 
 		/* //LAB 4
-		update_menu_main_counter();
-		menu_print_screen();
-		_delay_ms(200);
-		return_menu_pos(); */
+		 */
 		
 		
 		//LAB 5
