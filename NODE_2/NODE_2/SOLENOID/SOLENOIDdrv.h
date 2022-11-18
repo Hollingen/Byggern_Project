@@ -7,6 +7,7 @@
 
 void solenoid_init(void);
 void solenoid_pulse(void);
+void solenoid_shoot(uint8_t js_button);
 
 
 #endif

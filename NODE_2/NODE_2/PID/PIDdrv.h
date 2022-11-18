@@ -1,7 +1,7 @@
 #ifndef PIDDRV_H_
 #define PIDDRV_H_
 
-#define MAX_OUTPUT 3500
+#define MAX_OUTPUT 2000
 
 
 typedef struct PID_DATA{
@@ -14,7 +14,7 @@ typedef struct PID_DATA{
 
 } pidData_t;
 
-void PID_init(float K_p, float K_i, float K_d, float timestep, int max_calc, struct PID_DATA *pid);
+void PID_init(float K_p, float K_i, float K_d, float timestep, struct PID_DATA *pid);
 int PID_ctrl(int input, int current_value, struct PID_DATA *pid);
 
 #endif

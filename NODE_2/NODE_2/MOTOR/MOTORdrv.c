@@ -26,6 +26,9 @@ void motor_init(){
     // Enabling refresh rate under 20us to prevent loss of voltage
     DACC->DACC_MR |= DACC_MR_REFRESH(0x1);
     
+	motor_control_speed(-1500);
+	
+	delay_us(1000000);
     
     PIOD->PIO_SODR |= NOT_OE | NOT_RST;
 
@@ -47,7 +50,7 @@ uint16_t motor_encoder_read() {
     PIOD->PIO_CODR = NOT_OE;
     PIOD->PIO_CODR = SEL;
 
-    old_delay_us(20);
+    delay_us(20);
 
     uint32_t PIOC_PIN_DATA = PIOC->PIO_PDSR;
 
@@ -55,7 +58,7 @@ uint16_t motor_encoder_read() {
 
     PIOD->PIO_SODR = SEL;
 
-    old_delay_us(20);
+    delay_us(20);
         
 
     uint32_t PIOC_PIN_DATA1 = PIOC->PIO_PDSR;
@@ -85,22 +88,22 @@ uint16_t motor_encoder_read() {
 }
 
 
-void motor_control_speed(int8_t position){
+void motor_control_speed(int16_t position){
 
-	int32_t DACC_value = abs(position*1000/1405) + 2000;
+	//int32_t DACC_value = abs(position*1000/255) + 2500;
     if (position > 0){
-        PIOD->PIO_SODR |= DIR;
+        PIOD->PIO_CODR |= DIR;
         PIOD->PIO_SODR |= EN;
     }
     else if (position < 0) {
-        PIOD->PIO_CODR |= DIR;        
+        PIOD->PIO_SODR |= DIR;        
         PIOD->PIO_SODR |= EN;
     }
     else{PIOD->PIO_CODR |= EN;;}
 	//printf("%d\n\r", position);
-	uint16_t test = DACC_value;
+	//uint16_t test = DACC_value;
     DACC->DACC_MR |= DACC_MR_USER_SEL_CHANNEL1;
-    DACC->DACC_CDR = test;
+    DACC->DACC_CDR = abs(position) + MIN_VALUE;
 	//printf("%d\n\r", test);
     //for (int i = 0; i>100000; i++);
 
@@ -109,7 +112,8 @@ void motor_control_speed(int8_t position){
 
 uint16_t rs_map(uint8_t rs_raw, uint16_t max_enc){
 	uint16_t rs_mapped;
-	rs_mapped = abs(rs_raw-255) * max_enc/255;
+	rs_mapped = rs_raw * max_enc/255;
+    //rs_mapped = abs(rs_raw-255) * max_enc/255;
 	
 	return rs_mapped;
 }
