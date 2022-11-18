@@ -71,7 +71,7 @@ int main(void)
 			int8_t js_data;
 			uint8_t rs_data = meld.data[3];
 			//printf("%d\n\r", meld.data[2]);
-			SHOOT(meld.data[2]);
+			solenoid_shoot(meld.data[2]);
 		
 			PWM_set_period_percentage(meld.data[0]);
 			uint16_t rs = rs_map(rs_data, 1524);

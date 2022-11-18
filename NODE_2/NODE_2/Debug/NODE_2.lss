@@ -17,23 +17,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
   6 .comment      00000059  00000000  00000000  0002045d  2**0
                   CONTENTS, READONLY
-  7 .debug_info   00008d34  00000000  00000000  000204b6  2**0
+  7 .debug_info   00008d1d  00000000  00000000  000204b6  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 0000170f  00000000  00000000  000291ea  2**0
+  8 .debug_abbrev 0000170f  00000000  00000000  000291d3  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_loc    00001282  00000000  00000000  0002a8f9  2**0
+  9 .debug_loc    00001282  00000000  00000000  0002a8e2  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_aranges 00000280  00000000  00000000  0002bb7b  2**0
+ 10 .debug_aranges 00000280  00000000  00000000  0002bb64  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_ranges 000001e0  00000000  00000000  0002bdfb  2**0
+ 11 .debug_ranges 000001e0  00000000  00000000  0002bde4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_macro  00013978  00000000  00000000  0002bfdb  2**0
+ 12 .debug_macro  00013978  00000000  00000000  0002bfc4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_line   00005c1b  00000000  00000000  0003f953  2**0
+ 13 .debug_line   00005c1b  00000000  00000000  0003f93c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_str    00055875  00000000  00000000  0004556e  2**0
+ 14 .debug_str    0005587d  00000000  00000000  00045557  2**0
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_frame  00000724  00000000  00000000  0009ade4  2**2
+ 15 .debug_frame  00000724  00000000  00000000  0009add4  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -898,8 +898,8 @@ int main(void)
    8057a:	c307      	stmia	r3!, {r0, r1, r2}
 			uint8_t rs_data = meld.data[3];
    8057c:	f89d 503a 	ldrb.w	r5, [sp, #58]	; 0x3a
-			SHOOT(meld.data[2]);
-   80580:	f99d 0039 	ldrsb.w	r0, [sp, #57]	; 0x39
+			solenoid_shoot(meld.data[2]);
+   80580:	f89d 0039 	ldrb.w	r0, [sp, #57]	; 0x39
    80584:	4b22      	ldr	r3, [pc, #136]	; (80610 <main+0x118>)
    80586:	4798      	blx	r3
 			PWM_set_period_percentage(meld.data[0]);
@@ -1380,7 +1380,7 @@ uint32_t PWM_set_period_percentage(int16_t value)
 000808b4 <solenoid_init>:
 #include "SOLENOIDdrv.h"
 #include "../TIMER/timerdrv.h"
-uint8_t already_shote = 0;
+uint8_t already_shot = 0;
 void solenoid_init(){
     //Enable IO
     PIOA->PIO_PER  |= PIO_PA16;
@@ -1393,8 +1393,6 @@ void solenoid_init(){
    808be:	691a      	ldr	r2, [r3, #16]
    808c0:	f442 3280 	orr.w	r2, r2, #65536	; 0x10000
    808c4:	611a      	str	r2, [r3, #16]
-    //Disable pull up
-    //PIOA->PIO_PUDR |= PIO_PA16;
     //Set pin low
     PIOA->PIO_CODR |= PIO_PA16;
    808c6:	6b5a      	ldr	r2, [r3, #52]	; 0x34
@@ -1408,19 +1406,17 @@ void solenoid_init(){
 
 void solenoid_pulse(){
    808d4:	b510      	push	{r4, lr}
-	//Setting and resetting pin for solenoid, with an ideal delay inbetween
+	//SEtting and clearing pin A0 to "shoot" the solenoid
     PIOA->PIO_SODR |= PIO_PA16;
    808d6:	4c07      	ldr	r4, [pc, #28]	; (808f4 <solenoid_pulse+0x20>)
    808d8:	6b23      	ldr	r3, [r4, #48]	; 0x30
    808da:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
    808de:	6323      	str	r3, [r4, #48]	; 0x30
     //Need timer inbetween
-	//printf("shote\n\r");
 	delay_us(20000);
    808e0:	f644 6020 	movw	r0, #20000	; 0x4e20
    808e4:	4b04      	ldr	r3, [pc, #16]	; (808f8 <solenoid_pulse+0x24>)
    808e6:	4798      	blx	r3
-    //printf("shoot\n\r");
     PIOA->PIO_CODR |= PIO_PA16;
    808e8:	6b63      	ldr	r3, [r4, #52]	; 0x34
    808ea:	f443 3380 	orr.w	r3, r3, #65536	; 0x10000
@@ -1430,32 +1426,32 @@ void solenoid_pulse(){
    808f4:	400e0e00 	.word	0x400e0e00
    808f8:	0008094d 	.word	0x0008094d
 
-000808fc <SHOOT>:
+000808fc <solenoid_shoot>:
 }
 
-void SHOOT(uint8_t js_button){
+void solenoid_shoot(uint8_t js_button){
    808fc:	b508      	push	{r3, lr}
-    if(js_button && !already_shote){
+    if(js_button && !already_shot){
    808fe:	4603      	mov	r3, r0
-   80900:	b110      	cbz	r0, 80908 <SHOOT+0xc>
-   80902:	4a07      	ldr	r2, [pc, #28]	; (80920 <SHOOT+0x24>)
+   80900:	b110      	cbz	r0, 80908 <solenoid_shoot+0xc>
+   80902:	4a07      	ldr	r2, [pc, #28]	; (80920 <solenoid_shoot+0x24>)
    80904:	7812      	ldrb	r2, [r2, #0]
-   80906:	b122      	cbz	r2, 80912 <SHOOT+0x16>
+   80906:	b122      	cbz	r2, 80912 <solenoid_shoot+0x16>
         solenoid_pulse();
-        already_shote = 1;
+        already_shot = 1;
     }else if(!js_button){
-   80908:	b913      	cbnz	r3, 80910 <SHOOT+0x14>
-        already_shote = 0;
+   80908:	b913      	cbnz	r3, 80910 <solenoid_shoot+0x14>
+        already_shot = 0;
    8090a:	2200      	movs	r2, #0
-   8090c:	4b04      	ldr	r3, [pc, #16]	; (80920 <SHOOT+0x24>)
+   8090c:	4b04      	ldr	r3, [pc, #16]	; (80920 <solenoid_shoot+0x24>)
    8090e:	701a      	strb	r2, [r3, #0]
    80910:	bd08      	pop	{r3, pc}
         solenoid_pulse();
-   80912:	4b04      	ldr	r3, [pc, #16]	; (80924 <SHOOT+0x28>)
+   80912:	4b04      	ldr	r3, [pc, #16]	; (80924 <solenoid_shoot+0x28>)
    80914:	4798      	blx	r3
-        already_shote = 1;
+        already_shot = 1;
    80916:	2201      	movs	r2, #1
-   80918:	4b01      	ldr	r3, [pc, #4]	; (80920 <SHOOT+0x24>)
+   80918:	4b01      	ldr	r3, [pc, #4]	; (80920 <solenoid_shoot+0x24>)
    8091a:	701a      	strb	r2, [r3, #0]
    8091c:	bd08      	pop	{r3, pc}
    8091e:	bf00      	nop
