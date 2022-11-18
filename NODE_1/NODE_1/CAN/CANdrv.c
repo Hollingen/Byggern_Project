@@ -1,7 +1,7 @@
 #include "CANdrv.h"
 #include "../MCP2515/MCP2515drv.h"
 
-
+// putting input data in correct format
 can_msg can_handle_msg(uint16_t id, uint8_t size, signed char msg_data[8]){
     can_msg msg;
     msg.id = id;
@@ -14,11 +14,14 @@ can_msg can_handle_msg(uint16_t id, uint8_t size, signed char msg_data[8]){
 	
 }
 
+// Sending a message on either buffer 0 or 1
 void can_send_msg(can_msg* msg, BUFFER buffer){
+
 
     uint8_t idLSB = (msg->id & 0x7) << 5;
     uint8_t idMSB = (msg->id & 0x1F) >> 3;
 
+    // Buffer 0 and 1 adress are 16 bits apart
     mcp2515_write(MCP_TXB0SIDH + 16*buffer, idMSB);
     mcp2515_write(MCP_TXB0SIDL + 16*buffer, idLSB);
     mcp2515_write(MCP_TXB0DLC + 16*buffer, msg->data_len);
@@ -37,7 +40,7 @@ void can_send_msg(can_msg* msg, BUFFER buffer){
 
 }
 
-
+// Recieve a message from either buffer 0 or 1
 can_msg can_recieve_msg(BUFFER buffer){
     
     can_msg msg;
@@ -63,6 +66,7 @@ can_msg can_recieve_msg(BUFFER buffer){
 
 }
 
+// Checks what gave an interrupt on int1 from the mcp
 void interrupt_handler(){
 
     uint8_t status = mcp2515_read_status();
