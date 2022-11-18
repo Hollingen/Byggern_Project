@@ -35,7 +35,6 @@ void menu_print_screen(){	//uint8_t menu_main_counter, uint8_t menu_children_cou
      //   goto end;
     }
    
-    //uint8_t scroll_number = 0;
     uint8_t string_scroll_number = 0;
     uint8_t middle = 4;
     int start = 0;
@@ -59,7 +58,6 @@ void menu_print_screen(){	//uint8_t menu_main_counter, uint8_t menu_children_cou
         oled_print(buffer);
         string_scroll_number ++;
     }
-    //end:
 
     
 }
@@ -108,53 +106,4 @@ void update_menu_main_counter(){
         menu_main_counter = number_of_strings;
     }
     menu_main_counter_last = menu_main_counter;
-    //_delay_ms(100);
 }
-
-/* void choose_menu_item(uint8_t menu_counter){
-    switch (menu_counter){
-        //main menu
-        case 0:
-        // statements
-        break;
-
-        //play
-        case 1:
-        // statements
-        break;
-        
-        //settings
-        case 2:
-        // statements
-        break;
-
-        //highscore
-        case 3:
-        // statements
-        break;
-
-        //Placeholder1
-        case 4:
-        // statements
-        break;
-
-        //Placeholder2
-        case 5:
-        // statements
-        break;
-
-        //Placeholder3
-        case 6:
-        // statements
-        break;
-
-        //Placeholder4
-        case 7:
-        // statements
-        break;
-
-        //quit
-        default:
-        // default statements
-    }
-} */
