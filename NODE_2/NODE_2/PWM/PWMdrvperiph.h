@@ -10,6 +10,6 @@
 
 
 void PWM_init(void);
-uint32_t PWM_set_period_percentage(int16_t value);
+uint32_t PWM_width(int16_t value);
 
 #endif

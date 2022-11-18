@@ -29,12 +29,7 @@ volatile int menu_main_counter_last = 0;
 volatile int menu_children_counter_last = 0;
 
 
-void menu_print_screen(){	//uint8_t menu_main_counter, uint8_t menu_children_counter){
-
-    if(menu_main_counter == menu_main_counter_last){
-     //   goto end;
-    }
-   
+void menu_print_screen(){
     uint8_t string_scroll_number = 0;
     uint8_t middle = 4;
     int start = 0;
@@ -70,27 +65,6 @@ uint8_t return_menu_pos(){
     }
 }
 
-void oled_refresh_rate_init(){
-
-    //Setting Timer 0 to CTC mode
-    TCCR0 |= (1<<WGM01);
-    TCCR0 &= ~(1<<WGM00);
-    //Normal mode, OCn disconnected
-    TCCR0 &= ~(1<<COM00);
-    TCCR0 &= ~(1<<COM01);
-
-    //Prescaler 256, gives 60Hz
-    TCCR0 &= ~(1<<CS00);
-    TCCR0 &= ~(1<<CS01);
-    TCCR0 |= (1<<CS02);
-
-    //Enables interrupt for Timer 0 on compare match
-    TIMSK |= (1<<OCIE0);
-
-    OCR0 = 159;
-
-
-}
 void update_menu_main_counter(){
     adc_dir var = adc_get_dir(adc_get_pos());
     if(var == UP){

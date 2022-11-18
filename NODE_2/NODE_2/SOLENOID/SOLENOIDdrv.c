@@ -1,6 +1,6 @@
 #include "SOLENOIDdrv.h"
 #include "../TIMER/timerdrv.h"
-uint8_t already_shot = 0;
+static uint8_t already_shot = 0;
 void solenoid_init(){
     //Enable IO
     PIOA->PIO_PER  |= PIO_PA16;

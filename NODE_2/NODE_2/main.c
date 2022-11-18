@@ -28,7 +28,6 @@
 int main(void)
 {
     /* Initialize the SAM system */
-	
     SystemInit();
 	can_init_def_tx_rx_mb(can_br);
 	configure_uart();
@@ -41,20 +40,14 @@ int main(void)
 	PWM_init();
 	PWM_set_period_percentage(100);
 	ADC2_init();
-	
 	solenoid_init();
 	motor_init();
 	PID_init(3, 1, 0, (1/50),&pidData);
-	//motor_encoder_init();
 	
-	
-	//can_receive(&meld, 0);
-	//printf("%d", meld.data[0]);
-    /* Replace with your application code */
 	uint8_t game_on = 0;
 	uint8_t goal = 0;
-	
 	int16_t pid_output;
+
     while (1) {
 		
 		if(!game_on && !goal){
@@ -64,23 +57,17 @@ int main(void)
 			if(game_on){
 				printf("THE GAME IS ON!\n\r");
 			}
-			//printf("%d\n\r",meld.data[4]);
 		}else if(game_on){
-			//printf("GAME IS ON\n\r");
 			meld = get_msg();
 			int8_t js_data;
 			uint8_t rs_data = meld.data[3];
-			//printf("%d\n\r", meld.data[2]);
 			solenoid_shoot(meld.data[2]);
-		
-			PWM_set_period_percentage(meld.data[0]);
-			uint16_t rs = rs_map(rs_data, 1524);
+			
+			PWM_width(meld.data[0]); 								//Set the the servo to the value passed from node 1
+			uint16_t rs = rs_map(rs_data, 1524);					
 
 			int16_t encoder_data =  motor_encoder_read();
 			pid_output = PID_ctrl(rs, encoder_data, &pidData);
-			/*printf("RS: %d ", rs);
-			printf("Encoder Val: %d ", encoder_data);
-			printf("PID value: %d\r\n", pid_output);*/
 			motor_control_speed(pid_output);
 
 			goal = IR_check_goal();

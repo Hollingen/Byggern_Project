@@ -14,7 +14,7 @@ void motor_init(){
 	PIOD->PIO_OER |= DIR | EN | NOT_OE | NOT_RST | SEL;
 
 
-        //Set channel
+    //Set channel
     PMC->PMC_PCER1 |= PMC_PCER1_PID38;
     DACC->DACC_MR |= DACC_MR_USER_SEL_CHANNEL1;
     // Enables a 8 clock cycle startup periode
@@ -70,9 +70,6 @@ uint16_t motor_encoder_read() {
 
     PIOD->PIO_SODR = NOT_OE;
 	
-	/*if(encoder_value > 60000){
-		encoder_value = 0;
-	}*/
     return encoder_value;
     
 /*
@@ -90,7 +87,6 @@ uint16_t motor_encoder_read() {
 
 void motor_control_speed(int16_t position){
 
-	//int32_t DACC_value = abs(position*1000/255) + 2500;
     if (position > 0){
         PIOD->PIO_CODR |= DIR;
         PIOD->PIO_SODR |= EN;
@@ -100,20 +96,14 @@ void motor_control_speed(int16_t position){
         PIOD->PIO_SODR |= EN;
     }
     else{PIOD->PIO_CODR |= EN;;}
-	//printf("%d\n\r", position);
-	//uint16_t test = DACC_value;
     DACC->DACC_MR |= DACC_MR_USER_SEL_CHANNEL1;
     DACC->DACC_CDR = abs(position) + MIN_VALUE;
-	//printf("%d\n\r", test);
-    //for (int i = 0; i>100000; i++);
-
     
 }
 
 uint16_t rs_map(uint8_t rs_raw, uint16_t max_enc){
 	uint16_t rs_mapped;
 	rs_mapped = rs_raw * max_enc/255;
-    //rs_mapped = abs(rs_raw-255) * max_enc/255;
 	
 	return rs_mapped;
 }

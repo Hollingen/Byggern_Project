@@ -26,7 +26,6 @@ const char text_quit[] PROGMEM = "Quit";
 
 void menu_print_screen(void);
 uint8_t return_menu_pos(void);
-void oled_refresh_rate_init(void);
 void update_menu_main_counter(void);
 
 
