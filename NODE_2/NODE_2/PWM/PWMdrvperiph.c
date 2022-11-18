@@ -15,20 +15,19 @@ void PWM_init()
 	PIOC->PIO_ABSR |= PIO_ABSR_P19;                                         // Enable peripheral B for P19
 	
 	
-	PWM->PWM_CH_NUM[5].PWM_CMR |= PWM_CMR_CPRE_MCK_DIV_128;           // Prescales MCLK with 128
-	uint32_t CPRD = PWM_period_val;                                                  //CPRD = (84MHz*20ms)/128
+	PWM->PWM_CH_NUM[5].PWM_CMR |= PWM_CMR_CPRE_MCK_DIV_128;                 // Prescales MCLK with 128
+	uint32_t CPRD = PWM_period_val;                                         //CPRD = (84MHz*20ms)/128
 	uint32_t CDTY = PWM_center_val;
-	PWM->PWM_CH_NUM[5].PWM_CPRD |= PWM_CPRD_CPRD(CPRD);               //Set period to 20ms
+	PWM->PWM_CH_NUM[5].PWM_CPRD |= PWM_CPRD_CPRD(CPRD);                     //Set period to 20ms
 	
-	PWM->PWM_CH_NUM[5].PWM_CDTY |= PWM_CDTY_CDTY(CDTY); //Set duty cycle to 1.5 ms 
+	PWM->PWM_CH_NUM[5].PWM_CDTY |= PWM_CDTY_CDTY(CDTY);                     //Set duty cycle to 1.5 ms 
 	
 	PWM->PWM_ENA |= PWM_ENA_CHID5;                                          //Enables PWM channel 0 
 
 }
 
-uint32_t PWM_set_period_percentage(int16_t value)
+uint32_t PWM_width(int16_t value)
 {
-	
 	
 	if (value > 100) {
 		value = 100;

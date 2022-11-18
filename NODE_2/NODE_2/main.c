@@ -73,7 +73,7 @@ int main(void)
 			//printf("%d\n\r", meld.data[2]);
 			solenoid_shoot(meld.data[2]);
 		
-			PWM_set_period_percentage(meld.data[0]);
+			PWM_width(meld.data[0]);
 			uint16_t rs = rs_map(rs_data, 1524);
 
 			int16_t encoder_data =  motor_encoder_read();
