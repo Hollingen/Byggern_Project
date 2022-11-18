@@ -23,11 +23,11 @@ int PID_ctrl(int input, int current_value, struct PID_DATA *pid){
 
     calc = p_calc + i_calc + d_calc;
 
-    if (calc > pid->max_calc) {
-        calc = pid->max_calc;
+    if (calc > MAX_OUTPUT) {
+        calc = MAX_OUTPUT;
     }
-    else if (calc < -pid->max_calc) {
-        calc = -pid->max_calc;
+    else if (calc < -MAX_OUTPUT) {
+        calc = -MAX_OUTPUT;
     }
 
     return calc;
