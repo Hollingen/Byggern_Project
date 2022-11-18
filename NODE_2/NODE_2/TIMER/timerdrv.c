@@ -7,7 +7,6 @@ void timer_init(){
     //Enable ch 0
     TC0->TC_CHANNEL[0].TC_CCR |= TC_CCR_CLKEN;
     //Rising edge
-    //TC0->TC_CHANNEL[0].TC_CMR |= TC_CMR_CPCTRG;
     TC0->TC_CHANNEL[0].TC_CCR = TC_CCR_SWTRG;
 
 
